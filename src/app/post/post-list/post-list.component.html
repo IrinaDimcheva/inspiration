@@ -1,0 +1,8 @@
+<mat-accordion multi="true" *ngIf="postList">
+  <app-post-list-item *ngFor="let post of postList" [post]="post"></app-post-list-item>
+  <p class="info-text" *ngIf="postList.length === 0">No posts added yet!</p>
+</mat-accordion>
+<!-- <div *ngIf="!postList">Loading...</div> -->
+<div class="spinner">
+  <mat-spinner *ngIf="!postList"></mat-spinner>
+</div>

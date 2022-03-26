@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 
-import { IPost } from '../interfaces';
+import { IPost } from '../../shared/interfaces';
 import { PostService } from '../post.service';
 
 @Component({
@@ -20,12 +20,12 @@ export class PostCreateComponent implements OnInit {
 
   createHandler(form: NgForm) {
     if (form.invalid) { return; }
-    const post: IPost = {
-      title: form.value.title,
-      content: form.value.content
-    };
-    this.postService.addPost(post);
-    // this.postService.addPost(form.value.title, form.value.content);
+    // const post: IPost = {
+    //   title: form.value.title,
+    //   content: form.value.content
+    // };
+    // this.postService.addPost(post);
+    this.postService.addPost(form.value.title, form.value.content);
     form.resetForm();
   }
 }
