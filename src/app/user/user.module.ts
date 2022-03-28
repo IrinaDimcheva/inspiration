@@ -5,6 +5,7 @@ import { RegisterComponent } from './register/register.component';
 import { MaterialModule } from '../material.module';
 import { FormsModule } from '@angular/forms';
 import { UserRoutingModule } from './user-routing.module';
+import { UserService } from './user.service';
 
 
 
@@ -18,6 +19,9 @@ import { UserRoutingModule } from './user-routing.module';
     MaterialModule,
     FormsModule,
     UserRoutingModule
+  ],
+  providers: [
+    UserService
   ]
 })
 export class UserModule { }

@@ -4,15 +4,19 @@ import { CommentsComponent } from './comments/comments.component';
 import { MaterialModule } from '../material.module';
 import { CommentRoutingModule } from './comment-routing.module';
 import { CommentService } from './comment.service';
+import { CommentCreateComponent } from './comment-create/comment-create.component';
+import { FormsModule } from '@angular/forms';
 
 
 
 @NgModule({
   declarations: [
-    CommentsComponent
+    CommentsComponent,
+    CommentCreateComponent
   ],
   imports: [
     CommonModule,
+    FormsModule,
     MaterialModule,
     CommentRoutingModule
   ],

@@ -4,9 +4,17 @@
   </span>
   <span class="spacer"></span>
   <ul>
-    <li><a mat-button routerLink="/posts/new">New Post</a></li>
-    <li><a mat-button routerLink="/user/login">Login</a></li>
-    <li><a mat-button routerLink="/user/register">Register</a></li>
-    <li><button mat-button href="/user/logout">Logout</button></li>
+    <li>
+      <a *ngIf="isLogged" mat-button routerLink="/posts/new">New Post</a>
+    </li>
+    <li>
+      <a *ngIf="!isLogged" mat-button routerLink="/user/login" (click)="loginHandler()">Login</a>
+    </li>
+    <li>
+      <a *ngIf="!isLogged" mat-button routerLink="/user/register">Register</a>
+    </li>
+    <li>
+      <button *ngIf="isLogged" mat-button href="/user/logout" (click)="logoutHandler()">Logout</button>
+    </li>
   </ul>
 </mat-toolbar>
