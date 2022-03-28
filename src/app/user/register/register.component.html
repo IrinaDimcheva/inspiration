@@ -1,0 +1,58 @@
+<form>
+  <div>
+    <mat-form-field appearance="outline" [style.width.%]="100">
+      <mat-label>Enter username</mat-label>
+      <input
+        matInput
+        type="text"
+        name="username"
+        ngModel
+        #username="ngModel"
+        required
+        minlength="3">
+      <mat-error *ngIf="username.invalid">Please enter an username.</mat-error>
+    </mat-form-field>
+  </div>
+  <div>
+    <mat-form-field appearance="outline" [style.width.%]="100">
+      <mat-label>Enter email</mat-label>
+      <input
+        matInput
+        placeholder="pat@example.com"
+        name="email"
+        ngModel
+        #email="ngModel"
+        required>
+      <mat-error *ngIf="email.invalid">Please enter an email.</mat-error>
+    </mat-form-field>
+  </div>
+  <div>
+    <mat-form-field appearance="outline" [style.width.%]="100">
+      <mat-label>Enter password</mat-label>
+      <input
+        matInput
+        type="password"
+        placeholder="******"
+        name="password"
+        ngModel
+        #password="ngModel"
+        required>
+      <mat-error *ngIf="password.invalid">Please enter a password.</mat-error>
+    </mat-form-field>
+  </div>
+  <div>
+    <mat-form-field appearance="outline" [style.width.%]="100">
+      <mat-label>Enter repeat password</mat-label>
+      <input
+        matInput
+        type="password"
+        placeholder="******"
+        name="rePassword"
+        ngModel
+        #rePassword="ngModel"
+        required>
+      <mat-error *ngIf="password.invalid">Please enter a repeat password.</mat-error>
+    </mat-form-field>
+  </div>
+  <button mat-raised-button color="primary">Register</button>
+</form>

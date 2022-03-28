@@ -22,7 +22,7 @@ export class PostService {
     return this.postsUpdated.asObservable();
   }
 
-  addPost(title: string, content: string) {
+  addPost(title: string, content: string, imageUrl: string) {
     // const post: IPost = { title, content };
     // this.postList.push(post);
     // this.postsUpdated.next([...this.postList]);

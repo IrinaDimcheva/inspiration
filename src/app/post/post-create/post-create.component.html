@@ -13,6 +13,17 @@
       <mat-error *ngIf="title.invalid">Please enter post title.</mat-error>
     </mat-form-field>
     <mat-form-field appearance="outline" [style.width.%]="100">
+      <mat-label>Post Image</mat-label>
+      <input
+        matInput
+        type="text"
+        name="imageUrl"
+        ngModel
+        #imageUrl="ngModel"
+        required>
+      <mat-error>Please enter post image.</mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="outline" [style.width.%]="100">
       <mat-label>Post Content</mat-label>
       <textarea
         matInput

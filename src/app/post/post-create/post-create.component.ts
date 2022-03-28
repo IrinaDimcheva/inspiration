@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 
-import { IPost } from '../../shared/interfaces';
+// import { IPost } from '../../shared/interfaces';
 import { PostService } from '../post.service';
 
 @Component({
@@ -12,6 +12,7 @@ import { PostService } from '../post.service';
 export class PostCreateComponent implements OnInit {
   title = '';
   content = '';
+  imageUrl = '';
 
   constructor(private postService: PostService) { }
 
@@ -25,7 +26,7 @@ export class PostCreateComponent implements OnInit {
     //   content: form.value.content
     // };
     // this.postService.addPost(post);
-    this.postService.addPost(form.value.title, form.value.content);
+    this.postService.addPost(form.value.title, form.value.content, form.value.imageUrl);
     form.resetForm();
   }
 }

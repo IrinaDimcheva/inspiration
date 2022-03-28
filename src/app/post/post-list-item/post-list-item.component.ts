@@ -13,4 +13,7 @@ export class PostListItemComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  toCommentsHandler() {
+
+  }
 }

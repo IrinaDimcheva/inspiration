@@ -11,6 +11,7 @@ import { CoreModule } from './core/core.module';
 import { CommentModule } from './comment/comment.module';
 import { SharedModule } from './shared/shared.module';
 import { MaterialModule } from './material.module';
+import { UserModule } from './user/user.module';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { MaterialModule } from './material.module';
     SharedModule,
     PostModule,
     CommentModule,
+    UserModule
   ],
   providers: [
   ],

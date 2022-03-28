@@ -7,6 +7,7 @@ import { PostListItemComponent } from './post-list-item/post-list-item.component
 import { PostService } from './post.service';
 import { MaterialModule } from '../material.module';
 import { FormsModule } from '@angular/forms';
+import { PostRoutingModule } from './post-routing.module';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { FormsModule } from '@angular/forms';
   imports: [
     CommonModule,
     MaterialModule,
-    FormsModule
+    FormsModule,
+    PostRoutingModule
   ],
   providers: [
     PostService
