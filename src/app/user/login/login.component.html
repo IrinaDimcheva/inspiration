@@ -1,30 +1,34 @@
-<form>
-  <div>
-    <mat-form-field appearance="outline" [style.width.%]="100">
-      <mat-label>Enter your email</mat-label>
-      <input
-        matInput
-        placeholder="pat@example.com"
-        name="email"
-        ngModel
-        #email="ngModel"
-        required>
-      <mat-error *ngIf="email.invalid">Please enter an email.</mat-error>
-    </mat-form-field>
-  </div>
-  <div>
-    <mat-form-field appearance="outline" [style.width.%]="100">
-      <mat-label>Enter your password</mat-label>
-      <input
-        matInput
-        type="password"
-        placeholder="******"
-        name="password"
-        ngModel
-        #password="ngModel"
-        required>
-      <mat-error *ngIf="password.invalid">Please enter a password.</mat-error>
-    </mat-form-field>
-  </div>
-  <button mat-raised-button color="primary" (click)="loginHandler()">Login</button>
-</form>
+<mat-card>
+  <form (ngSubmit)="formHandler(f)" #f="ngForm">
+    <div>
+      <mat-form-field appearance="outline" [style.width.%]="100">
+        <mat-label>Enter your email</mat-label>
+        <input
+          matInput
+          placeholder="pat@example.com"
+          name="email"
+          ngModel
+          #email="ngModel"
+          email
+          required>
+        <mat-error *ngIf="email.invalid">Please enter an email.</mat-error>
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-form-field appearance="outline" [style.width.%]="100">
+        <mat-label>Enter your password</mat-label>
+        <input
+          matInput
+          type="password"
+          placeholder="******"
+          name="password"
+          ngModel
+          #password="ngModel"
+          required>
+        <mat-error *ngIf="password.invalid">Please enter a password.</mat-error>
+      </mat-form-field>
+    </div>
+    <button mat-raised-button color="primary">Login</button>
+  </form>
+  <p>Don't have an account? <a routerLink="/user/register">Register now</a></p>
+</mat-card>

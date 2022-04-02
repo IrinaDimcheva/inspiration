@@ -8,7 +8,7 @@ const apiUrl = environment.apiUrl;
 
 @Injectable()
 export class PostService {
-  private postList: IPost[] = [];
+  // private postList: IPost[] = [];
   private postsUpdated = new Subject<IPost[]>();
 
   constructor(private http: HttpClient) { }
@@ -22,13 +22,13 @@ export class PostService {
     return this.postsUpdated.asObservable();
   }
 
-  addPost(title: string, content: string, imageUrl: string) {
-    // const post: IPost = { title, content };
-    // this.postList.push(post);
-    // this.postsUpdated.next([...this.postList]);
-  }
-
-  // addPost(post: IPost) {
-  //   this.postList.push(post);
+  // addPost(title: string, content: string, imageUrl: string) {
+  //   // const post: IPost = { title, content };
+  //   // this.postList.push(post);
+  //   // this.postsUpdated.next([...this.postList]);
   // }
+
+  addPost(post: IPost): Observable<IPost> {
+    return this.http.post<IPost>(apiUrl + '/posts', post);
+  }
 }

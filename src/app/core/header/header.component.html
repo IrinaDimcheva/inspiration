@@ -8,7 +8,8 @@
       <a *ngIf="isLogged" mat-button routerLink="/posts/new">New Post</a>
     </li>
     <li>
-      <a *ngIf="!isLogged" mat-button routerLink="/user/login" (click)="loginHandler()">Login</a>
+      <!-- <a *ngIf="!isLogged" mat-button routerLink="/user/login" (click)="loginHandler()">Login</a> -->
+      <a *ngIf="!isLogged" mat-button routerLink="/user/login">Login</a>
     </li>
     <li>
       <a *ngIf="!isLogged" mat-button routerLink="/user/register">Register</a>

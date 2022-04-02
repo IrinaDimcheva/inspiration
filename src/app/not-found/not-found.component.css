@@ -1,10 +1,11 @@
-mat-card {
-  margin-top: 5em;
+div {
+  padding-top: 7rem;
 }
 
 p {
-  margin-top: 3em;
   text-align: center;
+  padding: 1em;
+  font-size: 3em;
 }
 
 a {

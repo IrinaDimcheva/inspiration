@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
+import { BrowserModule, Title } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -12,10 +12,12 @@ import { CommentModule } from './comment/comment.module';
 import { SharedModule } from './shared/shared.module';
 import { MaterialModule } from './material.module';
 import { UserModule } from './user/user.module';
+import { NotFoundComponent } from './not-found/not-found.component';
 
 @NgModule({
   declarations: [
     AppComponent,
+    NotFoundComponent,
   ],
   imports: [
     BrowserModule,
@@ -31,6 +33,7 @@ import { UserModule } from './user/user.module';
     UserModule
   ],
   providers: [
+    Title
   ],
   bootstrap: [AppComponent]
 })

@@ -5,7 +5,10 @@ export interface IComment {
   likes: string[];
   _id: string;
   text: string;
-  userId: IUser;
+  userId: {
+    _id: string;
+    username: string;
+  };
   postId: IPost;
   created_at: string;
   updatedAt: string;

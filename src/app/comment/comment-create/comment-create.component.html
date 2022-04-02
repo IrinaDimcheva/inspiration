@@ -1,15 +1,17 @@
-<form>
-  <mat-form-field appearance="outline" [style.width.%]="100">
-    <mat-label>Add Comment</mat-label>
-    <textarea
-      matInput
-      name="text"
-      rows="2"
-      ngModel
-      #text="ngModel"
-      required
-      minlength="10"></textarea>
-    <mat-error *ngIf="text.invalid">Comment text must be at least 10 chars long.</mat-error>
-  </mat-form-field>
-  <button mat-raised-button color="primary">Add</button>
-</form>
+<mat-card>
+  <form (ngSubmit)="addCommentHandler(f)" #f="ngForm">
+    <mat-form-field appearance="outline" [style.width.%]="100">
+      <mat-label>Comment</mat-label>
+      <textarea
+        matInput
+        name="text"
+        rows="2"
+        ngModel
+        #text="ngModel"
+        required
+        minlength="10"></textarea>
+      <mat-error *ngIf="text.invalid">Comment text must be at least 10 chars long.</mat-error>
+    </mat-form-field>
+    <button mat-raised-button color="primary">Add Comment</button>
+  </form>
+</mat-card>

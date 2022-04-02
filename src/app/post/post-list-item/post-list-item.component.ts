@@ -1,4 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { UserService } from 'src/app/user/user.service';
 import { IPost } from '../../shared/interfaces';
 
 @Component({
@@ -8,12 +10,19 @@ import { IPost } from '../../shared/interfaces';
 })
 export class PostListItemComponent implements OnInit {
   @Input() post: IPost;
-  constructor() { }
+  get isLogged() {
+    return this.userService.isLogged;
+  }
+
+  constructor(
+    private router: Router,
+    private route: ActivatedRoute,
+    private userService: UserService) { }
 
   ngOnInit(): void {
   }
 
-  toCommentsHandler() {
-
-  }
+  // toCommentsHandler() {
+  //   this.router.navigate([this.post._id, 'comments'], { relativeTo: this.route });
+  // }
 }

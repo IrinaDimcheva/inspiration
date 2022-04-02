@@ -5,11 +5,17 @@ import { PostListComponent } from "./post-list/post-list.component";
 const routes: Routes = [
   {
     path: 'posts',
-    component: PostListComponent
+    component: PostListComponent,
+    data: {
+      title: 'Inspiration | Posts'
+    }
   },
   {
     path: 'posts/new',
-    component: PostCreateComponent
+    component: PostCreateComponent,
+    data: {
+      title: 'Inspiration | New Post'
+    }
   }
 ];
 

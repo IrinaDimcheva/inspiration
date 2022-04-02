@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { Router } from '@angular/router';
 
-// import { IPost } from '../../shared/interfaces';
+import { IPost } from '../../shared/interfaces';
 import { PostService } from '../post.service';
 
 @Component({
@@ -10,23 +11,28 @@ import { PostService } from '../post.service';
   styleUrls: ['./post-create.component.css']
 })
 export class PostCreateComponent implements OnInit {
-  title = '';
-  content = '';
-  imageUrl = '';
+  // title = '';
+  // content = '';
+  // imageUrl = '';
 
-  constructor(private postService: PostService) { }
+  constructor(private postService: PostService, private router: Router) { }
 
   ngOnInit(): void {
   }
 
   createHandler(form: NgForm) {
     if (form.invalid) { return; }
-    // const post: IPost = {
-    //   title: form.value.title,
-    //   content: form.value.content
-    // };
+    const post: any = {
+      title: form.value.title,
+      content: form.value.content,
+      imageUrl: form.value.imageUrl
+    };
     // this.postService.addPost(post);
-    this.postService.addPost(form.value.title, form.value.content, form.value.imageUrl);
+    this.postService.addPost(post).subscribe({
+      next: () => {
+        this.router.navigate(['/posts']);
+      }
+    });
     form.resetForm();
   }
 }

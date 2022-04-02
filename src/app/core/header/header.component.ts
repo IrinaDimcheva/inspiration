@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Title } from '@angular/platform-browser';
+import { ActivationEnd, Router } from '@angular/router';
+import { filter, throttleTime } from 'rxjs/operators';
+
 import { UserService } from 'src/app/user/user.service';
 
 @Component({
@@ -6,19 +10,25 @@ import { UserService } from 'src/app/user/user.service';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css']
 })
-export class HeaderComponent {
+export class HeaderComponent implements OnInit {
   get isLogged(): boolean {
     return this.userService.isLogged;
   }
 
-  constructor(private userService: UserService) { }
+  constructor(
+    private userService: UserService,
+    private title: Title,
+    private router: Router) {
+  }
 
-  loginHandler() {
-    this.userService.login();
+  ngOnInit(): void {
+    this.router.events.pipe(filter(e => e instanceof ActivationEnd), throttleTime(0))
+      .subscribe((e: ActivationEnd) => {
+        this.title.setTitle(e.snapshot.data?.['title']);
+      });
   }
 
   logoutHandler() {
     this.userService.logout();
   }
-
 }

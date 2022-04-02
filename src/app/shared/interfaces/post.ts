@@ -1,3 +1,5 @@
+import { IUser } from "./user";
+
 export interface IPost {
   favorites: string[];
   likes: string[];
@@ -6,7 +8,7 @@ export interface IPost {
   title: string;
   content: string;
   imageUrl: string;
-  userId: string;
+  userId: IUser;
   created_at: string;
   updatedAt: string;
   __v: number;

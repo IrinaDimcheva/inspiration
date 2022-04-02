@@ -4,18 +4,28 @@ import { RouterModule } from '@angular/router';
 
 import { HeaderComponent } from './header/header.component';
 import { MaterialModule } from '../material.module';
+import { FooterComponent } from './footer/footer.component';
+import { AboutComponent } from './about/about.component';
+import { AuthGuard } from './guards/auth.guard';
 
 @NgModule({
   declarations: [
-    HeaderComponent
+    HeaderComponent,
+    FooterComponent,
+    AboutComponent
   ],
   imports: [
     CommonModule,
     MaterialModule,
     RouterModule
   ],
+  providers: [
+    AuthGuard
+  ],
   exports: [
-    HeaderComponent
+    HeaderComponent,
+    FooterComponent,
+    AboutComponent
   ]
 })
 export class CoreModule { }

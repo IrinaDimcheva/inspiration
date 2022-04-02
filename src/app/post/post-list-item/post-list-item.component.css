@@ -13,6 +13,19 @@ img {
   float: right;
 }
 
+mat-action-row {
+  display: flex;
+}
+
+.spacer {
+  margin: 0 auto;
+}
+
+.likes {
+  color: #444;
+  margin-right: 1em;
+}
+
 /* .image {
   width: 50%;
   background: #000;

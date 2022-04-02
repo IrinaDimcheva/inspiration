@@ -1,0 +1,15 @@
+mat-card {
+  margin-top: 1rem;
+}
+
+mat-action-row {
+  display: flex;
+}
+
+.spacer {
+  margin: 0 auto;
+}
+
+.title {
+  display: flex;
+}

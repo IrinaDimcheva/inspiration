@@ -1,0 +1,27 @@
+<mat-card class="example-card">
+  <div class="title">
+    <mat-card-title>{{comment.userId.username | titlecase}}</mat-card-title>
+    <span class="spacer"></span>
+    <mat-card-subtitle>commented on {{comment.created_at | date: 'd MMM y, hh:mm:ss'}}</mat-card-subtitle>
+  </div>
+
+  <mat-card-content>
+    <p>{{comment.text}}</p>
+  </mat-card-content>
+  <!-- <hr> -->
+  <!-- <mat-card-actions>
+    <button mat-button>LIKE</button>
+    <button mat-button>ADD COMMENT</button>
+  </mat-card-actions> -->
+  <mat-action-row>
+    <button mat-button color="primary">
+      <span class="material-icons">
+        thumb_up
+      </span>
+    </button>
+    <span class="likes">{{comment.likes.length}} likes</span>
+    <span class="spacer"></span>
+    <button mat-button color="primary">EDIT</button>
+    <button mat-button color="warn">DELETE</button>
+  </mat-action-row>
+</mat-card>

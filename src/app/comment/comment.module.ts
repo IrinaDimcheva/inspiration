@@ -1,23 +1,25 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { CommentsComponent } from './comments/comments.component';
+import { CommentListComponent } from './comment-list/comment-list.component';
 import { MaterialModule } from '../material.module';
 import { CommentRoutingModule } from './comment-routing.module';
 import { CommentService } from './comment.service';
 import { CommentCreateComponent } from './comment-create/comment-create.component';
 import { FormsModule } from '@angular/forms';
+import { CommentListItemComponent } from './comment-list-item/comment-list-item.component';
 
 
 
 @NgModule({
   declarations: [
-    CommentsComponent,
-    CommentCreateComponent
+    CommentListComponent,
+    CommentCreateComponent,
+    CommentListItemComponent
   ],
   imports: [
     CommonModule,
-    FormsModule,
     MaterialModule,
+    FormsModule,
     CommentRoutingModule
   ],
   providers: [

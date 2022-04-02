@@ -1,0 +1,17 @@
+mat-card {
+  margin-top: 5em;
+}
+
+p {
+  margin-top: 3em;
+  text-align: center;
+}
+
+a {
+  text-decoration: none;
+  color: #3F51B5;
+}
+
+a:hover {
+  color: #20318f;
+}

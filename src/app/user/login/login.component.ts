@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UserService } from '../user.service';
 
@@ -15,8 +16,17 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  loginHandler() {
-    this.userService.login();
-    this.router.navigate(['/']);
+  formHandler(form: NgForm) {
+    if (form.invalid) { return; }
+    const email = form.value.email;
+    const password = form.value.password;
+    this.userService.login({ email, password }).subscribe({
+      next: () => {
+        this.router.navigate(['/']);
+      },
+      error: (err) => {
+        console.log(err);
+      }
+    });
   }
 }

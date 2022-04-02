@@ -21,6 +21,7 @@ html {
 
 body, form, table, input, textarea, option, select {
   font: inherit;
+  color: #222;
 }
 
 p {
