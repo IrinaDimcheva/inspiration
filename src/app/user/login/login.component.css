@@ -15,3 +15,13 @@ a {
 a:hover {
   color: #20318f;
 }
+
+.error {
+  color: red;
+  font-size: 0.8em;
+}
+
+.spinner {
+  margin: auto;
+  width: 1em;
+}

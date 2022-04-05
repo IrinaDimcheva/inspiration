@@ -13,3 +13,7 @@ mat-action-row {
 .title {
   display: flex;
 }
+
+.image {
+  margin-right: 2em;
+}

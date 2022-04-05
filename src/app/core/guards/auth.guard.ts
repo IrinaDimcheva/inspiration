@@ -1,20 +1,50 @@
 import { Injectable } from "@angular/core";
-import { ActivatedRouteSnapshot, CanActivateChild, Router, RouterStateSnapshot, UrlTree } from "@angular/router";
-import { Observable } from "rxjs";
-import { UserService } from "src/app/user/user.service";
+import {
+  ActivatedRouteSnapshot,
+  CanActivateChild,
+  Router,
+  RouterStateSnapshot,
+  UrlTree
+} from "@angular/router";
+import { Observable, of } from "rxjs";
+import { tap, map } from 'rxjs/operators';
+
+import { IUser } from "../../shared/interfaces";
+import { UserService } from "../../user/user.service";
 
 @Injectable()
 export class AuthGuard implements CanActivateChild {
   constructor(private userService: UserService, private router: Router) { }
 
-  canActivateChild(childRoute: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean | UrlTree | Observable<boolean | UrlTree> | Promise<boolean | UrlTree> {
-    const isAuthRoute = childRoute.data['isAuth'];
-    if (typeof isAuthRoute === 'boolean' && isAuthRoute === this.userService.isLogged) {
-      console.log(childRoute.data);
-      return true;
-    }
-    // this.router.navigate(['']);
-    this.router.navigateByUrl(this.router.url);
-    return false;
+  canActivateChild(childRoute: ActivatedRouteSnapshot, state: RouterStateSnapshot):
+    boolean | UrlTree | Observable<boolean> {
+    return this.userService.isLogged === childRoute.data['isAuth'];
+
+    // if (this.userService.isLogged) {
+    //   return true;
+    // }
+
+    // this.router.navigate(['/user/login']);
+    // return false;
   }
+
+  // let stream$: Observable<IUser | null>;
+  // if (this.userService.user === undefined) {
+  //   stream$ = this.userService.getUserProfile();
+  // } else {
+  //   stream$ = of(this.userService.user);
+  // }
+
+  // return stream$.pipe(
+  //   map((user: IUser) => {
+  //     const isAuthRoute = childRoute.data['isAuth'];
+  //     return typeof isAuthRoute !== 'boolean' && isAuthRoute === !!user;
+  //   }),
+  //   tap((canContinue) => {
+  //     if (canContinue) { return; }
+  //     // this.router.navigate(['']);
+  //     this.router.navigateByUrl(this.router.url);
+  //   })
+  // )
 }
+// }

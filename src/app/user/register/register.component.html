@@ -1,5 +1,5 @@
 <mat-card>
-  <form>
+  <form #f="ngForm" (ngSubmit)="registerHandler(f)">
     <div>
       <mat-form-field appearance="outline" [style.width.%]="100">
         <mat-label>Enter username</mat-label>
@@ -10,9 +10,14 @@
           ngModel
           #username="ngModel"
           required
-          minlength="3">
-        <mat-error *ngIf="username.invalid">Please enter an username.</mat-error>
+          minlength="5">
       </mat-form-field>
+      <span *ngIf="username.touched && username.errors?.['required']" class="error">
+        Username is required!
+      </span>
+      <span *ngIf="username.touched && username.errors?.['minlength']" class="error">
+        Username must be at least 5 chars.
+      </span>
     </div>
     <div>
       <mat-form-field appearance="outline" [style.width.%]="100">
@@ -24,9 +29,15 @@
           ngModel
           #email="ngModel"
           email
-          required>
-        <mat-error *ngIf="email.invalid">Please enter an email.</mat-error>
+          required
+          pattern="^[a-zA-z0-9\.-_]{4,}@[a-z]{2,4}\.[a-z]{2,4}$">
       </mat-form-field>
+      <span *ngIf="email.touched && email.errors?.['required']" class="error">
+        Email is required!
+      </span>
+      <span *ngIf="email.touched && email.errors?.['pattern']" class="error">
+        Email is not valid!
+      </span>
     </div>
     <div>
       <mat-form-field appearance="outline" [style.width.%]="100">
@@ -38,9 +49,19 @@
           name="password"
           ngModel
           #password="ngModel"
-          required>
-        <mat-error *ngIf="password.invalid">Please enter a password.</mat-error>
+          required
+          minlength="6"
+          pattern="^[a-zA-Z0-9]+$">
       </mat-form-field>
+      <span *ngIf="password.touched && password.errors?.['required']" class="error">
+        Password is required!
+      </span>
+      <span *ngIf="password.touched && password.errors?.['minlength']" class="error">
+        Password should be at least 6 characters.
+      </span>
+      <span *ngIf="password.touched && password.errors?.['pattern']" class="error">
+        Password must contains only latin letters and digits!
+      </span>
     </div>
     <div>
       <mat-form-field appearance="outline" [style.width.%]="100">
@@ -52,11 +73,76 @@
           name="rePassword"
           ngModel
           #rePassword="ngModel"
-          required>
-        <mat-error *ngIf="password.invalid">Please enter a repeat password.</mat-error>
+          required
+          minlength="6">
       </mat-form-field>
+      <span *ngIf="rePassword.touched && rePassword.errors?.['required']" class="error">
+        Password is required!
+      </span>
+      <span *ngIf="rePassword.touched && (f.value.password !== f.value.rePassword)" class="error">Passwords should match.</span>
+    </div>
+    <button mat-raised-button color="primary" [disabled]="isLoading || f.invalid">Register</button>
+    <mat-spinner class="spinner" *ngIf="isLoading"></mat-spinner>
+  </form>
+  <p>Have an account? <a routerLink="/user/login">Login</a></p>
+</mat-card>
+
+<!-- 
+<mat-card>
+  <form [formGroup]="form" (ngSubmit)="registerHandler()">
+    <div>
+      <mat-form-field appearance="outline" [style.width.%]="100">
+        <mat-label>Enter username</mat-label>
+        <input
+          matInput
+          type="text"
+          name="username"
+          formControlName="username">
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-form-field appearance="outline" [style.width.%]="100">
+        <mat-label>Enter email</mat-label>
+        <input
+          matInput
+          placeholder="pat@example.com"
+          name="email"
+          formControlName="email">
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-form-field appearance="outline" [style.width.%]="100">
+        <mat-label>Enter password</mat-label>
+        <input
+          matInput
+          type="password"
+          placeholder="******"
+          name="password"
+          formControlName="password">
+      </mat-form-field>
+      <span class="error" *ngIf="form.get('password').touched && form.get('password').errors?.required">
+        Password is required!
+      </span>
+      <span class="error" *ngIf="form.get('password').touched && form.get('password').errors?.minlength">
+        Password must be at least 6 chars.
+      </span>
+    </div>
+    <div>
+      <mat-form-field appearance="outline" [style.width.%]="100">
+        <mat-label>Enter repeat password</mat-label>
+        <input
+          matInput
+          type="password"
+          placeholder="******"
+          name="rePassword"
+          formControlName="rePassword">
+      </mat-form-field>
+      <span class="error" *ngIf="form.get('rePassword').touched && form.get('rePassword').errors?.required">
+        Repassword is required.
+      </span>
+
     </div>
     <button mat-raised-button color="primary">Register</button>
   </form>
   <p>Have an account? <a routerLink="/user/login">Login</a></p>
-</mat-card>
+</mat-card> -->

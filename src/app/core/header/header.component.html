@@ -15,6 +15,9 @@
       <a *ngIf="!isLogged" mat-button routerLink="/user/register">Register</a>
     </li>
     <li>
+      <a *ngIf="isLogged" mat-button routerLink="/user/profile">Profile</a>
+    </li>
+    <li>
       <button *ngIf="isLogged" mat-button href="/user/logout" (click)="logoutHandler()">Logout</button>
     </li>
   </ul>

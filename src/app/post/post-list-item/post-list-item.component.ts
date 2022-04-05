@@ -22,6 +22,9 @@ export class PostListItemComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  AddToFavoritesHandler() {
+
+  }
   // toCommentsHandler() {
   //   this.router.navigate([this.post._id, 'comments'], { relativeTo: this.route });
   // }

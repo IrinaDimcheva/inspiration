@@ -1,5 +1,8 @@
 <mat-card class="example-card">
   <div class="title">
+    <div class="image">
+      <img mat-card-avatar src="../../../assets/images/profile-icon-material-design-hd-png-download.png">
+    </div>
     <mat-card-title>{{comment.userId.username | titlecase}}</mat-card-title>
     <span class="spacer"></span>
     <mat-card-subtitle>commented on {{comment.created_at | date: 'd MMM y, hh:mm:ss'}}</mat-card-subtitle>

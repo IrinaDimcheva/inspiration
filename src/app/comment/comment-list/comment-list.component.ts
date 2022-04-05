@@ -12,7 +12,7 @@ import { CommentService } from '../comment.service';
 export class CommentListComponent implements OnInit {
   // postId: string;
   commentList: IComment[] = [];
-  showSpinner = false;
+  isLoading = false;
 
   constructor(private commentService: CommentService, private route: ActivatedRoute) { }
 
@@ -28,10 +28,10 @@ export class CommentListComponent implements OnInit {
     //     this.commentList = comments;
     //   }
     // });
-    this.showSpinner = true;
+    this.isLoading = true;
     this.route.params.pipe(switchMap(({ id }) => this.commentService.getComments(id)))
       .subscribe(comments => {
-        this.showSpinner = false;
+        this.isLoading = false;
         this.commentList = comments;
       });
   }

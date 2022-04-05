@@ -4,5 +4,5 @@
   <p class="info-text" *ngIf="commentList.length === 0">No comments for this post yet!</p>
 </mat-card>
 <div class="spinner">
-  <mat-spinner *ngIf="showSpinner"></mat-spinner>
+  <mat-spinner *ngIf="isLoading"></mat-spinner>
 </div>

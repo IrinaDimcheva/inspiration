@@ -1,10 +1,12 @@
 import { RouterModule, Routes } from "@angular/router";
+import { AuthGuard } from "../core/guards/auth.guard";
 import { CommentCreateComponent } from "./comment-create/comment-create.component";
 import { CommentListComponent } from "./comment-list/comment-list.component";
 
 const routes: Routes = [
   {
     path: 'posts/:id',
+    // canActivateChild: [AuthGuard],
     children: [
       {
         path: 'comments',

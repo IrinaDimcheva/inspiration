@@ -1,4 +1,5 @@
 import { RouterModule, Routes } from "@angular/router";
+import { AuthGuard } from "../core/guards/auth.guard";
 import { PostCreateComponent } from "./post-create/post-create.component";
 import { PostListComponent } from "./post-list/post-list.component";
 
@@ -8,7 +9,7 @@ const routes: Routes = [
     component: PostListComponent,
     data: {
       title: 'Inspiration | Posts'
-    }
+    },
   },
   {
     path: 'posts/new',

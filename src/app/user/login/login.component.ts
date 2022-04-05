@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UserService } from '../user.service';
@@ -9,6 +9,9 @@ import { UserService } from '../user.service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
+  @ViewChild('f') form: NgForm;
+  errorMessage = '';
+  isLoading = false;
 
   constructor(private userService: UserService,
     private router: Router) { }
@@ -16,16 +19,21 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  formHandler(form: NgForm) {
-    if (form.invalid) { return; }
-    const email = form.value.email;
-    const password = form.value.password;
+  loginHandler(): void {
+    if (this.form.invalid) { return; }
+    this.errorMessage = '';
+    this.isLoading = true;
+    const email = this.form.value.email;
+    const password = this.form.value.password;
     this.userService.login({ email, password }).subscribe({
       next: () => {
+        this.isLoading = false;
         this.router.navigate(['/']);
       },
       error: (err) => {
         console.log(err);
+        this.isLoading = false;
+        this.errorMessage = 'ERROR!'
       }
     });
   }
