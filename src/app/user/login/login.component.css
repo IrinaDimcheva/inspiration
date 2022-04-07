@@ -21,7 +21,7 @@ a:hover {
   font-size: 0.8em;
 }
 
-.spinner {
+mat-spinner {
   margin: auto;
   width: 1em;
 }

@@ -6,7 +6,7 @@ import { CommentListComponent } from "./comment-list/comment-list.component";
 const routes: Routes = [
   {
     path: 'posts/:id',
-    // canActivateChild: [AuthGuard],
+    canActivateChild: [AuthGuard],
     children: [
       {
         path: 'comments',
@@ -20,7 +20,12 @@ const routes: Routes = [
   },
   // {
   //   path: 'posts/:id/comments',
-  //   component: CommentCreateComponent
+  //   component: CommentCreateComponent,
+  //   canActivate: [AuthGuard],
+  //   data: {
+  //     isAuth: true,
+  //     title: 'Inspiration | Comments'
+  //   }
   // }
 ];
 

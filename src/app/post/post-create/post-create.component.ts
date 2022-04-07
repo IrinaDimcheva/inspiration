@@ -11,6 +11,7 @@ import { PostService } from '../post.service';
   styleUrls: ['./post-create.component.css']
 })
 export class PostCreateComponent implements OnInit {
+  isLoading = false;
   // title = '';
   // content = '';
   // imageUrl = '';
@@ -27,12 +28,21 @@ export class PostCreateComponent implements OnInit {
       content: form.value.content,
       imageUrl: form.value.imageUrl
     };
+    this.isLoading = true;
     // this.postService.addPost(post);
     this.postService.addPost(post).subscribe({
       next: () => {
+        this.isLoading = false;
         this.router.navigate(['/posts']);
+      },
+      error: (err) => {
+        console.log(err);
       }
     });
+    form.resetForm();
+  }
+
+  resetForm(form: NgForm) {
     form.resetForm();
   }
 }

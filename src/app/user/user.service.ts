@@ -19,6 +19,7 @@ export class UserService {
     return this.http.get(`${apiUrl}/users/profile`, { withCredentials: true }).pipe(
       tap((user: IUser) => {
         this.user = user;
+        console.log(this.user, user);
       }),
       catchError(() => {
         this.user = null;

@@ -1,5 +1,6 @@
 <mat-card>
-  <form (ngSubmit)="createHandler(f)" #f="ngForm">
+  <mat-spinner *ngIf="isLoading"></mat-spinner>
+  <form (ngSubmit)="createHandler(f)" #f="ngForm" *ngIf="!isLoading">
     <mat-form-field appearance="outline" [style.width.%]="100">
       <mat-label>Post Title</mat-label>
       <input
@@ -9,9 +10,14 @@
         ngModel
         #title="ngModel"
         required
-        minlength="3">
-      <mat-error *ngIf="title.invalid">Please enter post title.</mat-error>
+        minlength="5">
     </mat-form-field>
+    <span *ngIf="title.touched && title.errors?.['required']" class="error">
+      Please enter post title.
+    </span>
+    <span *ngIf="title.touched && title.errors?.['minlength']" class="error">
+      Post title should be at least 5 characters.
+    </span>
     <mat-form-field appearance="outline" [style.width.%]="100">
       <mat-label>Post Image</mat-label>
       <input
@@ -20,22 +26,37 @@
         name="imageUrl"
         ngModel
         #imageUrl="ngModel"
-        required>
-      <mat-error>Please enter post image.</mat-error>
+        required
+        pattern="^https*:\/\/.+">
+      <img [src]="imageUrl.value">
     </mat-form-field>
+    <span *ngIf="imageUrl.touched && imageUrl.errors?.['required']" class="error">
+      Please enter post image.
+    </span>
+    <span *ngIf="imageUrl.touched && imageUrl.errors?.['pattern']" class="error">
+      Image should start with 'http://' or 'https://'.
+    </span>
     <mat-form-field appearance="outline" [style.width.%]="100">
       <mat-label>Post Content</mat-label>
       <textarea
         matInput
-        rows="3"
+        rows="6"
         name="content"
         ngModel
         #content="ngModel"
         required
         minlength="10"></textarea>
-      <mat-error>Please enter post content.</mat-error>
     </mat-form-field>
-    <button type="submit" mat-raised-button color="primary">Save</button>
+    <span *ngIf="content.touched && content.errors?.['required']" class="error">
+      Please enter post content.
+    </span>
+    <span *ngIf="content.touched && content.errors?.['minlength']" class="error">
+      Post content must be at least 10 characters.
+    </span>
+    <div>
+      <button type="submit" mat-raised-button color="primary">Save</button>
+      <button type="button" mat-raised-button color="warn" (click)="resetForm(f)">Clear</button>
+    </div>
   </form>
 
 </mat-card>

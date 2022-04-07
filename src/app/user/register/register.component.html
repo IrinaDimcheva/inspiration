@@ -82,7 +82,9 @@
       <span *ngIf="rePassword.touched && (f.value.password !== f.value.rePassword)" class="error">Passwords should match.</span>
     </div>
     <button mat-raised-button color="primary" [disabled]="isLoading || f.invalid">Register</button>
-    <mat-spinner class="spinner" *ngIf="isLoading"></mat-spinner>
+    <div class="spinner">
+      <mat-spinner class="spinner" *ngIf="isLoading"></mat-spinner>
+    </div>
   </form>
   <p>Have an account? <a routerLink="/user/login">Login</a></p>
 </mat-card>

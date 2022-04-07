@@ -1,5 +1,5 @@
 <mat-card>
-  <form (ngSubmit)="loginHandler()" #f="ngForm">
+  <form (ngSubmit)="loginHandler()" #f="ngForm" *ngIf="!isLoading">
     <div>
       <mat-form-field appearance="outline" [style.width.%]="100">
         <mat-label>Enter your email</mat-label>
@@ -42,7 +42,7 @@
       </span>
     </div>
     <button mat-raised-button color="primary" [disabled]="isLoading || f.invalid">Login</button>
-    <mat-spinner *ngIf="isLoading"></mat-spinner>
   </form>
+  <mat-spinner *ngIf="isLoading"></mat-spinner>
   <p>Don't have an account? <a routerLink="/user/register">Register now</a></p>
 </mat-card>

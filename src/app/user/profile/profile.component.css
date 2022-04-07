@@ -16,3 +16,12 @@ h2 {
 .info {
   margin: 5em 10em;
 }
+
+.info-text {
+  text-align: center;
+}
+
+.spinner {
+  margin: auto;
+  width: 1em;
+}

@@ -7,28 +7,22 @@ import { NotFoundComponent } from './not-found/not-found.component';
 const routes: Routes = [
   {
     path: '',
-    // canActivateChild: [AuthGuard],
-    children: [
-      {
-        path: '',
-        pathMatch: 'full',
-        redirectTo: '/posts',
-      },
-      {
-        path: 'about',
-        component: AboutComponent,
-        data: {
-          title: 'Inspiration | About'
-        }
-      },
-      {
-        path: '**',
-        component: NotFoundComponent,
-        data: {
-          title: 'Inspiration | 404'
-        }
-      }
-    ]
+    pathMatch: 'full',
+    redirectTo: '/posts',
+  },
+  {
+    path: 'about',
+    component: AboutComponent,
+    data: {
+      title: 'Inspiration | About'
+    }
+  },
+  {
+    path: '**',
+    component: NotFoundComponent,
+    data: {
+      title: 'Inspiration | 404'
+    }
   }
 ];
 

@@ -29,6 +29,6 @@ export class PostService {
   // }
 
   addPost(post: IPost): Observable<IPost> {
-    return this.http.post<IPost>(apiUrl + '/posts', post);
+    return this.http.post<IPost>(apiUrl + '/posts', post, { withCredentials: true });
   }
 }

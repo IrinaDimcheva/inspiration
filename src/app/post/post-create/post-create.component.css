@@ -1,3 +1,16 @@
 mat-card {
   margin-top: 5em;
 }
+
+mat-spinner {
+  margin: auto;
+}
+
+button {
+  margin-right: 1em;
+}
+
+.error {
+  color: red;
+  font-size: 0.8em;
+}
