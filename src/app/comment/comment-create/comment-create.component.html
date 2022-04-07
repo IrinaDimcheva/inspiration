@@ -1,4 +1,4 @@
-<mat-card>
+<mat-card *ngIf="!isLoading">
   <form (ngSubmit)="addCommentHandler(f)" #f="ngForm">
     <mat-form-field appearance="outline" [style.width.%]="100">
       <mat-label>Comment</mat-label>
@@ -10,8 +10,14 @@
         #text="ngModel"
         required
         minlength="10"></textarea>
-      <mat-error *ngIf="text.invalid">Comment text must be at least 10 chars long.</mat-error>
     </mat-form-field>
+    <p *ngIf="text.touched && text.errors?.['required']" class="errors">
+      Comment text is required.
+    </p>
+    <p *ngIf="text.touched && text.errors?.['minlength']" class="errors">
+      Comment text must be at least 10 chars long.
+    </p>
     <button mat-raised-button color="primary">Add Comment</button>
   </form>
 </mat-card>
+<mat-spinner *ngIf="isLoading"></mat-spinner>

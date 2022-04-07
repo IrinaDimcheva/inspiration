@@ -14,10 +14,10 @@ export class CommentService {
   //   return this.http.get<IPost>(`${apiUrl}/posts/${postId}`);
   // }
   getComments(postId: string): Observable<IComment[]> {
-    return this.http.get<IComment[]>(`${apiUrl}/posts/${postId}/comments`);
+    return this.http.get<IComment[]>(`${apiUrl}/posts/${postId}/comments`, { withCredentials: true });
   }
 
-  addComment(postId: string, text: string): Observable<IComment> {
-    return this.http.post<IComment>(`${apiUrl}/posts/${postId}`, text);
+  addComment(comment: string, postId: string): Observable<IComment> {
+    return this.http.post<IComment>(`${apiUrl}/posts/${postId}/comments`, { text: comment }, { withCredentials: true });
   }
 }

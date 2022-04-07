@@ -7,13 +7,13 @@ import { RegisterComponent } from './register/register.component';
 const routes: Routes = [
   {
     path: 'user',
-    // canActivateChild: [AuthGuard],
+    canActivateChild: [AuthGuard],
     children: [
       {
         path: 'login',
         component: LoginComponent,
         data: {
-          isAuth: false,
+          isLogged: false,
           title: 'Inspiration | Login'
         }
       },
@@ -21,7 +21,7 @@ const routes: Routes = [
         path: 'register',
         component: RegisterComponent,
         data: {
-          isAuth: false,
+          isLogged: false,
           title: 'Inspiration | Register'
         }
       },
@@ -29,7 +29,7 @@ const routes: Routes = [
         path: 'profile',
         component: ProfileComponent,
         data: {
-          isAuth: true,
+          isLogged: true,
           title: 'Inspiration | User'
         }
       }

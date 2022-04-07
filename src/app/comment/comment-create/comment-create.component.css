@@ -2,3 +2,12 @@ mat-card {
   margin-top: 2em;
   margin-bottom: 3em;
 }
+
+mat-spinner {
+  margin: auto;
+}
+
+.errors {
+  color: red;
+  font-size: 0.8em;
+}

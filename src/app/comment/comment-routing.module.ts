@@ -6,7 +6,6 @@ import { CommentListComponent } from "./comment-list/comment-list.component";
 const routes: Routes = [
   {
     path: 'posts/:id',
-    canActivateChild: [AuthGuard],
     children: [
       {
         path: 'comments',

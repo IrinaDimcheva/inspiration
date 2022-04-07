@@ -12,9 +12,6 @@ import { PostService } from '../post.service';
 })
 export class PostCreateComponent implements OnInit {
   isLoading = false;
-  // title = '';
-  // content = '';
-  // imageUrl = '';
 
   constructor(private postService: PostService, private router: Router) { }
 
@@ -29,7 +26,6 @@ export class PostCreateComponent implements OnInit {
       imageUrl: form.value.imageUrl
     };
     this.isLoading = true;
-    // this.postService.addPost(post);
     this.postService.addPost(post).subscribe({
       next: () => {
         this.isLoading = false;
