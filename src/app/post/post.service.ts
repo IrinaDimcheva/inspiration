@@ -18,6 +18,10 @@ export class PostService {
     return this.http.get<IPost[]>(apiUrl + '/posts');
   }
 
+  loadPostById$(postId: string): Observable<IPost> {
+    return this.http.get<IPost>(`${apiUrl}/posts/${postId}`);
+  }
+
   getPostUpdateListener() {
     return this.postsUpdated.asObservable();
   }

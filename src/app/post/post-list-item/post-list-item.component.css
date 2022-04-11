@@ -1,40 +1,30 @@
-p {
-  float: right;
+mat-card {
+  max-height: 100px;
+  display: flex;
+  cursor: pointer;
+  margin: 0.7rem;
+}
+
+mat-card div {
+  margin: 0.5em;
+}
+
+.image {
+  height: 100px;
+  width: auto;
+  background: inherit;
+  /* overflow: hidden; */
+  /* border-radius: 0.3em;
+  box-shadow: 0 0 0.3 0 rgba(0, 0, 0, 0.9); */
 }
 
 img {
-  margin-bottom:1em;
-  margin-left: 1em;
-  max-width: 200px;
-  display: block;
-} 
-
-.image {
-  float: right;
-}
-
-mat-action-row {
-  display: flex;
+  border-radius: 0.3em;
+  overflow: hidden;
+  box-shadow: 0 0 0.3em 0 rgba(0, 0, 0, 0.5);
 }
 
 .spacer {
-  margin: 0 auto;
+  flex: 1 1 auto;
 }
 
-.likes {
-  color: #444;
-  margin-right: 1em;
-}
-
-/* .image {
-  width: 50%;
-  background: #000;
-  float: left;
-  margin: 0 1em 1em 0;
-}
-
-.image img {
-  display: block;
-  width: 100%;
-  height: auto;
-} */

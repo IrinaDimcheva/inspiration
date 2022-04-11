@@ -1,6 +1,6 @@
 <mat-card>
   <mat-spinner *ngIf="isLoading"></mat-spinner>
-  <form (ngSubmit)="createHandler(f)" #f="ngForm" *ngIf="!isLoading">
+  <form (ngSubmit)="createHandler(f)" #f="ngForm">
     <mat-form-field appearance="outline" [style.width.%]="100">
       <mat-label>Post Title</mat-label>
       <input
@@ -58,5 +58,4 @@
       <button type="button" mat-raised-button color="warn" (click)="resetForm(f)">Clear</button>
     </div>
   </form>
-
 </mat-card>
