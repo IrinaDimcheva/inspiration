@@ -12,6 +12,7 @@ const apiUrl = environment.apiUrl;
 export class UserService {
   user: IUser | null;
   get isLogged(): boolean { return !!this.user; }
+  get userId() { return this.user?._id; }
 
   constructor(private http: HttpClient) { }
 

@@ -17,7 +17,18 @@ export class CommentService {
     return this.http.get<IComment[]>(`${apiUrl}/posts/${postId}/comments`, { withCredentials: true });
   }
 
+  getComment(postId: string, commentId: string): Observable<IComment> {
+    return this.http.get<IComment>(`${apiUrl}/posts/${postId}/comments/${commentId}`,
+      { withCredentials: true });
+  }
+
   addComment(comment: string, postId: string): Observable<IComment> {
-    return this.http.post<IComment>(`${apiUrl}/posts/${postId}/comments`, { text: comment }, { withCredentials: true });
+    return this.http.post<IComment>(`${apiUrl}/posts/${postId}/comments`, { text: comment },
+      { withCredentials: true });
+  }
+
+  editComment(data: { text: string }, postId: string, commentId: string): Observable<IComment> {
+    return this.http.put<IComment>(`${apiUrl}/posts/${postId}/comments/${commentId}`, data,
+      { withCredentials: true });
   }
 }

@@ -14,6 +14,13 @@ const routes: Routes = [
           isAuth: true,
           title: 'Inspiration | Comments'
         }
+      },
+      {
+        path: 'comments/:commentId',
+        component: CommentCreateComponent,
+        data: {
+          title: 'Inspiration | Comments'
+        }
       }
     ]
   },

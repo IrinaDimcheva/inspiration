@@ -1,5 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { IComment } from 'src/app/shared/interfaces';
+import { UserService } from 'src/app/user/user.service';
+import { CommentService } from '../comment.service';
 
 @Component({
   selector: 'app-comment-list-item',
@@ -8,10 +11,23 @@ import { IComment } from 'src/app/shared/interfaces';
 })
 export class CommentListItemComponent implements OnInit {
   @Input() comment: IComment;
+  commentUserId: string;
+  userId: string;
+  isAuthor: boolean;
 
-  constructor() { }
+  constructor(
+    public userService: UserService,
+    private router: Router,
+    private route: ActivatedRoute
+  ) { }
 
   ngOnInit(): void {
+    this.userId = this.userService.userId;
+    this.commentUserId = this.comment.userId._id;
+    this.isAuthor = this.userId == this.commentUserId;
   }
 
+  editHandler() {
+    this.router.navigate([this.comment._id], { relativeTo: this.route });
+  }
 }

@@ -24,7 +24,10 @@
     </button>
     <span class="likes">{{comment.likes.length}} likes</span>
     <span class="spacer"></span>
-    <button mat-button color="primary">EDIT</button>
-    <button mat-button color="warn">DELETE</button>
+    <!-- {{ isAuthor }} -->
+    <!-- <ng-template *ngIf="isAuthor"> -->
+    <button mat-button color="primary" *ngIf="isAuthor" (click)="editHandler()">EDIT</button>
+    <button mat-button color="warn" *ngIf="isAuthor">DELETE</button>
+    <!-- </ng-template> -->
   </mat-action-row>
 </mat-card>
