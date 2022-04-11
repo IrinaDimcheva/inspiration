@@ -1,0 +1,35 @@
+<mat-card class="detail">
+  <mat-card-header>
+    <div mat-card-avatar class="avatar-image">
+      <img mat-card-avatar src="../../../assets/images/profile-icon-material-design-hd-png-download.png">
+    </div>
+    <mat-card-title>{{post.title}}</mat-card-title>
+    <mat-card-subtitle>Author {{post.userId.username | titlecase}}, posted on {{post.created_at | date: 'd MMM y, hh:mm:ss'}}</mat-card-subtitle>
+  </mat-card-header>
+  <div class="post-image">
+    <img mat-card-image [src]="post.imageUrl" [alt]="post.title">
+  </div>
+  <mat-card-content>
+    <p>{{post.content}}</p>
+  </mat-card-content>
+  <mat-action-row>
+    <button mat-button color="primary" *ngIf="isLogged">
+      <span class="material-icons">
+        thumb_up
+      </span>
+    </button>
+    <button mat-button color="primary" *ngIf="!isLogged" routerLink="/user/login">
+      <span class="material-icons">
+        thumb_up
+      </span>
+    </button>
+    <span class="likes">{{post.likes.length}} likes</span>
+    <a mat-button color="primary" [routerLink]="['/posts', post._id, 'comments']" *ngIf="isLogged">Comments</a>
+    <a mat-button color="primary" *ngIf="!isLogged" routerLink="/user/login">Comments</a>
+    <button mat-button color="primary" *ngIf="isLogged" (click)="AddToFavoritesHandler()">To Favorites</button>
+    <button mat-button color="primary" *ngIf="!isLogged" routerLink="/user/login">To Favorites</button>
+    <span class="spacer"></span>
+    <button mat-button color="primary">EDIT</button>
+    <button mat-button color="warn">DELETE</button>
+  </mat-action-row>
+</mat-card>

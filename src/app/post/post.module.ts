@@ -8,12 +8,14 @@ import { PostService } from './post.service';
 import { MaterialModule } from '../material.module';
 import { FormsModule } from '@angular/forms';
 import { PostRoutingModule } from './post-routing.module';
+import { PostDetailComponent } from './post-detail/post-detail.component';
 
 @NgModule({
   declarations: [
     PostListComponent,
     PostCreateComponent,
-    PostListItemComponent
+    PostListItemComponent,
+    PostDetailComponent
   ],
   imports: [
     CommonModule,
