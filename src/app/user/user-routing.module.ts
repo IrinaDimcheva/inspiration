@@ -6,34 +6,31 @@ import { RegisterComponent } from './register/register.component';
 
 const routes: Routes = [
   {
-    path: 'user',
-    canActivateChild: [AuthGuard],
-    children: [
-      {
-        path: 'login',
-        component: LoginComponent,
-        data: {
-          isLogged: false,
-          title: 'Inspiration | Login'
-        }
-      },
-      {
-        path: 'register',
-        component: RegisterComponent,
-        data: {
-          isLogged: false,
-          title: 'Inspiration | Register'
-        }
-      },
-      {
-        path: 'profile',
-        component: ProfileComponent,
-        data: {
-          isLogged: true,
-          title: 'Inspiration | User'
-        }
-      }
-    ]
+    path: 'login',
+    // canActivate: [AuthGuard],
+    component: LoginComponent,
+    data: {
+      // isLogged: false,
+      title: 'Inspiration | Login'
+    }
+  },
+  {
+    path: 'register',
+    // canActivate: [AuthGuard],
+    component: RegisterComponent,
+    data: {
+      // isLogged: false,
+      title: 'Inspiration | Register'
+    }
+  },
+  {
+    path: 'profile',
+    canActivate: [AuthGuard],
+    component: ProfileComponent,
+    data: {
+      // isLogged: true,
+      title: 'Inspiration | User'
+    }
   }
 ];
 

@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { switchMap } from 'rxjs';
+import { UserService } from 'src/app/core/services/user.service';
 import { IComment } from 'src/app/shared/interfaces';
-import { CommentService } from '../comment.service';
+import { CommentService } from '../../core/services/comment.service';
 
 @Component({
   selector: 'app-comment-list',
@@ -13,8 +14,13 @@ export class CommentListComponent implements OnInit {
   // postId: string;
   commentList: IComment[] = [];
   isLoading = false;
+  isLogged = this.userService.isLogged;
 
-  constructor(private commentService: CommentService, private route: ActivatedRoute) { }
+  constructor(
+    private commentService: CommentService,
+    private userService: UserService,
+    private route: ActivatedRoute,
+    private router: Router) { }
 
   ngOnInit(): void {
     // // const postId = this.route.snapshot.params['id'];
@@ -30,10 +36,18 @@ export class CommentListComponent implements OnInit {
     // });
     this.isLoading = true;
     this.route.params.pipe(switchMap(({ id }) => this.commentService.getComments(id)))
-      .subscribe(comments => {
-        this.isLoading = false;
-        this.commentList = comments;
+      .subscribe({
+        next: comments => {
+          this.isLoading = false;
+          this.commentList = comments;
+        },
+        error: err => {
+          console.log(err);
+        }
       });
   }
 
+  AddCommentHandler() {
+    this.router.navigate(['new'], { relativeTo: this.route });
+  }
 }

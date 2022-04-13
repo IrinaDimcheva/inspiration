@@ -1,8 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { IComment } from 'src/app/shared/interfaces';
-import { UserService } from 'src/app/user/user.service';
-import { CommentService } from '../comment.service';
+import { UserService } from 'src/app/core/services/user.service';
+import { CommentService } from '../../core/services/comment.service';
 
 @Component({
   selector: 'app-comment-list-item',

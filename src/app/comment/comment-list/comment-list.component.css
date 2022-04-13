@@ -1,5 +1,9 @@
-.spinner {
-  margin: auto;
+mat-card {
+  margin: 1em 0;
+}
+
+mat-spinner {
+  margin: 0 auto;
   width: 1em;
 }
 

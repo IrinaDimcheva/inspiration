@@ -3,7 +3,7 @@ import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { tap } from 'rxjs/operators';
 import { IComment } from 'src/app/shared/interfaces';
-import { CommentService } from '../comment.service';
+import { CommentService } from '../../core/services/comment.service';
 
 @Component({
   selector: 'app-comment-create',
@@ -31,14 +31,14 @@ export class CommentCreateComponent implements OnInit {
       // console.log(this.editMode);
       // console.log(this.commentId);
     });
-    if (this.commentId !== null) {
-      this.commentService.getComment(this.id, this.commentId)
-        .subscribe({
-          next: (comment) => {
-            this.form.setValue({ 'text': comment.text })
-          }
-        })
-    }
+    // if (this.commentId !== null) {
+    //   this.commentService.getComment(this.id, this.commentId)
+    //     .subscribe({
+    //       next: (comment) => {
+    //         this.form.setValue({ 'text': comment.text })
+    //       }
+    //     })
+    // }
     // this.commentService.getComments(this.id).subscribe();
   }
 
@@ -54,8 +54,8 @@ export class CommentCreateComponent implements OnInit {
         .subscribe({
           next: () => {
             this.isLoading = false;
-            this.router.navigate(['/posts', postId, 'comments'], { relativeTo: this.route });
-            // this.router.navigate(['../'], { relativeTo: this.route });
+            // this.router.navigate(['/posts', postId, 'comments'], { relativeTo: this.route });
+            this.router.navigate(['../'], { relativeTo: this.route });
           },
           error: (err) => {
             this.isLoading = false;

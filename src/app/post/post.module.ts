@@ -4,7 +4,6 @@ import { CommonModule } from '@angular/common';
 import { PostListComponent } from './post-list/post-list.component';
 import { PostCreateComponent } from './post-create/post-create.component';
 import { PostListItemComponent } from './post-list-item/post-list-item.component';
-import { PostService } from './post.service';
 import { MaterialModule } from '../material.module';
 import { FormsModule } from '@angular/forms';
 import { PostRoutingModule } from './post-routing.module';
@@ -22,9 +21,6 @@ import { PostDetailComponent } from './post-detail/post-detail.component';
     MaterialModule,
     FormsModule,
     PostRoutingModule
-  ],
-  providers: [
-    PostService
   ],
   exports: [
     PostListComponent,

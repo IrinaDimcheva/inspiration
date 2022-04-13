@@ -3,7 +3,7 @@ import { Title } from '@angular/platform-browser';
 import { ActivationEnd, Router } from '@angular/router';
 import { filter, throttleTime } from 'rxjs/operators';
 
-import { UserService } from 'src/app/user/user.service';
+import { UserService } from 'src/app/core/services/user.service';
 
 @Component({
   selector: 'app-header',
@@ -30,7 +30,7 @@ export class HeaderComponent implements OnInit {
 
   logoutHandler() {
     this.userService.logout().subscribe(() => {
-      this.router.navigate(['/user/login']);
+      this.router.navigate(['/login']);
     });
   }
 }

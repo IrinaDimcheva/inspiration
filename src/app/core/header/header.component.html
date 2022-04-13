@@ -4,21 +4,24 @@
   </span>
   <span class="spacer"></span>
   <ul>
-    <li>
-      <a *ngIf="isLogged" mat-button routerLink="/posts/new">New Post</a>
-    </li>
-    <li>
-      <!-- <a *ngIf="!isLogged" mat-button routerLink="/user/login" (click)="loginHandler()">Login</a> -->
-      <a *ngIf="!isLogged" mat-button routerLink="/user/login">Login</a>
-    </li>
-    <li>
-      <a *ngIf="!isLogged" mat-button routerLink="/user/register">Register</a>
-    </li>
-    <li>
-      <a *ngIf="isLogged" mat-button routerLink="/user/profile">Profile</a>
-    </li>
-    <li>
-      <button *ngIf="isLogged" mat-button href="/user/logout" (click)="logoutHandler()">Logout</button>
-    </li>
+    <ng-container *ngIf="isLogged">
+      <li>
+        <a mat-button routerLink="/posts/new">New Post</a>
+      </li>
+      <li>
+        <a mat-button routerLink="/profile">Profile</a>
+      </li>
+      <li>
+        <button mat-button href="/logout" (click)="logoutHandler()">Logout</button>
+      </li>
+    </ng-container>
+    <ng-container *ngIf="!isLogged">
+      <li>
+        <a mat-button routerLink="/login">Login</a>
+      </li>
+      <li>
+        <a mat-button routerLink="/register">Register</a>
+      </li>
+    </ng-container>
   </ul>
 </mat-toolbar>

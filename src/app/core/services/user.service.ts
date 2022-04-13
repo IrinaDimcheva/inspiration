@@ -3,12 +3,14 @@ import { Injectable } from "@angular/core";
 import { Observable, of } from "rxjs";
 import { tap, catchError } from 'rxjs/operators';
 
-import { environment } from "../../environments/environment";
-import { IUser } from "../shared/interfaces";
+import { environment } from "../../../environments/environment";
+import { IUser } from "../../shared/interfaces";
 
 const apiUrl = environment.apiUrl;
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class UserService {
   user: IUser | null;
   get isLogged(): boolean { return !!this.user; }

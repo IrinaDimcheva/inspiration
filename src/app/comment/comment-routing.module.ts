@@ -9,6 +9,8 @@ const routes: Routes = [
     children: [
       {
         path: 'comments',
+        pathMatch: 'full',
+        canActivate: [AuthGuard],
         component: CommentListComponent,
         data: {
           isAuth: true,
@@ -16,23 +18,18 @@ const routes: Routes = [
         }
       },
       {
-        path: 'comments/:commentId',
+        path: 'comments/new',
+        canActivate: [AuthGuard],
         component: CommentCreateComponent,
         data: {
           title: 'Inspiration | Comments'
         }
-      }
+      },
+      // {
+      //   path: 'comments/:commentId'
+      // }
     ]
-  },
-  // {
-  //   path: 'posts/:id/comments',
-  //   component: CommentCreateComponent,
-  //   canActivate: [AuthGuard],
-  //   data: {
-  //     isAuth: true,
-  //     title: 'Inspiration | Comments'
-  //   }
-  // }
+  }
 ];
 
 export const CommentRoutingModule = RouterModule.forChild(routes);

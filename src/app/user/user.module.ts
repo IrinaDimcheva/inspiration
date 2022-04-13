@@ -6,7 +6,6 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { MaterialModule } from '../material.module';
 import { UserRoutingModule } from './user-routing.module';
-import { UserService } from './user.service';
 import { ProfileComponent } from './profile/profile.component';
 import { PostModule } from '../post/post.module';
 
@@ -25,9 +24,6 @@ import { PostModule } from '../post/post.module';
     ReactiveFormsModule,
     UserRoutingModule,
     PostModule
-  ],
-  providers: [
-    UserService
   ]
 })
 export class UserModule { }

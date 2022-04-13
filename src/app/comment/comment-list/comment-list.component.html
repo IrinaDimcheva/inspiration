@@ -1,8 +1,7 @@
-<app-comment-create></app-comment-create>
-<mat-card *ngIf="commentList">
+<!-- <app-comment-create></app-comment-create> -->
+<button mat-raised-button color="primary" (click)="AddCommentHandler()">Add Comment</button>
+<mat-card *ngIf="!isLoading">
   <app-comment-list-item *ngFor="let comment of commentList" [comment]="comment"></app-comment-list-item>
   <p class="info-text" *ngIf="commentList.length === 0">No comments for this post yet!</p>
 </mat-card>
-<div class="spinner">
-  <mat-spinner *ngIf="isLoading"></mat-spinner>
-</div>
+<mat-spinner *ngIf="isLoading"></mat-spinner>

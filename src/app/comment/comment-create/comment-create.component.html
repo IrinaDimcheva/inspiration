@@ -11,12 +11,14 @@
         required
         minlength="10"></textarea>
     </mat-form-field>
-    <p *ngIf="text.touched && text.errors?.['required']" class="errors">
-      Comment text is required.
-    </p>
-    <p *ngIf="text.touched && text.errors?.['minlength']" class="errors">
-      Comment text must be at least 10 chars long.
-    </p>
+    <div>
+      <span *ngIf="text.touched && text.errors?.['required']" class="errors">
+        Comment text is required.
+      </span>
+      <span *ngIf="text.touched && text.errors?.['minlength']" class="errors">
+        Comment text must be at least 10 chars long.
+      </span>
+    </div>
     <button mat-raised-button color="primary" *ngIf="!editMode">Add Comment</button>
     <button mat-raised-button color="primary" *ngIf="editMode">Edit Comment</button>
     <button mat-raised-button color="warn" (click)="cancelHandler()" *ngIf="editMode">Cancel</button>

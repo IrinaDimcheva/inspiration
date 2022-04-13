@@ -1,6 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { UserService } from 'src/app/user/user.service';
+import { Component, Input } from '@angular/core';
+import { UserService } from 'src/app/core/services/user.service';
 import { IPost } from '../../shared/interfaces';
 
 @Component({
@@ -8,24 +7,11 @@ import { IPost } from '../../shared/interfaces';
   templateUrl: './post-list-item.component.html',
   styleUrls: ['./post-list-item.component.css']
 })
-export class PostListItemComponent implements OnInit {
+export class PostListItemComponent {
   @Input() post: IPost;
   get isLogged() {
     return this.userService.isLogged;
   }
 
-  constructor(
-    private router: Router,
-    private route: ActivatedRoute,
-    private userService: UserService) { }
-
-  ngOnInit(): void {
-  }
-
-  AddToFavoritesHandler() {
-
-  }
-  // toCommentsHandler() {
-  //   this.router.navigate([this.post._id, 'comments'], { relativeTo: this.route });
-  // }
+  constructor(private userService: UserService) { }
 }

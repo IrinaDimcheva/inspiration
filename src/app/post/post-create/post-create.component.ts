@@ -3,7 +3,7 @@ import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 
 import { IPost } from '../../shared/interfaces';
-import { PostService } from '../post.service';
+import { PostService } from '../../core/services/post.service';
 
 @Component({
   selector: 'app-post-create',
