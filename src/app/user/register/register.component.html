@@ -1,4 +1,87 @@
 <mat-card>
+  <form [formGroup]="form" (ngSubmit)="registerHandler()">
+    <div>
+      <mat-form-field appearance="outline" [style.width.%]="100">
+        <mat-label>Enter username</mat-label>
+        <input
+          matInput
+          type="text"
+          name="username"
+          formControlName="username">
+      </mat-form-field>
+    </div>
+    <span class="error" *ngIf="form.get('username').touched && form.get('username').errors?.['required']">
+      Username is required!
+    </span>
+    <span class="error" *ngIf="form.get('username').touched && form.get('username').errors?.['charactersValidator']">
+      Username must contains only latin letters and digits.
+    </span>
+    <span class="error" *ngIf="form.get('username').touched && form.get('username').errors?.['minlength']">
+      Username should be at least 5 characters long.
+    </span>
+    <div>
+      <mat-form-field appearance="outline" [style.width.%]="100">
+        <mat-label>Enter email</mat-label>
+        <input
+          matInput
+          placeholder="pat@example.com"
+          name="email"
+          formControlName="email">
+      </mat-form-field>
+      <span class="error" *ngIf="form.get('email').touched && form.get('email').errors?.['required']">
+        Email is required!
+      </span>
+      <span class="error" *ngIf="form.get('email').touched && form.get('email').errors?.['emailValidator']">
+        Email is invalid.
+      </span>
+    </div>
+    <div>
+      <mat-form-field appearance="outline" [style.width.%]="100">
+        <mat-label>Enter password</mat-label>
+        <input
+          matInput
+          type="password"
+          placeholder="******"
+          name="password"
+          formControlName="password">
+      </mat-form-field>
+      <span class="error" *ngIf="form.get('password').touched && form.get('password').errors?.['required']">
+        Password is required!
+      </span>
+      <span class="error" *ngIf="form.get('password').touched && form.get('password').errors?.['charactersValidator']">
+        Password must contains only latin letters and digits.
+      </span>
+      <span class="error" *ngIf="form.get('password').touched && form.get('password').errors?.['minlength']">
+        Password must be at least 6 chars.
+      </span>
+    </div>
+    <div>
+      <mat-form-field appearance="outline" [style.width.%]="100">
+        <mat-label>Enter repeat password</mat-label>
+        <input
+          matInput
+          type="password"
+          placeholder="******"
+          name="rePassword"
+          formControlName="rePassword">
+      </mat-form-field>
+      <span class="error" *ngIf="form.get('rePassword').touched && form.get('rePassword').errors?.['required']">
+        Repeat password is required.
+      </span>
+      <span class="error" *ngIf="form.get('rePassword').touched && form.get('rePassword').errors?.['charactersValidator']">
+        Repeat password must contains only latin letters and digits.
+      </span>
+      <span class="error" *ngIf="form.get('rePassword').touched && form.get('rePassword').errors?.['rePasswordValidator']">
+        Passwords should match.
+      </span>
+    </div>
+    <button mat-raised-button color="primary" [disabled]="isLoading || form.invalid">Register</button>
+  </form>
+  <p>Have an account? <a routerLink="/login">Login</a></p>
+</mat-card>
+
+
+<!-- <mat-card>
   <form #f="ngForm" (ngSubmit)="registerHandler(f)">
     <div>
       <mat-form-field appearance="outline" [style.width.%]="100">
@@ -85,66 +168,6 @@
     <div class="spinner">
       <mat-spinner class="spinner" *ngIf="isLoading"></mat-spinner>
     </div>
-  </form>
-  <p>Have an account? <a routerLink="/login">Login</a></p>
-</mat-card>
-
-<!-- 
-<mat-card>
-  <form [formGroup]="form" (ngSubmit)="registerHandler()">
-    <div>
-      <mat-form-field appearance="outline" [style.width.%]="100">
-        <mat-label>Enter username</mat-label>
-        <input
-          matInput
-          type="text"
-          name="username"
-          formControlName="username">
-      </mat-form-field>
-    </div>
-    <div>
-      <mat-form-field appearance="outline" [style.width.%]="100">
-        <mat-label>Enter email</mat-label>
-        <input
-          matInput
-          placeholder="pat@example.com"
-          name="email"
-          formControlName="email">
-      </mat-form-field>
-    </div>
-    <div>
-      <mat-form-field appearance="outline" [style.width.%]="100">
-        <mat-label>Enter password</mat-label>
-        <input
-          matInput
-          type="password"
-          placeholder="******"
-          name="password"
-          formControlName="password">
-      </mat-form-field>
-      <span class="error" *ngIf="form.get('password').touched && form.get('password').errors?.required">
-        Password is required!
-      </span>
-      <span class="error" *ngIf="form.get('password').touched && form.get('password').errors?.minlength">
-        Password must be at least 6 chars.
-      </span>
-    </div>
-    <div>
-      <mat-form-field appearance="outline" [style.width.%]="100">
-        <mat-label>Enter repeat password</mat-label>
-        <input
-          matInput
-          type="password"
-          placeholder="******"
-          name="rePassword"
-          formControlName="rePassword">
-      </mat-form-field>
-      <span class="error" *ngIf="form.get('rePassword').touched && form.get('rePassword').errors?.required">
-        Repassword is required.
-      </span>
-
-    </div>
-    <button mat-raised-button color="primary">Register</button>
   </form>
   <p>Have an account? <a routerLink="/login">Login</a></p>
 </mat-card> -->

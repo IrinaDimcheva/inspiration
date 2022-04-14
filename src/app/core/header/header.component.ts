@@ -4,6 +4,7 @@ import { ActivationEnd, Router } from '@angular/router';
 import { filter, throttleTime } from 'rxjs/operators';
 
 import { UserService } from 'src/app/core/services/user.service';
+import { IUser } from 'src/app/shared/interfaces';
 
 @Component({
   selector: 'app-header',
@@ -13,6 +14,9 @@ import { UserService } from 'src/app/core/services/user.service';
 export class HeaderComponent implements OnInit {
   get isLogged(): boolean {
     return this.userService.isLogged;
+  }
+  get user(): IUser {
+    return this.userService.user;
   }
 
   constructor(

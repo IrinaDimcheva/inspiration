@@ -9,7 +9,7 @@
         <a mat-button routerLink="/posts/new">New Post</a>
       </li>
       <li>
-        <a mat-button routerLink="/profile">Profile</a>
+        <a mat-button routerLink="/profile">{{user.username | titlecase}}'s Profile</a>
       </li>
       <li>
         <button mat-button href="/logout" (click)="logoutHandler()">Logout</button>
