@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { charactersValidator, emailValidator, rePasswordValidator } from 'src/app/shared/validators';
+import { charactersValidator, emailValidator, rePasswordValidator } from '../../shared/validators';
 import { UserService } from '../../core/services/user.service';
 
 @Component({
