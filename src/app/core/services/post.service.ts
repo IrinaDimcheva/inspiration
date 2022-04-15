@@ -11,31 +11,28 @@ const apiUrl = environment.apiUrl;
 })
 export class PostService {
   // private postList: IPost[] = [];
-  private postsUpdated = new Subject<IPost[]>();
+  // private postsUpdated = new Subject<IPost[]>();
 
   constructor(private http: HttpClient) { }
 
   loadPostList(): Observable<IPost[]> {
-    // return [...this.postList];
     return this.http.get<IPost[]>(apiUrl + '/posts');
   }
 
-  loadPostById$(postId: string): Observable<IPost> {
+  loadPostById(postId: string): Observable<IPost> {
     return this.http.get<IPost>(`${apiUrl}/posts/${postId}`);
   }
 
-  getPostUpdateListener() {
-    return this.postsUpdated.asObservable();
-  }
-
-  // addPost(title: string, content: string, imageUrl: string) {
-  //   // const post: IPost = { title, content };
-  //   // this.postList.push(post);
-  //   // this.postsUpdated.next([...this.postList]);
+  // getPostUpdateListener() {
+  //   return this.postsUpdated.asObservable();
   // }
 
+  editPost(id: string, post: IPost): Observable<IPost> {
+    return this.http.put<IPost>(`${apiUrl}/posts/${id}`, post, { withCredentials: true });
+  }
+
   addPost(post: IPost): Observable<IPost> {
-    return this.http.post<IPost>(apiUrl + '/posts', post, { withCredentials: true });
+    return this.http.post<IPost>(`${apiUrl}/posts`, post, { withCredentials: true });
   }
 
   likePost(postId: string): Observable<IPost> {

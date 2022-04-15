@@ -25,6 +25,14 @@ const routes: Routes = [
     path: 'posts/:id',
     component: PostDetailComponent
   },
+  {
+    path: 'posts/:id/edit',
+    canActivate: [AuthGuard],
+    component: PostCreateComponent,
+    data: {
+      title: 'Inspiration | Edit Post'
+    }
+  }
 ];
 
 export const PostRoutingModule = RouterModule.forChild(routes);

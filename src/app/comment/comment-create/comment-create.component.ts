@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { tap } from 'rxjs/operators';
+import { UserService } from 'src/app/core/services/user.service';
 import { IComment } from 'src/app/shared/interfaces';
 import { CommentService } from '../../core/services/comment.service';
 
@@ -18,10 +19,14 @@ export class CommentCreateComponent implements OnInit {
   editMode = false;
   comments: IComment[];
   editedComment: IComment;
+  isLogged = this.userService.isLogged;
 
-  constructor(private commentService: CommentService,
+  constructor(
+    private commentService: CommentService,
     private route: ActivatedRoute,
-    private router: Router) { }
+    private router: Router,
+    private userService: UserService
+  ) { }
 
   ngOnInit(): void {
     // this.id = this.route.snapshot.params['id'];

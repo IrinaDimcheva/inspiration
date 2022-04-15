@@ -44,6 +44,10 @@ mat-action-row {
   margin-right: 1em;
 }
 
+.tag {
+  color: #444;
+}
+
 /* .image {
   width: 50%;
   background: #000;

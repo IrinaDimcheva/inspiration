@@ -43,7 +43,7 @@ export class PostDetailComponent implements OnInit, OnDestroy {
       this.isLoading = true;
     }),
       mergeMap(params => {
-        return this.postService.loadPostById$(params['id']);
+        return this.postService.loadPostById(params['id']);
       }))
       .subscribe({
         next: post => {

@@ -11,6 +11,7 @@
   </div>
   <mat-card-content>
     <p>{{post.content}}</p>
+    <span class="tag">#{{post.tag}}</span>
   </mat-card-content>
   <mat-action-row>
     <button mat-button color="primary" *ngIf="isLogged" [disabled]="!canLike" (click)="likeHandler()">
@@ -31,7 +32,8 @@
     <button mat-button color="primary" *ngIf="isLogged" (click)="AddToFavoritesHandler()">To Favorites</button>
     <!-- <button mat-button color="primary" *ngIf="!isLogged" routerLink="/login">To Favorites</button> -->
     <span class="spacer"></span>
-    <button mat-button color="primary" *ngIf="isLogged && isAuthor">EDIT</button>
+    <button mat-button color="primary" *ngIf="isLogged && isAuthor"
+      [routerLink]="['/posts', post._id, 'edit']">EDIT</button>
     <button mat-button color="warn" *ngIf="isLogged && isAuthor">DELETE</button>
   </mat-action-row>
 </mat-card>
