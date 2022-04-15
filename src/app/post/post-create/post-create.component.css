@@ -6,6 +6,10 @@ mat-spinner {
   margin: auto;
 }
 
+ng-container {
+  display: block;
+}
+
 button {
   margin-right: 1em;
 }
