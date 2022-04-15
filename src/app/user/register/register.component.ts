@@ -12,6 +12,7 @@ import { UserService } from '../../core/services/user.service';
 export class RegisterComponent implements OnInit {
   form: FormGroup;
   isLoading = false;
+  errorMessage = '';
 
   constructor(
     private fb: FormBuilder,
@@ -32,6 +33,7 @@ export class RegisterComponent implements OnInit {
   registerHandler(): void {
     const data = this.form.value;
     this.isLoading = true;
+    this.errorMessage = '';
     this.userService.register(data).subscribe({
       next: () => {
         this.isLoading = false;
@@ -40,6 +42,9 @@ export class RegisterComponent implements OnInit {
       error: err => {
         this.isLoading = false;
         console.log(err);
+        this.errorMessage = err.error.message;
+        // TODO change with modal
+        alert(this.errorMessage);
       }
     });
   }

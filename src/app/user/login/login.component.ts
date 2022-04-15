@@ -33,7 +33,9 @@ export class LoginComponent implements OnInit {
       error: (err) => {
         console.log(err);
         this.isLoading = false;
-        this.errorMessage = 'ERROR!'
+        this.errorMessage = err.error.message;
+        // TODO change with modal
+        alert(this.errorMessage);
       }
     });
   }

@@ -41,6 +41,7 @@
         Password should be at least 6 characters.
       </span>
     </div>
+    <!-- <p class="error" *ngIf="errorMessage">{{errorMessage}}</p> -->
     <button mat-raised-button color="primary" [disabled]="isLoading || f.invalid">Login</button>
   </form>
   <mat-spinner *ngIf="isLoading"></mat-spinner>

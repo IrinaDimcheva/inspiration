@@ -75,6 +75,7 @@
         Passwords should match.
       </span>
     </div>
+    <!-- <p class="error" *ngIf="errorMessage">{{errorMessage}}</p> -->
     <button mat-raised-button color="primary" [disabled]="isLoading || form.invalid">Register</button>
   </form>
   <p>Have an account? <a routerLink="/login">Login</a></p>
