@@ -5,7 +5,7 @@
       <textarea
         matInput
         name="text"
-        rows="2"
+        rows="4"
         ngModel
         #text="ngModel"
         required
@@ -19,9 +19,9 @@
         Comment text must be at least 10 chars long.
       </span>
     </div>
-    <button mat-raised-button color="primary" *ngIf="!editMode">Add Comment</button>
-    <button mat-raised-button color="primary" *ngIf="editMode">Edit Comment</button>
-    <button mat-raised-button color="warn" (click)="cancelHandler()" *ngIf="editMode">Cancel</button>
+    <button mat-raised-button color="primary" *ngIf="!isEditMode" [disabled]="f.invalid">Add Comment</button>
+    <button mat-raised-button color="primary" *ngIf="isEditMode" [disabled]="f.invalid">Edit Comment</button>
+    <button mat-raised-button color="warn" (click)="cancelHandler()" *ngIf="isEditMode">Cancel</button>
   </form>
 </mat-card>
 <mat-spinner *ngIf="isLoading"></mat-spinner>

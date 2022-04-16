@@ -24,12 +24,16 @@ export class CommentService {
       { withCredentials: true });
   }
 
-  addComment(comment: string, postId: string): Observable<IComment> {
-    return this.http.post<IComment>(`${apiUrl}/posts/${postId}/comments`, { text: comment },
+  addComment(comment: IComment | any, postId: string): Observable<IComment> {
+    return this.http.post<IComment>(`${apiUrl}/posts/${postId}/comments`, comment,
       { withCredentials: true });
   }
 
-  editComment(data: { text: string }, postId: string, commentId: string): Observable<IComment> {
+  // editComment(data: { text: string }, postId: string, commentId: string): Observable<IComment> {
+  //   return this.http.put<IComment>(`${apiUrl}/posts/${postId}/comments/${commentId}`, data,
+  //     { withCredentials: true });
+  // }
+  editComment(postId: string, commentId: string, data: IComment): Observable<IComment> {
     return this.http.put<IComment>(`${apiUrl}/posts/${postId}/comments/${commentId}`, data,
       { withCredentials: true });
   }

@@ -1,5 +1,80 @@
 <!-- <mat-card>
   <mat-spinner *ngIf="isLoading"></mat-spinner>
+  <form (ngSubmit)="createHandler()" #f="ngForm" *ngIf="!isLoading">
+    <mat-form-field appearance="outline" [style.width.%]="100">
+      <mat-label>Post Title</mat-label>
+      <input
+        matInput
+        type="text"
+        name="title"
+        ngModel
+        #title="ngModel"
+        required
+        minlength="5">
+    </mat-form-field>
+    <span *ngIf="title.touched && title.errors?.['required']" class="error">
+      Please enter post title.
+    </span>
+    <span *ngIf="title.touched && title.errors?.['minlength']" class="error">
+      Post title should be at least 5 characters.
+    </span>
+    <mat-form-field appearance="outline" [style.width.%]="100">
+      <mat-label>Post Image</mat-label>
+      <input
+        matInput
+        type="text"
+        name="imageUrl"
+        ngModel
+        #imageUrl="ngModel"
+        required
+        pattern="^https*:\/\/.+">
+      <img [src]="imageUrl.value">
+    </mat-form-field>
+    <span *ngIf="imageUrl.touched && imageUrl.errors?.['required']" class="error">
+      Please enter post image.
+    </span>
+    <span *ngIf="imageUrl.touched && imageUrl.errors?.['pattern']" class="error">
+      Image should start with 'http://' or 'https://'.
+    </span>
+    <mat-form-field appearance="outline" [style.width.%]="100">
+      <mat-label>Post Content</mat-label>
+      <textarea
+        matInput
+        rows="10"
+        name="content"
+        ngModel
+        #content="ngModel"
+        required
+        minlength="10"></textarea>
+    </mat-form-field>
+    <span *ngIf="content.touched && content.errors?.['required']" class="error">
+      Please enter post content.
+    </span>
+    <span *ngIf="content.touched && content.errors?.['minlength']" class="error">
+      Post content must be at least 10 characters.
+    </span>
+    <mat-form-field appearance="outline">
+      <mat-label>Category</mat-label>
+      <select matNativeControl name="tag" required ngModel>
+        <option *ngFor="let tag of tagList" [ngValue]="tag">
+          {{tag}}
+        </option>
+      </select>
+    </mat-form-field>
+    <div *ngIf="!isEditMode">
+      <button type="submit" mat-raised-button color="primary" [disabled]="f.invalid">Save</button>
+      <button type="button" mat-raised-button color="warn" (click)="resetForm()">Clear</button>
+    </div>
+    <div *ngIf="isEditMode">
+      <button type="submit" mat-raised-button color="primary" [disabled]="f.invalid">Edit</button>
+      <button type="button" mat-raised-button color="warn" (click)="cancelHandler()">Cancel</button>
+    </div>
+  </form>
+</mat-card> -->
+
+
+<mat-card>
+  <mat-spinner *ngIf="isLoading"></mat-spinner>
   <form [formGroup]="form" (ngSubmit)="createHandler()" *ngIf="!isLoading">
     <mat-form-field appearance="outline" [style.width.%]="100">
       <mat-label>Post Title</mat-label>
@@ -43,35 +118,43 @@
     </span>
     <span *ngIf="form.get('content').touched && form.get('content').errors?.['minlength']" class="error">
       Post content must be at least 10 characters.
-    </span> -->
+    </span>
+    <mat-form-field appearance="outline">
+      <mat-label>Category</mat-label>
+      <select matNativeControl name="tag" required formControlName="tag">
+        <option *ngFor="let tag of tagList" [ngValue]="tag">
+          {{tag}}
+        </option>
+      </select>
+    </mat-form-field>
 
-<!-- <mat-form-field appearance="outline">
+    <!-- <mat-form-field appearance="outline">
       <mat-label>Categories</mat-label>
       <mat-select [formControl]="tagList" multiple>
         <mat-option *ngFor="let topping of toppingList" [value]="topping">{{topping}}</mat-option>
       </mat-select>
     </mat-form-field> -->
 
-<!-- <mat-form-field appearance="fill">
+    <!-- <mat-form-field appearance="fill">
       <mat-label>Categories</mat-label>
       <select multiple name="tags" formControlName="tags">
         <option *ngFor="let tag of tagList" [value]="tag">{{tag | titlecase}}</option>
       </select> -->
 
-<!-- <mat-select-trigger>
+    <!-- <mat-select-trigger>
           {{tags.value ? tags.value[0] : ''}}
           <span *ngIf="tags.value?.length > 1" class="example-additional-selection">
             (+{{tags.value.length - 1}} {{tags.value?.length === 2 ? 'other' : 'others'}})
           </span>
         </mat-select-trigger> -->
-<!-- <mat-option *ngFor="let tag of tagList" [value]="tag">{{tag | titlecase}}</mat-option> -->
-<!-- <mat-select [formControl]="tags" multiple>
+    <!-- <mat-option *ngFor="let tag of tagList" [value]="tag">{{tag | titlecase}}</mat-option> -->
+    <!-- <mat-select [formControl]="tags" multiple>
         <mat-option *ngFor="let tag of tagList" [value]="tag">
           {{ tag | titlecase }}
         </mat-option>
       </mat-select> -->
 
-<!-- </mat-form-field>
+    <!-- </mat-form-field> -->
     <ng-container *ngIf="!isEditMode">
       <button type="submit" mat-raised-button color="primary">Save</button>
       <button type="button" mat-raised-button color="warn" (click)="resetForm()">Clear</button>
@@ -80,82 +163,5 @@
       <button type="submit" mat-raised-button color="primary">Edit</button>
       <button type="button" mat-raised-button color="warn" (click)="cancelHandler()">Cancel</button>
     </ng-container>
-  </form>
-</mat-card> -->
-
-
-<mat-card>
-  <mat-spinner *ngIf="isLoading"></mat-spinner>
-  <form (ngSubmit)="createHandler()" #f="ngForm" *ngIf="!isLoading">
-    <mat-form-field appearance="outline" [style.width.%]="100">
-      <mat-label>Post Title</mat-label>
-      <input
-        matInput
-        type="text"
-        name="title"
-        ngModel
-        #title="ngModel"
-        required
-        minlength="5">
-    </mat-form-field>
-    <span *ngIf="title.touched && title.errors?.['required']" class="error">
-      Please enter post title.
-    </span>
-    <span *ngIf="title.touched && title.errors?.['minlength']" class="error">
-      Post title should be at least 5 characters.
-    </span>
-    <mat-form-field appearance="outline" [style.width.%]="100">
-      <mat-label>Post Image</mat-label>
-      <input
-        matInput
-        type="text"
-        name="imageUrl"
-        ngModel
-        #imageUrl="ngModel"
-        required
-        pattern="^https*:\/\/.+">
-      <img [src]="imageUrl.value">
-    </mat-form-field>
-    <span *ngIf="imageUrl.touched && imageUrl.errors?.['required']" class="error">
-      Please enter post image.
-    </span>
-    <span *ngIf="imageUrl.touched && imageUrl.errors?.['pattern']" class="error">
-      Image should start with 'http://' or 'https://'.
-    </span>
-    <mat-form-field appearance="outline" [style.width.%]="100">
-      <mat-label>Post Content</mat-label>
-      <textarea
-        matInput
-        rows="6"
-        name="content"
-        ngModel
-        #content="ngModel"
-        required
-        minlength="10"></textarea>
-    </mat-form-field>
-    <span *ngIf="content.touched && content.errors?.['required']" class="error">
-      Please enter post content.
-    </span>
-    <span *ngIf="content.touched && content.errors?.['minlength']" class="error">
-      Post content must be at least 10 characters.
-    </span>
-    <mat-form-field appearance="outline">
-      <mat-label>Category</mat-label>
-      <select matNativeControl name="tag" required ngModel>
-        <option *ngFor="let tag of tagList" [ngValue]="tag">
-          {{tag}}
-        </option>
-      </select>
-    </mat-form-field>
-    <!-- <sup>*</sup>
-    Please select category. -->
-    <div *ngIf="!isEditMode">
-      <button type="submit" mat-raised-button color="primary" [disabled]="f.invalid">Save</button>
-      <button type="button" mat-raised-button color="warn" (click)="resetForm()">Clear</button>
-    </div>
-    <div *ngIf="isEditMode">
-      <button type="submit" mat-raised-button color="primary" [disabled]="f.invalid">Edit</button>
-      <button type="button" mat-raised-button color="warn" (click)="cancelHandler()">Cancel</button>
-    </div>
   </form>
 </mat-card>

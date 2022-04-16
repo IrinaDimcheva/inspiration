@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { ActivatedRoute, Params, Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { tap } from 'rxjs/operators';
 import { UserService } from 'src/app/core/services/user.service';
 import { IComment } from 'src/app/shared/interfaces';
@@ -13,12 +13,11 @@ import { CommentService } from '../../core/services/comment.service';
 })
 export class CommentCreateComponent implements OnInit {
   @ViewChild('f') form: NgForm;
-  id: string;
+  postId: string;
   commentId?: string;
   isLoading = false;
-  editMode = false;
-  comments: IComment[];
-  editedComment: IComment;
+  isEditMode = false;
+  comment: IComment | any;
   isLogged = this.userService.isLogged;
 
   constructor(
@@ -29,62 +28,56 @@ export class CommentCreateComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    // this.id = this.route.snapshot.params['id'];
-    this.route.parent.params.subscribe((params: Params) => {
-      this.id = params['id'];
-      this.commentId = params['commentId'];
-      // console.log(this.editMode);
-      // console.log(this.commentId);
-    });
-    // if (this.commentId !== null) {
-    //   this.commentService.getComment(this.id, this.commentId)
-    //     .subscribe({
-    //       next: (comment) => {
-    //         this.form.setValue({ 'text': comment.text })
-    //       }
-    //     })
-    // }
-    // this.commentService.getComments(this.id).subscribe();
+    this.postId = this.route.snapshot.params['postId'];
+    this.commentId = this.route.parent.snapshot.params?.['commentId'];
+    if (this.commentId) {
+      this.isEditMode = true;
+      this.isLoading = true;
+      this.commentService.getComment(this.postId, this.commentId).subscribe({
+        next: comment => {
+          this.isLoading = false;
+          console.log(comment);
+          this.comment = {
+            text: comment.text
+          };
+          setTimeout(() => {
+            this.form.setValue(this.comment);
+            this.router.navigate(['../'], { relativeTo: this.route });
+          });
+        },
+        error: (err) => {
+          this.isLoading = false;
+          console.log(err);
+        }
+      });
+    } else {
+      this.isEditMode = false;
+      this.commentId = null;
+    }
   }
 
   addCommentHandler() {
     if (this.form.invalid) { return; }
-    const comment = this.form.value.text;
-    const postId = this.id;
-
+    const comment = { text: this.form.value.text };
     // console.log(form.value.text);
     this.isLoading = true;
-    if (!this.editMode) {
-      this.commentService.addComment(comment, postId).pipe(tap(data => console.log(data)))
-        .subscribe({
-          next: () => {
-            this.isLoading = false;
-            // this.router.navigate(['/posts', postId, 'comments'], { relativeTo: this.route });
-            this.router.navigate(['../'], { relativeTo: this.route });
-          },
-          error: (err) => {
-            this.isLoading = false;
-            console.log(err);
-          }
-        });
-    } else {
-      this.commentService.editComment(comment, postId, this.commentId)
-        .subscribe({
-          next: () => {
-            this.editMode = false;
-            this.isLoading = false;
-            this.router.navigate(['../'], { relativeTo: this.route });
-          },
-          error: (err) => {
-            console.log(err);
-          }
-        })
-    }
+    this.commentService.addComment(comment, this.postId).pipe(tap(data => console.log(data)))
+      .subscribe({
+        next: () => {
+          this.isLoading = false;
+          this.router.navigate(['../'], { relativeTo: this.route });
+        },
+        error: (err) => {
+          this.isLoading = false;
+          console.log(err);
+        }
+      });
   }
 
   cancelHandler() {
     this.router.navigate(['../'], { relativeTo: this.route });
-    this.editMode = false;
+    this.isEditMode = false;
     this.form.reset();
   }
 }
+
