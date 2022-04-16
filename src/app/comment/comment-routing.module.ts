@@ -25,14 +25,14 @@ const routes: Routes = [
           title: 'Inspiration | Comments'
         }
       },
-      {
-        path: 'comments/:commentId/edit',
-        canActivate: [AuthGuard],
-        component: CommentCreateComponent,
-        data: {
-          title: 'Inspiration | Edit Comment'
-        }
-      }
+      // {
+      //   path: 'comments/:commentId/edit',
+      //   canActivate: [AuthGuard],
+      //   component: CommentCreateComponent,
+      //   data: {
+      //     title: 'Inspiration | Edit Comment'
+      //   }
+      // }
     ]
   }
 ];
