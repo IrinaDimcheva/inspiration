@@ -1,6 +1,7 @@
 import { RouterModule, Routes } from "@angular/router";
 import { AuthGuard } from "../core/guards/auth.guard";
 import { CommentCreateComponent } from "./comment-create/comment-create.component";
+import { CommentEditComponent } from "./comment-edit/comment-edit.component";
 import { CommentListComponent } from "./comment-list/comment-list.component";
 
 const routes: Routes = [
@@ -25,14 +26,14 @@ const routes: Routes = [
           title: 'Inspiration | Comments'
         }
       },
-      // {
-      //   path: 'comments/:commentId/edit',
-      //   canActivate: [AuthGuard],
-      //   component: CommentCreateComponent,
-      //   data: {
-      //     title: 'Inspiration | Edit Comment'
-      //   }
-      // }
+      {
+        path: 'comments/:commentId/edit',
+        canActivate: [AuthGuard],
+        component: CommentEditComponent,
+        data: {
+          title: 'Inspiration | Edit Comment'
+        }
+      },
     ]
   }
 ];

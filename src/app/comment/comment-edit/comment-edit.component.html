@@ -1,0 +1,50 @@
+<mat-card *ngIf="!isLoading">
+  <form [formGroup]="form" (ngSubmit)="EditCommentHandler()">
+    <mat-form-field appearance="outline" [style.width.%]="100">
+      <mat-label>Comment</mat-label>
+      <textarea
+        matInput
+        name="text"
+        rows="4"
+        formControlName="text"></textarea>
+    </mat-form-field>
+    <div>
+      <span *ngIf="form.get('text').touched && form.get('text').errors?.['required']" class="errors">
+        Comment text is required.
+      </span>
+      <span *ngIf="form.get('text').touched && form.get('text').errors?.['minlength']" class="errors">
+        Comment text must be at least 10 chars long.
+      </span>
+    </div>
+    <button mat-raised-button color="primary" [disabled]="form.invalid">Edit Comment</button>
+    <button mat-raised-button color="warn" type="button" (click)="cancelHandler()">Cancel</button>
+  </form>
+</mat-card>
+<mat-spinner *ngIf="isLoading"></mat-spinner>
+
+<!-- <mat-card *ngIf="!isLoading">
+  <form (ngSubmit)="EditCommentHandler()" #f="ngForm">
+    <mat-form-field appearance="outline" [style.width.%]="100">
+      <mat-label>Comment</mat-label>
+      <textarea
+        matInput
+        name="text"
+        rows="4"
+        [ngModel]="comment.text"
+        #text="ngModel"
+        required
+        minlength="10"></textarea>
+    </mat-form-field>
+    <div>
+      <span *ngIf="text.touched && text.errors?.['required']" class="errors">
+        Comment text is required.
+      </span>
+      <span *ngIf="text.touched && text.errors?.['minlength']" class="errors">
+        Comment text must be at least 10 chars long.
+      </span>
+    </div>
+    <button mat-raised-button color="primary" [disabled]="f.invalid">Edit Comment</button>
+    <button mat-raised-button color="warn" type="button" (click)="cancelHandler()">Cancel</button>
+  </form>
+</mat-card>
+<mat-spinner *ngIf="isLoading"></mat-spinner> -->

@@ -33,12 +33,12 @@ export class CommentService {
   //   return this.http.put<IComment>(`${apiUrl}/posts/${postId}/comments/${commentId}`, data,
   //     { withCredentials: true });
   // }
-  editComment(postId: string, commentId: string, data: IComment): Observable<IComment> {
-    return this.http.put<IComment>(`${apiUrl}/posts/${postId}/comments/${commentId}`, data,
+  editComment(postId: string, commentId: string, comment: IComment): Observable<IComment> {
+    return this.http.put<IComment>(`${apiUrl}/posts/${postId}/comments/${commentId}`, comment,
       { withCredentials: true });
   }
 
-  deleteComment(postId: string, commentId: string) {
+  deleteComment(postId: string, commentId: string): Observable<unknown> {
     return this.http.delete(`${apiUrl}/posts/${postId}/comments/${commentId}`, { withCredentials: true });
   }
 }

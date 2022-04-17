@@ -4,7 +4,7 @@
       <img mat-card-avatar src="../../../assets/images/profile-icon-material-design-hd-png-download.png">
     </div>
     <mat-card-title>{{post.title}}</mat-card-title>
-    <mat-card-subtitle>Author {{post.userId.username | titlecase}}, posted on {{post.created_at | date: 'd MMM y, hh:mm:ss'}}</mat-card-subtitle>
+    <mat-card-subtitle>Author {{post.userId.username | titlecase}}, posted on {{post.created_at| date: 'd MMM y, HH:mm:ss'}}</mat-card-subtitle>
   </mat-card-header>
   <div class="post-image">
     <img mat-card-image [src]="post.imageUrl" [alt]="post.title">
