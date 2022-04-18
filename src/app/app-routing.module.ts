@@ -12,6 +12,7 @@ const routes: Routes = [
   },
   {
     path: 'about',
+    canActivate: [AuthGuard],
     component: AboutComponent,
     data: {
       title: 'Inspiration | About'
@@ -19,6 +20,7 @@ const routes: Routes = [
   },
   {
     path: '**',
+    canActivate: [AuthGuard],
     component: NotFoundComponent,
     data: {
       title: 'Inspiration | 404'

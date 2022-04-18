@@ -6,35 +6,32 @@ import { CommentListComponent } from "./comment-list/comment-list.component";
 
 const routes: Routes = [
   {
-    path: 'posts/:id',
-    children: [
-      {
-        path: 'comments',
-        pathMatch: 'full',
-        canActivate: [AuthGuard],
-        component: CommentListComponent,
-        data: {
-          isAuth: true,
-          title: 'Inspiration | Comments'
-        }
-      },
-      {
-        path: 'comments/new',
-        canActivate: [AuthGuard],
-        component: CommentCreateComponent,
-        data: {
-          title: 'Inspiration | Comments'
-        }
-      },
-      {
-        path: 'comments/:commentId/edit',
-        canActivate: [AuthGuard],
-        component: CommentEditComponent,
-        data: {
-          title: 'Inspiration | Edit Comment'
-        }
-      },
-    ]
+    path: 'posts/:id/comments',
+    pathMatch: 'full',
+    canActivate: [AuthGuard],
+    component: CommentListComponent,
+    data: {
+      isLogged: true,
+      title: 'Inspiration | Comments'
+    }
+  },
+  {
+    path: 'posts/:id/comments/new',
+    canActivate: [AuthGuard],
+    component: CommentCreateComponent,
+    data: {
+      isLogged: true,
+      title: 'Inspiration | Comments'
+    }
+  },
+  {
+    path: 'posts/:id/comments/:commentId/edit',
+    canActivate: [AuthGuard],
+    component: CommentEditComponent,
+    data: {
+      isLogged: true,
+      title: 'Inspiration | Edit Comment'
+    }
   }
 ];
 

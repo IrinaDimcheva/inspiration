@@ -12,9 +12,6 @@ const apiUrl = environment.apiUrl;
 export class CommentService {
   constructor(private http: HttpClient) { }
 
-  // getComments(postId: string): Observable<IPost> {
-  //   return this.http.get<IPost>(`${apiUrl}/posts/${postId}`);
-  // }
   getComments(postId: string): Observable<IComment[]> {
     return this.http.get<IComment[]>(`${apiUrl}/posts/${postId}/comments`, { withCredentials: true });
   }

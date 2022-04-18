@@ -16,11 +16,11 @@ export class PostService {
   constructor(private http: HttpClient) { }
 
   loadPostList(): Observable<IPost[]> {
-    return this.http.get<IPost[]>(apiUrl + '/posts');
+    return this.http.get<IPost[]>(apiUrl + '/posts', { withCredentials: true });
   }
 
   loadPostById(postId: string): Observable<IPost> {
-    return this.http.get<IPost>(`${apiUrl}/posts/${postId}`);
+    return this.http.get<IPost>(`${apiUrl}/posts/${postId}`, { withCredentials: true });
   }
 
   // getPostUpdateListener() {

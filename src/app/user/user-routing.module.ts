@@ -7,20 +7,20 @@ import { RegisterComponent } from './register/register.component';
 const routes: Routes = [
   {
     path: 'login',
-    // canActivate: [AuthGuard],
+    canActivate: [AuthGuard],
     component: LoginComponent,
     data: {
-      // isLogged: false,
-      title: 'Inspiration | Login'
+      title: 'Inspiration | Login',
+      isLogged: false
     }
   },
   {
     path: 'register',
-    // canActivate: [AuthGuard],
+    canActivate: [AuthGuard],
     component: RegisterComponent,
     data: {
-      // isLogged: false,
-      title: 'Inspiration | Register'
+      title: 'Inspiration | Register',
+      isLogged: false
     }
   },
   {
@@ -28,7 +28,7 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     component: ProfileComponent,
     data: {
-      // isLogged: true,
+      isLogged: true,
       title: 'Inspiration | User'
     }
   }

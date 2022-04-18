@@ -7,6 +7,7 @@ import { PostListComponent } from "./post-list/post-list.component";
 const routes: Routes = [
   {
     path: 'posts',
+    canActivate: [AuthGuard],
     component: PostListComponent,
     data: {
       title: 'Inspiration | Posts'
@@ -18,19 +19,24 @@ const routes: Routes = [
     component: PostCreateComponent,
     data: {
       title: 'Inspiration | New Post',
-      // isLogged: true
+      isLogged: true
     }
   },
   {
     path: 'posts/:id',
-    component: PostDetailComponent
+    canActivate: [AuthGuard],
+    component: PostDetailComponent,
+    data: {
+      title: 'Inspiration | Post Detail',
+    }
   },
   {
     path: 'posts/:id/edit',
     canActivate: [AuthGuard],
     component: PostCreateComponent,
     data: {
-      title: 'Inspiration | Edit Post'
+      title: 'Inspiration | Edit Post',
+      isLogged: true
     }
   }
 ];
