@@ -41,7 +41,7 @@ export class RegisterComponent implements OnInit {
       },
       error: err => {
         this.isLoading = false;
-        console.log(err);
+        console.error(err);
         this.errorMessage = err.error.message;
         // TODO change with modal
         alert(this.errorMessage);

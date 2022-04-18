@@ -50,4 +50,8 @@ export class CommentListComponent implements OnInit {
   AddCommentHandler() {
     this.router.navigate(['new'], { relativeTo: this.route });
   }
+
+  backToPostHandler() {
+    this.router.navigate(['../'], { relativeTo: this.route });
+  }
 }

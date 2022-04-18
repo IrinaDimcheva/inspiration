@@ -9,7 +9,6 @@ import { AppComponent } from './app.component';
 import { PostModule } from './post/post.module';
 import { CoreModule } from './core/core.module';
 import { CommentModule } from './comment/comment.module';
-import { SharedModule } from './shared/shared.module';
 import { MaterialModule } from './material.module';
 import { UserModule } from './user/user.module';
 import { NotFoundComponent } from './not-found/not-found.component';
@@ -27,7 +26,6 @@ import { NotFoundComponent } from './not-found/not-found.component';
     BrowserAnimationsModule,
     MaterialModule,
     CoreModule,
-    SharedModule,
     PostModule,
     CommentModule,
     UserModule

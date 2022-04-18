@@ -9,14 +9,14 @@
           name="email"
           ngModel
           #email="ngModel"
-          pattern="^[a-zA-z0-9\.-_]{4,}@[a-z]{2,4}\.[a-z]{2,4}$"
+          appEmailValidator
           required>
         <!-- <mat-error *ngIf="email.invalid">Please enter an email.</mat-error> -->
       </mat-form-field>
       <span *ngIf="email.touched && email.errors?.['required']" class="error">
         Email is required!
       </span>
-      <span *ngIf="email.touched && email.errors?.['pattern']" class="error">
+      <span *ngIf="email.touched && email.errors?.['emailValidator']" class="error">
         Email is not valid!
       </span>
     </div>

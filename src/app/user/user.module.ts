@@ -8,6 +8,7 @@ import { MaterialModule } from '../material.module';
 import { UserRoutingModule } from './user-routing.module';
 import { ProfileComponent } from './profile/profile.component';
 import { PostModule } from '../post/post.module';
+import { SharedModule } from '../shared/shared.module';
 
 
 
@@ -15,7 +16,7 @@ import { PostModule } from '../post/post.module';
   declarations: [
     LoginComponent,
     RegisterComponent,
-    ProfileComponent
+    ProfileComponent,
   ],
   imports: [
     CommonModule,
@@ -23,7 +24,8 @@ import { PostModule } from '../post/post.module';
     FormsModule,
     ReactiveFormsModule,
     UserRoutingModule,
-    PostModule
+    PostModule,
+    SharedModule
   ]
 })
 export class UserModule { }

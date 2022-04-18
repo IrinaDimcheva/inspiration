@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit, SimpleChanges } from '@angular/core';
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { BehaviorSubject, mergeMap, tap } from 'rxjs';
 import { IPost } from 'src/app/shared/interfaces';
 import { UserService } from 'src/app/core/services/user.service';
@@ -27,7 +27,8 @@ export class PostDetailComponent implements OnInit, OnDestroy {
   constructor(
     public postService: PostService,
     private route: ActivatedRoute,
-    private userService: UserService
+    private userService: UserService,
+    private router: Router
   ) { }
 
   likeHandler() {
@@ -57,6 +58,15 @@ export class PostDetailComponent implements OnInit, OnDestroy {
           console.log(err);
         }
       })
+  }
+
+  deleteHandler() {
+    this.postService.deletePost(this.id).subscribe({
+      next: (any) => {
+        console.log(any);
+        this.router.navigate(['/']);
+      }
+    });
   }
 
   // ngOnChanges(changes: SimpleChanges): void {

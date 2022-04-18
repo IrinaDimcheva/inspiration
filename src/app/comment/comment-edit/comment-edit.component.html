@@ -16,7 +16,7 @@
         Comment text must be at least 10 chars long.
       </span>
     </div>
-    <button mat-raised-button color="primary" [disabled]="form.invalid">Edit Comment</button>
+    <button mat-raised-button color="primary" [disabled]="isLoading || form.invalid">Edit Comment</button>
     <button mat-raised-button color="warn" type="button" (click)="cancelHandler()">Cancel</button>
   </form>
 </mat-card>

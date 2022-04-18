@@ -34,7 +34,7 @@
     <span class="spacer"></span>
     <button mat-button color="primary" *ngIf="isLogged && isAuthor"
       [routerLink]="['/posts', post._id, 'edit']">EDIT</button>
-    <button mat-button color="warn" *ngIf="isLogged && isAuthor">DELETE</button>
+    <button mat-button color="warn" type="button" *ngIf="isLogged && isAuthor" (click)="deleteHandler()" routerLink="/posts">DELETE</button>
   </mat-action-row>
 </mat-card>
 <mat-spinner *ngIf="!post"></mat-spinner>

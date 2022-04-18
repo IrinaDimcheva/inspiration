@@ -10,6 +10,7 @@ import { UserService } from '../../core/services/user.service';
 export class ProfileComponent implements OnInit {
   user: IUser;
   postList: IPost[];
+  isLogged = this.userService.isLogged;
 
   constructor(private userService: UserService) { }
 
