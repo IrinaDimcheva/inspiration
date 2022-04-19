@@ -21,7 +21,7 @@
     <span class="spacer"></span>
     <ng-container *ngIf="isAuthor">
       <button mat-button color="primary" (click)="editHandler()">EDIT</button>
-      <button mat-button color="warn" [routerLink]="['/posts', comment.postId._id, 'comments']" (click)="deleteHandler(comment._id)">DELETE</button>
+      <button mat-button color="warn" (click)="deleteHandler(comment._id)">DELETE</button>
     </ng-container>
   </mat-action-row>
 </mat-card>

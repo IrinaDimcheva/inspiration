@@ -7,6 +7,10 @@ mat-spinner {
   margin: auto;
 }
 
+button {
+  margin-right: 1em;
+}
+
 .errors {
   color: red;
   font-size: 0.8em;

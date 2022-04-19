@@ -45,5 +45,9 @@ export class CommentCreateComponent implements OnInit {
         }
       });
   }
+
+  cancelHandler() {
+    this.router.navigate(['../'], { relativeTo: this.route });
+  }
 }
 

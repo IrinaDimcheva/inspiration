@@ -1,5 +1,5 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 
 import { IPost } from '../../shared/interfaces';
 import { PostService } from '../../core/services/post.service';
@@ -10,22 +10,19 @@ import { PostService } from '../../core/services/post.service';
   styleUrls: ['./post-list.component.css']
 })
 export class PostListComponent implements OnInit, OnDestroy {
-  postList: IPost[];
+  postList$: Observable<IPost[]>;
   private postSubscription: Subscription;
 
   constructor(private postService: PostService) { }
 
   ngOnInit(): void {
-    this.postService.loadPostList().subscribe({
-      next: (posts) => {
-        console.log(posts);
-        this.postList = posts;
-      }
-    });
-    // this.postSubscription = this.postService.getPostUpdateListener()
-    //   .subscribe((postList: IPost[]) => {
-    //     this.postList = postList;
-    //   });
+    this.postList$ = this.postService.loadPostList();
+    // this.postService.loadPostList().subscribe({
+    //   next: (posts) => {
+    //     console.log(posts);
+    //     this.postList = posts;
+    //   }
+    // });
   }
 
   ngOnDestroy(): void {

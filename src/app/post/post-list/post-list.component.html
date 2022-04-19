@@ -1,11 +1,11 @@
-<mat-card *ngIf="postList">
-  <app-post-list-item *ngFor="let post of postList" [post]="post"></app-post-list-item>
-  <p class="info-text" *ngIf="postList.length === 0">No posts added yet!</p>
+<mat-card *ngIf="(postList$ | async)">
+  <app-post-list-item *ngFor="let post of postList$ | async" [post]="post"></app-post-list-item>
+  <p class="info-text" *ngIf="(postList$ | async)?.length === 0">No posts added yet!</p>
 </mat-card>
 <!-- <mat-accordion multi="true" *ngIf="postList">
   <app-post-list-item *ngFor="let post of postList" [post]="post"></app-post-list-item>
   <p class="info-text" *ngIf="postList.length === 0">No posts added yet!</p>
 </mat-accordion> -->
 <div class="spinner">
-  <mat-spinner *ngIf="!postList"></mat-spinner>
+  <mat-spinner *ngIf="!(postList$ | async)"></mat-spinner>
 </div>

@@ -20,6 +20,7 @@
       </span>
     </div>
     <button mat-raised-button color="primary" [disabled]="isLoading || f.invalid">Add Comment</button>
+    <button mat-raised-button color="warn" type="button" (click)="cancelHandler()">Cancel</button>
   </form>
 </mat-card>
 <mat-spinner *ngIf="isLoading"></mat-spinner>

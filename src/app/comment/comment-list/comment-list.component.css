@@ -1,5 +1,5 @@
 mat-card {
-  margin: 1em 0;
+  margin: 2em 0;
 }
 
 mat-spinner {
@@ -8,9 +8,29 @@ mat-spinner {
 }
 
 button {
-  margin-right: 1em;
+  margin-left: 1em;
 }
 
 .info-text {
   text-align: center;
+}
+
+/* mat-card {
+  margin-top: 1rem;
+} */
+
+mat-action-row {
+  display: flex;
+}
+
+.spacer {
+  margin: 0 auto;
+}
+
+.title {
+  display: flex;
+}
+
+.image {
+  margin-right: 2em;
 }

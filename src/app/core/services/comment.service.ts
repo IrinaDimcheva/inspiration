@@ -1,6 +1,6 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { Observable } from "rxjs";
+import { Observable, Subject } from "rxjs";
 import { environment } from "../../../environments/environment";
 import { IComment } from "../../shared/interfaces";
 
@@ -10,6 +10,11 @@ const apiUrl = environment.apiUrl;
   providedIn: 'root'
 })
 export class CommentService {
+  // private _deleteOperationSuccessfulEvent$: Subject<boolean> = new Subject();
+  // get deleteOperationSuccessfulEvent$(): Observable<boolean> {
+  //   return this._deleteOperationSuccessfulEvent$.asObservable();
+  // }
+
   constructor(private http: HttpClient) { }
 
   getComments(postId: string): Observable<IComment[]> {
