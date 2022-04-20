@@ -8,9 +8,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { PostModule } from './post/post.module';
 import { CoreModule } from './core/core.module';
-import { CommentModule } from './comment/comment.module';
 import { MaterialModule } from './material.module';
-import { UserModule } from './user/user.module';
 import { NotFoundComponent } from './not-found/not-found.component';
 
 @NgModule({
@@ -26,9 +24,7 @@ import { NotFoundComponent } from './not-found/not-found.component';
     BrowserAnimationsModule,
     MaterialModule,
     CoreModule,
-    PostModule,
-    CommentModule,
-    UserModule
+    PostModule
   ],
   providers: [
     Title

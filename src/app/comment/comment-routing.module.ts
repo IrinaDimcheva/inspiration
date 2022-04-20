@@ -6,7 +6,7 @@ import { CommentListComponent } from "./comment-list/comment-list.component";
 
 const routes: Routes = [
   {
-    path: 'posts/:id/comments',
+    path: '',
     pathMatch: 'full',
     canActivate: [AuthGuard],
     component: CommentListComponent,
@@ -16,7 +16,7 @@ const routes: Routes = [
     }
   },
   {
-    path: 'posts/:id/comments/new',
+    path: 'new',
     canActivate: [AuthGuard],
     component: CommentCreateComponent,
     data: {
@@ -25,7 +25,7 @@ const routes: Routes = [
     }
   },
   {
-    path: 'posts/:id/comments/:commentId/edit',
+    path: ':commentId/edit',
     canActivate: [AuthGuard],
     component: CommentEditComponent,
     data: {
