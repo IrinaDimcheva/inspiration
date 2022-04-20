@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
-import { mergeMap, tap } from 'rxjs';
+import { mergeMap, tap } from 'rxjs/operators';
 import { CommentService } from 'src/app/core/services/comment.service';
 import { UserService } from 'src/app/core/services/user.service';
 import { IComment } from 'src/app/shared/interfaces';
@@ -87,7 +87,7 @@ export class CommentEditComponent implements OnInit {
 // import { Component, OnInit, ViewChild } from '@angular/core';
 // import { NgForm } from '@angular/forms';
 // import { ActivatedRoute, ParamMap, Params, Router } from '@angular/router';
-// import { mergeMap, tap } from 'rxjs';
+// import { mergeMap, tap } from 'rxjs/operators';
 // import { CommentService } from 'src/app/core/services/comment.service';
 // import { UserService } from 'src/app/core/services/user.service';
 // import { IComment } from 'src/app/shared/interfaces';

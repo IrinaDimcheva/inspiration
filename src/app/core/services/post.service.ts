@@ -1,10 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, Subject } from 'rxjs';
+import { Observable } from 'rxjs';
 import { IPost } from '../../shared/interfaces';
-import { environment } from '../../../environments/environment';
-
-const apiUrl = environment.apiUrl;
 
 @Injectable({
   providedIn: 'root'
@@ -16,11 +13,11 @@ export class PostService {
   constructor(private http: HttpClient) { }
 
   loadPostList(): Observable<IPost[]> {
-    return this.http.get<IPost[]>(apiUrl + '/posts', { withCredentials: true });
+    return this.http.get<IPost[]>('/posts');
   }
 
   loadPostById(postId: string): Observable<IPost> {
-    return this.http.get<IPost>(`${apiUrl}/posts/${postId}`, { withCredentials: true });
+    return this.http.get<IPost>(`/posts/${postId}`);
   }
 
   // getPostUpdateListener() {
@@ -28,18 +25,18 @@ export class PostService {
   // }
 
   editPost(id: string, post: IPost): Observable<IPost> {
-    return this.http.put<IPost>(`${apiUrl}/posts/${id}`, post, { withCredentials: true });
+    return this.http.put<IPost>(`/posts/${id}`, post);
   }
 
   addPost(post: IPost): Observable<IPost> {
-    return this.http.post<IPost>(`${apiUrl}/posts`, post, { withCredentials: true });
+    return this.http.post<IPost>('/posts', post);
   }
 
   deletePost(id: string): Observable<unknown> {
-    return this.http.delete(`${apiUrl}/posts/${id}`, { withCredentials: true })
+    return this.http.delete(`/posts/${id}`);
   }
 
   likePost(postId: string): Observable<IPost> {
-    return this.http.put<IPost>(`${apiUrl}/likes/${postId}`, {}, { withCredentials: true });
+    return this.http.put<IPost>(`/likes/${postId}`, {});
   }
 }

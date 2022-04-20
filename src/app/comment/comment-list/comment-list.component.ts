@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
-import { Observable, switchMap } from 'rxjs';
+import { Observable } from 'rxjs';
+import { switchMap } from 'rxjs/operators';
 import { UserService } from 'src/app/core/services/user.service';
 import { IComment } from 'src/app/shared/interfaces';
 import { CommentService } from '../../core/services/comment.service';
@@ -17,6 +18,7 @@ export class CommentListComponent implements OnInit {
   isAuthor: boolean;
   comment: IComment;
   postId: string;
+  status: string;
 
   constructor(
     private commentService: CommentService,
@@ -40,17 +42,20 @@ export class CommentListComponent implements OnInit {
     this.router.navigate(['../'], { relativeTo: this.route });
   }
 
-  editHandler() {
-    this.router.navigate([this.comment._id, 'edit'], { relativeTo: this.route });
+  editHandler(commentId: string) {
+    this.router.navigate([commentId, 'edit'], { relativeTo: this.route });
   }
 
   deleteHandler(commentId: string) {
     this.commentService.deleteComment(this.postId, commentId)
       .subscribe({
         next: data => {
-          // this.status = 'Delete successful';
+          this.status = 'Delete successful';
           console.log('Delete successful', data);
-          this.commentList$ = this.commentService.getComments(commentId);
+          this.commentList$ = this.commentService.getComments(this.postId);
+          setTimeout(() => {
+            this.status = '';
+          }, 2000);
         },
         error: error => {
           // this.errorMessage = error.message;

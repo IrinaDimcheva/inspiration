@@ -13,7 +13,6 @@ import { CommentEditComponent } from './comment-edit/comment-edit.component';
   declarations: [
     CommentListComponent,
     CommentCreateComponent,
-    // CommentListItemComponent,
     CommentEditComponent
   ],
   imports: [
