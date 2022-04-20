@@ -7,7 +7,7 @@ import { MaterialModule } from '../material.module';
 import { FooterComponent } from './footer/footer.component';
 import { AboutComponent } from './about/about.component';
 import { AuthGuard } from './guards/auth.guard';
-import { appInterceptorProvider } from './app.interceptor';
+import { authInterceptorProvider } from './auth.interceptor';
 
 @NgModule({
   declarations: [
@@ -22,7 +22,7 @@ import { appInterceptorProvider } from './app.interceptor';
   ],
   providers: [
     AuthGuard,
-    appInterceptorProvider
+    authInterceptorProvider
   ],
   exports: [
     HeaderComponent,

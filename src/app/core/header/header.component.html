@@ -9,18 +9,18 @@
         <a mat-button routerLink="/posts/new">New Post</a>
       </li>
       <li>
-        <a mat-button routerLink="/profile">{{user.username | titlecase}}'s Profile</a>
+        <a mat-button routerLink="/user/profile">{{user.username | titlecase}}'s Profile</a>
       </li>
       <li>
-        <button mat-button href="/logout" (click)="logoutHandler()">Logout</button>
+        <button mat-button href="/user/logout" (click)="logoutHandler()">Logout</button>
       </li>
     </ng-container>
     <ng-container *ngIf="!isLogged">
       <li>
-        <a mat-button routerLink="/login">Login</a>
+        <a mat-button routerLink="/user/login">Login</a>
       </li>
       <li>
-        <a mat-button routerLink="/register">Register</a>
+        <a mat-button routerLink="/user/register">Register</a>
       </li>
     </ng-container>
   </ul>

@@ -3,7 +3,10 @@ import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { tap, catchError } from 'rxjs/operators';
 
+import { environment } from '../../../environments/environment';
 import { IUser } from '../../shared/interfaces';
+
+const apiUrl = environment.apiUrl;
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +19,7 @@ export class UserService {
   constructor(private http: HttpClient) { }
 
   getUserProfile(): Observable<any> {
-    return this.http.get('/users/profile').pipe(
+    return this.http.get(`${apiUrl}/users/profile`).pipe(
       tap((user: IUser) => {
         this.user = user;
         console.log(this.user, user);
@@ -29,19 +32,22 @@ export class UserService {
   }
 
   register(data: any): Observable<IUser> {
-    return this.http.post('/register', data).pipe(tap((user: IUser) => {
-      this.user = user;
-    }));
+    return this.http.post(`${apiUrl}/register`, data)
+      .pipe(tap((user: IUser) => {
+        this.user = user;
+      }));
   }
 
   login(data: any): Observable<IUser | any> {
-    return this.http.post<IUser | any>('/login', data).pipe(tap((user) => {
-      this.user = user;
-    }));
+    return this.http.post<IUser | any>(`${apiUrl}/login`, data)
+      .pipe(tap((user) => {
+        this.user = user;
+      }));
   }
 
   logout() {
-    return this.http.post('/logout', {}).pipe(tap(() => this.user = null));
+    return this.http.post(`${apiUrl}/logout`, {})
+      .pipe(tap(() => this.user = null));
   }
 
 }

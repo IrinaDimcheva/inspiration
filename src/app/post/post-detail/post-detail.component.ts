@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit, SimpleChanges } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
-import { BehaviorSubject, mergeMap, tap } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
+import { mergeMap, tap } from 'rxjs/operators';
 import { IPost } from 'src/app/shared/interfaces';
 import { UserService } from 'src/app/core/services/user.service';
 import { PostService } from '../../core/services/post.service';

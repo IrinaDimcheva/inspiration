@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
+import { shareReplay } from 'rxjs/operators';
 
 import { IPost } from '../../shared/interfaces';
 import { PostService } from '../../core/services/post.service';
@@ -15,6 +16,7 @@ export class PostListComponent implements OnInit {
   constructor(private postService: PostService) { }
 
   ngOnInit(): void {
-    this.postList$ = this.postService.loadPostList();
+    this.postList$ = this.postService.loadPostList()
+    // .pipe(shareReplay());
   }
 }
