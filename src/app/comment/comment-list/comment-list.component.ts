@@ -29,7 +29,7 @@ export class CommentListComponent implements OnInit {
   ngOnInit(): void {
     this.commentList$ = this.route.params.pipe(
       switchMap(({ id }) => this.commentService.getComments(id)),
-      shareReplay());
+      shareReplay(1));
     this.userId = this.userService.userId;
     this.route.paramMap.subscribe((paramMap: ParamMap) => {
       this.postId = paramMap.get('id');
@@ -55,7 +55,7 @@ export class CommentListComponent implements OnInit {
           this.status = 'Delete successful';
           console.log('Delete successful', data);
           this.commentList$ = this.commentService.getComments(this.postId)
-            .pipe(shareReplay());
+            .pipe(shareReplay(1));
           setTimeout(() => {
             this.status = '';
           }, 2000);

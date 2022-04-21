@@ -17,6 +17,6 @@ export class PostListComponent implements OnInit {
 
   ngOnInit(): void {
     this.postList$ = this.postService.loadPostList()
-    // .pipe(shareReplay());
+    // .pipe(shareReplay(1));
   }
 }

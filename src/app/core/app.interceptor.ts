@@ -2,19 +2,24 @@ import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest, HTTP_INTERCEPTORS
 import { Injectable, Provider } from '@angular/core';
 import { Observable } from 'rxjs';
 
-@Injectable()
-export class AuthInterceptor implements HttpInterceptor {
-  intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    req = req.clone({
-      withCredentials: true
-    });
+import { environment } from '../../environments/environment';
 
+const apiUrl = environment.apiUrl;
+@Injectable()
+export class AppInterceptor implements HttpInterceptor {
+  intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+    if (!req.url.includes('http')) {
+      req = req.clone({
+        url: `${apiUrl}${req.url}`,
+        withCredentials: true
+      });
+    }
     return next.handle(req);
   }
 }
 
-export const authInterceptorProvider: Provider = {
+export const appInterceptorProvider: Provider = {
   provide: HTTP_INTERCEPTORS,
-  useClass: AuthInterceptor,
+  useClass: AppInterceptor,
   multi: true
 };

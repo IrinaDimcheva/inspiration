@@ -3,3 +3,7 @@ main {
   margin: 1rem auto;
   min-height: 70vh;
 }
+
+mat-spinner {
+  margin: 0 auto;
+}

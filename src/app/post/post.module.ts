@@ -8,6 +8,7 @@ import { PostListItemComponent } from './post-list-item/post-list-item.component
 import { MaterialModule } from '../material.module';
 import { PostRoutingModule } from './post-routing.module';
 import { PostDetailComponent } from './post-detail/post-detail.component';
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { PostDetailComponent } from './post-detail/post-detail.component';
     MaterialModule,
     FormsModule,
     ReactiveFormsModule,
-    PostRoutingModule
+    PostRoutingModule,
+    SharedModule
   ],
   exports: [
     PostListComponent,

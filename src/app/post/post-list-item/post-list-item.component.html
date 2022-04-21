@@ -1,9 +1,9 @@
 <mat-card [routerLink]="['/posts', post._id]">
   <div>
-    <mat-card-title>{{post.title}}</mat-card-title>
+    <mat-card-title>{{post.title | shortenTitle }}</mat-card-title>
     <mat-card-subtitle>Author {{post.userId.username | titlecase}}, posted on {{post.created_at | date: 'd MMM y, HH:mm' }}</mat-card-subtitle>
     <mat-card-content>
-      <p>Shortened description goes here...<a [routerLink]="['/posts', post._id]" mat-button>Read more</a></p>
+      <p>{{post.content | shortenContent}}<a [routerLink]="['/posts', post._id]" mat-button>Read more</a></p>
       <!-- <mat-card-actions> -->
 
       <!-- </mat-card-actions> -->
