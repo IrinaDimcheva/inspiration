@@ -10,7 +10,7 @@ import { UserService } from '../../core/services/user.service';
 })
 export class LoginComponent implements OnInit {
   @ViewChild('f') form: NgForm;
-  errorMessage = '';
+  // errorMessage = '';
   isLoading = false;
 
   constructor(private userService: UserService,
@@ -21,7 +21,7 @@ export class LoginComponent implements OnInit {
 
   loginHandler(): void {
     if (this.form.invalid) { return; }
-    this.errorMessage = '';
+    // this.errorMessage = '';
     this.isLoading = true;
     const email = this.form.value.email;
     const password = this.form.value.password;
@@ -33,9 +33,7 @@ export class LoginComponent implements OnInit {
       error: (err) => {
         console.log(err);
         this.isLoading = false;
-        this.errorMessage = err.error.message;
-        // TODO change with modal
-        alert(this.errorMessage);
+        // this.errorMessage = err.error.message;
       }
     });
   }

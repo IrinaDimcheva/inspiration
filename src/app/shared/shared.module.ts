@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { EmailValidatorDirective } from './email-validator.directive';
 import { ShortenTitlePipe } from './pipes/shorten-title.pipe';
 import { ShortenContentPipe } from './pipes/shorten-content.pipe';
+import { ErrorComponent } from './error/error.component';
 
 
 
@@ -10,7 +11,8 @@ import { ShortenContentPipe } from './pipes/shorten-content.pipe';
   declarations: [
     EmailValidatorDirective,
     ShortenTitlePipe,
-    ShortenContentPipe
+    ShortenContentPipe,
+    ErrorComponent
   ],
   imports: [
     CommonModule
@@ -18,7 +20,8 @@ import { ShortenContentPipe } from './pipes/shorten-content.pipe';
   exports: [
     EmailValidatorDirective,
     ShortenTitlePipe,
-    ShortenContentPipe
-  ]
+    ShortenContentPipe,
+  ],
+  // entryComponents: [ErrorComponent]
 })
 export class SharedModule { }

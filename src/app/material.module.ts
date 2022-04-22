@@ -10,6 +10,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSelectModule } from '@angular/material/select';
 import { MatOptionModule } from "@angular/material/core";
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
   imports: [
@@ -22,7 +23,8 @@ import { MatOptionModule } from "@angular/material/core";
     MatProgressSpinnerModule,
     MatIconModule,
     MatSelectModule,
-    MatOptionModule
+    MatOptionModule,
+    MatDialogModule
   ],
   exports: [
     MatToolbarModule,
@@ -32,7 +34,10 @@ import { MatOptionModule } from "@angular/material/core";
     MatInputModule,
     MatFormFieldModule,
     MatProgressSpinnerModule,
-    MatIconModule
+    MatIconModule,
+    MatSelectModule,
+    MatOptionModule,
+    MatDialogModule
   ]
 })
 export class MaterialModule { }
