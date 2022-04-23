@@ -9,6 +9,7 @@ import { UserRoutingModule } from './user-routing.module';
 import { ProfileComponent } from './profile/profile.component';
 import { PostModule } from '../post/post.module';
 import { SharedModule } from '../shared/shared.module';
+import { FavoritesComponent } from './favorites/favorites.component';
 
 
 
@@ -17,6 +18,7 @@ import { SharedModule } from '../shared/shared.module';
     LoginComponent,
     RegisterComponent,
     ProfileComponent,
+    FavoritesComponent,
   ],
   imports: [
     CommonModule,

@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { tap } from 'rxjs/operators';
 import { IPost } from '../../shared/interfaces';
 
 @Injectable({
@@ -38,5 +39,13 @@ export class PostService {
 
   likePost(postId: string): Observable<IPost> {
     return this.http.put<IPost>(`/likes/${postId}`, {});
+  }
+
+  addToFavorites(postId: string): Observable<unknown> {
+    return this.http.post(`/favorites/add/${postId}`, {});
+  }
+
+  removeFromFavorites(postId: string): Observable<unknown> {
+    return this.http.delete(`/favorites/remove/${postId}`).pipe(tap(postId => console.log(postId)));
   }
 }

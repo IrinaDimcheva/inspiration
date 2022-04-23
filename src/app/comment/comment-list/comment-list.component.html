@@ -11,17 +11,18 @@
       <span class="spacer"></span>
       <mat-card-subtitle>commented on {{comment.updatedAt | date: 'd MMM y, HH:mm:ss'}}</mat-card-subtitle>
     </div>
-
     <mat-card-content>
       <p>{{comment.text}}</p>
     </mat-card-content>
     <mat-action-row>
       <button mat-button color="primary">
+        <!-- <button mat-button color="primary" (click)="likeHandler(comment._id)"> -->
         <span class="material-icons">
           thumb_up
         </span>
       </button>
-      <span class="likes">{{comment.likes.length}} likes</span>
+      <span class="likes" *ngIf="likes === null">{{comment.likes.length}} likes</span>
+      <span class="likes" *ngIf="likes">{{likes}} likes</span>
       <span class="spacer"></span>
       <ng-container *ngIf="comment.userId._id === userId">
         <button mat-button color="primary" (click)="editHandler(comment._id)">EDIT</button>

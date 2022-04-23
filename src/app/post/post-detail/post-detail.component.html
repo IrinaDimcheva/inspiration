@@ -19,22 +19,61 @@
         thumb_up
       </span>
     </button>
-    <!-- <button mat-button color="primary" *ngIf="!isLogged" routerLink="/user/login">
-      <span class="material-icons">
-        thumb_up
-      </span>
-    </button> -->
-    <!-- <span class="likes">{{post.likes.length}} likes</span> -->
+
     <span class="likes">{{post.likes.length}} likes</span>
     <a mat-button color="primary" *ngIf="isLogged" [routerLink]="['/posts', post._id, 'comments', 'new']">Add Comment</a>
     <a mat-button color="primary" [routerLink]="['/posts', post._id, 'comments']" *ngIf="isLogged">Comments</a>
-    <!-- <a mat-button color="primary" *ngIf="!isLogged" routerLink="/user/login">Comments</a> -->
-    <button mat-button color="primary" *ngIf="isLogged" (click)="AddToFavoritesHandler()">To Favorites</button>
-    <!-- <button mat-button color="primary" *ngIf="!isLogged" routerLink="/user/login">To Favorites</button> -->
+    <button mat-button color="primary" *ngIf="isLogged" (click)="addToFavoritesHandler()">To Favorites</button>
+    <button mat-button color="primary" *ngIf="isLogged" (click)="removeFromFavoritesHandler()">Remove from Favorites</button>
     <span class="spacer"></span>
     <button mat-button color="primary" *ngIf="isLogged && isAuthor"
       [routerLink]="['/posts', post._id, 'edit']">EDIT</button>
     <button mat-button color="warn" type="button" *ngIf="isLogged && isAuthor" (click)="deleteHandler()" routerLink="/posts">DELETE</button>
   </mat-action-row>
+  <div class="info" *ngIf="status">{{ status }}</div>
 </mat-card>
 <mat-spinner *ngIf="!post"></mat-spinner>
+
+<!-- <mat-card class="detail" *ngIf="(post$ | async)">
+  <mat-card-header>
+    <div mat-card-avatar class="avatar-image">
+      <img mat-card-avatar src="../../../assets/images/profile-icon-material-design-hd-png-download.png">
+    </div>
+    <mat-card-title>{{(post$ | async)?.title}}</mat-card-title>
+    <mat-card-subtitle>Author {{(post$ | async)?.userId.username | titlecase}}, posted on {{(post$ | async)?.created_at | date: 'd MMM y, HH:mm:ss'}}</mat-card-subtitle>
+  </mat-card-header>
+  <div class="post-image">
+    <img mat-card-image [src]="(post$ | async)?.imageUrl" [alt]="(post$ | async)?.title">
+  </div>
+  <mat-card-content>
+    <p>{{(post$ | async)?.content}}</p>
+    <span class="tag">#{{(post$ | async)?.tag}}</span>
+  </mat-card-content>
+  <mat-action-row>
+    <button mat-button color="primary" *ngIf="isLogged" [disabled]="!canLike" (click)="likeHandler()">
+      <span class="material-icons">
+        thumb_up
+      </span>
+    </button>
+    <button mat-button color="primary" *ngIf="!isLogged" routerLink="/user/login">
+      <span class="material-icons">
+        thumb_up
+      </span>
+    </button>
+    <span class="likes">{{post.likes.length}} likes</span>
+    <span class="likes">{{(post$ | async)?.likes.length}} likes</span>
+    <span class="likes">{{likes}} likes</span>
+    <a mat-button color="primary" *ngIf="isLogged" [routerLink]="['/posts', (post$ | async)?.['_id'], 'comments', 'new']">Add Comment</a>
+    <a mat-button color="primary" [routerLink]="['/posts', (post$ | async)?.['_id'], 'comments']" *ngIf="isLogged">Comments</a>
+    <a mat-button color="primary" *ngIf="!isLogged" routerLink="/user/login">Comments</a>
+    <button mat-button color="primary" *ngIf="isLogged && !isInFavorites" (click)="addToFavoritesHandler()">To Favorites</button>
+    <button mat-button color="primary" *ngIf="isLogged && isInFavorites" (click)="removeFromFavoritesHandler()">Remove from Favorites</button>
+    <button mat-button color="primary" *ngIf="!isLogged" routerLink="/user/login">To Favorites</button>
+    <span class="spacer"></span>
+    <button mat-button color="primary" *ngIf="isLogged && isAuthor"
+      [routerLink]="['/posts', (post$ | async)?.['_id'], 'edit']">EDIT</button>
+    <button mat-button color="warn" type="button" *ngIf="isLogged && isAuthor" (click)="deleteHandler()" routerLink="/posts">DELETE</button>
+  </mat-action-row>
+</mat-card>
+<mat-spinner *ngIf="!(post$ | async)"></mat-spinner>
+{{ isInFavorites | json}} -->

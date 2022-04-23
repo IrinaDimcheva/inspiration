@@ -34,6 +34,10 @@ export class CommentService {
     return this.http.put<IComment>(`/posts/${postId}/comments/${commentId}`, comment);
   }
 
+  likeComment(commentId: string): Observable<IComment> {
+    return this.http.put<IComment>(`/likes/${commentId}`, {});
+  }
+
   deleteComment(postId: string, commentId: string): Observable<unknown> {
     return this.http.delete(`/posts/${postId}/comments/${commentId}`);
   }

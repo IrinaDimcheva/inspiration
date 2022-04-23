@@ -12,6 +12,9 @@ import { CommentService } from '../../core/services/comment.service';
   styleUrls: ['./comment-list.component.css']
 })
 export class CommentListComponent implements OnInit {
+  get user() {
+    return this.userService.userId;
+  }
   commentList$: Observable<IComment[]>;
   commentUserId: string;
   userId: string;
@@ -19,6 +22,8 @@ export class CommentListComponent implements OnInit {
   comment: IComment;
   postId: string;
   status: string;
+  canLike: boolean;
+  likes: number = null;
 
   constructor(
     private commentService: CommentService,
@@ -28,8 +33,9 @@ export class CommentListComponent implements OnInit {
 
   ngOnInit(): void {
     this.commentList$ = this.route.params.pipe(
-      switchMap(({ id }) => this.commentService.getComments(id)),
-      shareReplay(1));
+      switchMap(({ id }) => this.commentService.getComments(id))
+      // shareReplay(1)
+    );
     this.userId = this.userService.userId;
     this.route.paramMap.subscribe((paramMap: ParamMap) => {
       this.postId = paramMap.get('id');
@@ -48,6 +54,20 @@ export class CommentListComponent implements OnInit {
     this.router.navigate([commentId, 'edit'], { relativeTo: this.route });
   }
 
+  // likeHandler(commentId: string) {
+  //   this.commentService.likeComment(commentId).subscribe({
+  //     next: () => {
+  //       console.log(commentId);
+  //       this.commentList$ = this.commentService.getComments(this.postId);
+  //       // this.likes++;
+  //       // this.canLike = false;
+  //     },
+  //     error: err => {
+  //       console.error(err);
+  //     }
+  //   })
+  // }
+
   deleteHandler(commentId: string) {
     this.commentService.deleteComment(this.postId, commentId)
       .subscribe({
@@ -60,9 +80,8 @@ export class CommentListComponent implements OnInit {
             this.status = '';
           }, 2000);
         },
-        error: error => {
-          // this.errorMessage = error.message;
-          console.error('There was an error!', error);
+        error: err => {
+          console.error('There was an error!', err);
         }
       });
   }

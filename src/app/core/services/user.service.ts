@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { tap, catchError } from 'rxjs/operators';
 
-import { IUser } from '../../shared/interfaces';
+import { IPost, IUser } from '../../shared/interfaces';
 
 @Injectable({
   providedIn: 'root'
@@ -26,6 +26,14 @@ export class UserService {
         return of(null);
       })
     );
+  }
+
+  getFavorites(): Observable<IPost[]> {
+    return this.http.get<IPost[]>('/favorites').pipe(
+      tap((favorites) => {
+        console.log(favorites);
+      })
+    )
   }
 
   register(data: any): Observable<IUser> {

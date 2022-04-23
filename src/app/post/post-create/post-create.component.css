@@ -10,6 +10,10 @@ button {
   margin-right: 1em;
 }
 
+img {
+  max-width: 62rem;
+}
+
 .error {
   color: red;
   font-size: 0.8em;

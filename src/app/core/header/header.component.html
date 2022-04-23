@@ -6,10 +6,13 @@
   <ul>
     <ng-container *ngIf="isLogged">
       <li>
-        <a mat-button routerLink="/posts/new">New Post</a>
+        <a mat-button routerLink="/posts/new" routerLinkActive="active">New Post</a>
       </li>
       <li>
-        <a mat-button routerLink="/user/profile">{{user.username | titlecase}}'s Profile</a>
+        <a mat-button routerLink="/user/profile" routerLinkActive="active">{{user.username | titlecase}}'s Profile</a>
+      </li>
+      <li>
+        <a mat-button routerLink="/user/favorites" routerLinkActive="active">My Favorites</a>
       </li>
       <li>
         <button mat-button href="/user/logout" (click)="logoutHandler()">Logout</button>
@@ -17,10 +20,10 @@
     </ng-container>
     <ng-container *ngIf="!isLogged">
       <li>
-        <a mat-button routerLink="/user/login">Login</a>
+        <a mat-button routerLink="/user/login" routerLinkActive="active">Login</a>
       </li>
       <li>
-        <a mat-button routerLink="/user/register">Register</a>
+        <a mat-button routerLink="/user/register" routerLinkActive="active">Register</a>
       </li>
     </ng-container>
   </ul>
