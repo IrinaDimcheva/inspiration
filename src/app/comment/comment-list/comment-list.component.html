@@ -33,4 +33,5 @@
   <div class="info" *ngIf="status">{{ status }}</div>
   <p class="info-text" *ngIf="(commentList$ | async)?.length === 0">No comments for this post yet!</p>
 </mat-card>
+<!-- <mat-paginator></mat-paginator> -->
 <mat-spinner *ngIf="!(commentList$ | async)"></mat-spinner>

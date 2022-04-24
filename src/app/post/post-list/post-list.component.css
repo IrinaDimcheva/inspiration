@@ -3,11 +3,14 @@
   margin-top: 1rem;
 }
 
-.info-text {
-  text-align: center;
+mat-spinner {
+  margin: 0 auto;
 }
 
-mat-spinner {
-  margin: auto;
-  width: 1em;
+mat-paginator {
+  margin-top: 1rem;
+}
+
+.info-text {
+  text-align: center;
 }

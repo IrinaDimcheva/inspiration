@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
@@ -13,8 +13,21 @@ export class PostService {
 
   constructor(private http: HttpClient) { }
 
-  loadPostList(): Observable<IPost[]> {
-    return this.http.get<IPost[]>('/posts');
+  // loadPostList(postsPerPage: number, currentPage: number): Observable<IPost[]> | any {
+  //   const queryParams = `?pagesize=${postsPerPage}&page=${currentPage}`;
+  //   return this.http.get<{ posts: IPost[], postsCount: number }>(`/posts${queryParams}`);
+  // }
+  loadPostList(postsPerPage: number, currentPage: number, searchTitle: string = ''): Observable<IPost[]> | any {
+    // const queryParams = `?pagesize=${postsPerPage}&page=${currentPage}`;
+    return this.http.get<{ posts: Observable<IPost[]>, postsCount: number }>(`/posts`, {
+      params: new HttpParams({
+        fromObject: {
+          pagesize: postsPerPage,
+          page: currentPage,
+          title: searchTitle
+        }
+      })
+    });
   }
 
   loadPostById(postId: string): Observable<IPost> {

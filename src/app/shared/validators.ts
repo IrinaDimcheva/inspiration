@@ -10,7 +10,7 @@ export function charactersValidator(control: AbstractControl): ValidationErrors 
 export function emailValidator(control: AbstractControl): ValidationErrors | null {
   const value = control.value;
   if (!value) { return null; }
-  const isValidEmail = /^[a-zA-z\.-_]{4,}@[a-z]{2,4}\.[a-z]{2,4}$/.test(value);
+  const isValidEmail = /^[A-Za-z0-9_\.-]{4,}@[a-z]{2,5}\.[a-z]{2,4}/.test(value);
   return isValidEmail ? null : { emailValidator: true };
 }
 

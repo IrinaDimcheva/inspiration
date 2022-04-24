@@ -98,9 +98,9 @@ export class PostDetailComponent implements OnInit, OnDestroy {
         this.status = 'Add to Favorites successful';
         setTimeout(() => {
           this.status = '';
-        }, 2000);
+          this.router.navigate(['../'], { relativeTo: this.route });
+        }, 1200);
         // this.reloadCurrentRoute();
-        // this.router.navigate(['../'], { relativeTo: this.route });
       }
     });
   }
@@ -112,10 +112,10 @@ export class PostDetailComponent implements OnInit, OnDestroy {
       next: () => {
         this.status = 'Remove from Favorites successful';
         setTimeout(() => {
+          this.router.navigate(['../'], { relativeTo: this.route });
           this.status = '';
-        }, 2000);
+        }, 1200);
         // this.reloadCurrentRoute();
-        // this.router.navigate(['../'], { relativeTo: this.route });
       }
     });
   }

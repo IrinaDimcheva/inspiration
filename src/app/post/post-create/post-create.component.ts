@@ -24,15 +24,19 @@ export class PostCreateComponent implements OnInit {
     'crafts',
     'cuisine',
     'culture',
+    'fashion',
     'fun',
     'music',
+    'movies',
     'nature',
     'photography',
     'programming',
     'science',
+    'social',
     'sports',
     'travel',
     'wellbeing',
+    'wildlife',
     'work'
   ];
 
