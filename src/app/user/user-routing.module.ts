@@ -12,7 +12,8 @@ const routes: Routes = [
     component: LoginComponent,
     data: {
       title: 'Inspiration | Login',
-      isLogged: false
+      isLogged: false,
+      animation: '*'
     }
   },
   {
@@ -21,7 +22,8 @@ const routes: Routes = [
     component: RegisterComponent,
     data: {
       title: 'Inspiration | Register',
-      isLogged: false
+      isLogged: false,
+      animation: '*'
     }
   },
   {
@@ -30,7 +32,8 @@ const routes: Routes = [
     component: ProfileComponent,
     data: {
       isLogged: true,
-      title: 'Inspiration | User'
+      title: 'Inspiration | User',
+      animation: '*'
     }
   },
   {
@@ -39,7 +42,8 @@ const routes: Routes = [
     component: FavoritesComponent,
     data: {
       isLogged: true,
-      title: 'Inspiration | Favorites'
+      title: 'Inspiration | Favorites',
+      animation: '*'
     }
   }
 ];

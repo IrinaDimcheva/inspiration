@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { ChildrenOutletContexts } from '@angular/router';
 import {
-  slideInAnimation,
+  // slideInAnimation,
   fader
 } from './animations';
 import { UserService } from './core/services/user.service';
@@ -11,7 +11,7 @@ import { UserService } from './core/services/user.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
   animations: [
-    slideInAnimation,
+    // slideInAnimation,
     fader
   ]
 })

@@ -19,7 +19,8 @@ const routes: Routes = [
     component: PostCreateComponent,
     data: {
       title: 'Inspiration | New Post',
-      isLogged: true
+      isLogged: true,
+      animation: '*'
     }
   },
   {
@@ -28,6 +29,7 @@ const routes: Routes = [
     component: PostDetailComponent,
     data: {
       title: 'Inspiration | Post Detail',
+      animation: '*'
     }
   },
   {
@@ -36,7 +38,8 @@ const routes: Routes = [
     component: PostCreateComponent,
     data: {
       title: 'Inspiration | Edit Post',
-      isLogged: true
+      isLogged: true,
+      animation: '*'
     }
   }
 ];

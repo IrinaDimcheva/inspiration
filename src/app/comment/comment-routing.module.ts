@@ -11,8 +11,8 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     component: CommentListComponent,
     data: {
-      // isLogged: true,
-      title: 'Inspiration | Comments'
+      title: 'Inspiration | Comments',
+      animation: '*'
     }
   },
   {
@@ -21,7 +21,8 @@ const routes: Routes = [
     component: CommentCreateComponent,
     data: {
       isLogged: true,
-      title: 'Inspiration | Comments'
+      title: 'Inspiration | Comments',
+      animation: '*'
     }
   },
   {
@@ -30,7 +31,8 @@ const routes: Routes = [
     component: CommentEditComponent,
     data: {
       isLogged: true,
-      title: 'Inspiration | Edit Comment'
+      title: 'Inspiration | Edit Comment',
+      animation: '*'
     }
   }
 ];
