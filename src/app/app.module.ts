@@ -18,10 +18,10 @@ import { NotFoundComponent } from './not-found/not-found.component';
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
-    BrowserAnimationsModule,
     MaterialModule,
     CoreModule,
     PostModule
@@ -32,3 +32,4 @@ import { NotFoundComponent } from './not-found/not-found.component';
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+

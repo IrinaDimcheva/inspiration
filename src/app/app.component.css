@@ -2,6 +2,7 @@ main {
   max-width: 65rem;
   margin: 1rem auto;
   min-height: 70vh;
+  position: relative;
 }
 
 mat-spinner {

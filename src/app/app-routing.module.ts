@@ -9,12 +9,16 @@ const routes: Routes = [
     path: '',
     pathMatch: 'full',
     redirectTo: '/posts',
+    data: {
+      animation: 'HomePage'
+    }
   },
   {
     path: 'about',
     canActivate: [AuthGuard],
     component: AboutComponent,
     data: {
+      animation: 'AboutPage',
       title: 'Inspiration | About'
     }
   },
