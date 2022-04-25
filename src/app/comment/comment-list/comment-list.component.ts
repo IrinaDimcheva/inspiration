@@ -15,6 +15,9 @@ export class CommentListComponent implements OnInit {
   get user() {
     return this.userService.userId;
   }
+  get isLogged() {
+    return this.userService.isLogged;
+  }
   commentList$: Observable<IComment[]>;
   commentUserId: string;
   userId: string;
@@ -58,14 +61,23 @@ export class CommentListComponent implements OnInit {
   //   this.commentService.likeComment(commentId).subscribe({
   //     next: () => {
   //       console.log(commentId);
-  //       this.commentList$ = this.commentService.getComments(this.postId);
+  //       this.commentList$ = this.commentService.getComments(this.postId)
+  //         .pipe(shareReplay(1));
   //       // this.likes++;
-  //       // this.canLike = false;
+  //       this.canLike = false;
+  //       this.reloadCurrentRoute();
   //     },
-  //     error: err => {
-  //       console.error(err);
-  //     }
+  //     // error: err => {
+  //     //   console.error(err);
+  //     // }
   //   })
+  // }
+
+  // reloadCurrentRoute() {
+  //   const currentUrl = this.router.url;
+  //   this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+  //     this.router.navigate([currentUrl]);
+  //   });
   // }
 
   deleteHandler(commentId: string) {

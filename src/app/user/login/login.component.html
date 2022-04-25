@@ -11,7 +11,6 @@
           #email="ngModel"
           appEmailValidator
           required>
-        <!-- <mat-error *ngIf="email.invalid">Please enter an email.</mat-error> -->
       </mat-form-field>
       <span *ngIf="email.touched && email.errors?.['required']" class="error">
         Email is required!
@@ -31,8 +30,8 @@
           ngModel
           #password="ngModel"
           minlength="6"
+          maxlength="35"
           required>
-        <!-- <mat-error *ngIf="password.invalid">Please enter a password.</mat-error> -->
       </mat-form-field>
       <span *ngIf="password.touched && password.errors?.['required']" class="error">
         Password is required!
@@ -40,8 +39,10 @@
       <span *ngIf="password.touched && password.errors?.['minlength']" class="error">
         Password should be at least 6 characters.
       </span>
+      <span *ngIf="password.touched && password.errors?.['maxlength']" class="error">
+        Password shouldn't exceed 35 characters.
+      </span>
     </div>
-    <!-- <p class="error" *ngIf="errorMessage">{{errorMessage}}</p> -->
     <button mat-raised-button color="primary" [disabled]="isLoading || f.invalid">Login</button>
   </form>
   <mat-spinner *ngIf="isLoading"></mat-spinner>

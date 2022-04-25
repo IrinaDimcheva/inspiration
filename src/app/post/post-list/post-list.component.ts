@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Observable } from 'rxjs';
-import { shareReplay, tap, map, mergeMap, startWith, debounceTime, switchMap } from 'rxjs/operators';
+import { shareReplay, tap, map, mergeMap, startWith, debounceTime, switchMap, distinctUntilChanged } from 'rxjs/operators';
 import { PageEvent } from '@angular/material/paginator';
 
 import { IPost } from '../../shared/interfaces';
@@ -39,6 +39,7 @@ export class PostListComponent implements OnInit {
     this.searchControl.valueChanges.pipe(
       startWith(''),
       debounceTime(300),
+      distinctUntilChanged(),
       switchMap(searchTitle => {
         return this.postService.loadPostList(this.postsPerPage, this.currentPage, searchTitle);
       }),

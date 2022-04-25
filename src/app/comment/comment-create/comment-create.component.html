@@ -9,14 +9,18 @@
         ngModel
         #text="ngModel"
         required
-        minlength="10"></textarea>
+        minlength="10"
+        maxlength="2000"></textarea>
     </mat-form-field>
     <div>
       <span *ngIf="text.touched && text.errors?.['required']" class="errors">
         Comment text is required.
       </span>
       <span *ngIf="text.touched && text.errors?.['minlength']" class="errors">
-        Comment text must be at least 10 chars long.
+        Comment text should be at least 10 characters.
+      </span>
+      <span *ngIf="text.touched && text.errors?.['minlength']" class="errors">
+        Comment text shouldn't exceed 2000 characters.
       </span>
     </div>
     <button mat-raised-button color="primary" [disabled]="isLoading || f.invalid">Add Comment</button>

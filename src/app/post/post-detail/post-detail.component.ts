@@ -21,7 +21,7 @@ export class PostDetailComponent implements OnInit, OnDestroy {
   canLike: boolean;
   isInFavorites: boolean;
   removeFavorites: boolean;
-  likes: number;
+  // likes: number;
   status = '';
   get isLogged() {
     return this.userService.isLogged;
@@ -39,9 +39,9 @@ export class PostDetailComponent implements OnInit, OnDestroy {
 
   likeHandler() {
     this.postService.likePost(this.id)
-      .subscribe((post) => {
+      .subscribe(() => {
         this.canLike = false;
-        this.likes++;
+        // this.likes++;
         this.reloadCurrentRoute();
         // this.refresh$.next(undefined);
       });
@@ -58,7 +58,6 @@ export class PostDetailComponent implements OnInit, OnDestroy {
     this.route.params.pipe(
       tap((params: Params) => {
         this.id = params['id'];
-        console.log(this.id);
         this.isLoading = true;
       }),
       mergeMap(params => {
@@ -66,14 +65,12 @@ export class PostDetailComponent implements OnInit, OnDestroy {
       }))
       .subscribe({
         next: post => {
-          console.log(post);
           this.isLoading = false;
           this.post = post;
           this.isAuthor = post.userId._id === this.userId;
           this.canLike = !post.likes.includes(this.userId);
-          this.isInFavorites = !!this.userService.user.favorites.find(post => post['_id'] === this.id);
-          console.log(!!this.userService.user.favorites.find(post => post['_id'] === this.id));
-          this.likes = post.likes.length;
+          this.isInFavorites = !!this.userService.user?.favorites?.find(post => post['_id'] === this.id);
+          // this.likes = post.likes.length;
         },
         error: err => {
           this.isLoading = false;
@@ -84,8 +81,7 @@ export class PostDetailComponent implements OnInit, OnDestroy {
 
   deleteHandler() {
     this.postService.deletePost(this.id).subscribe({
-      next: (any) => {
-        console.log(any);
+      next: () => {
         this.router.navigate(['/']);
       }
     });

@@ -20,12 +20,12 @@ export class RegisterComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    const passwordControl = this.fb.control('', [Validators.required, Validators.minLength(6), charactersValidator]);
+    const passwordControl = this.fb.control('', [Validators.required, Validators.minLength(6), Validators.maxLength(35), charactersValidator]);
     this.form = this.fb.group({
-      username: ['', [Validators.required, Validators.minLength(5), charactersValidator]],
+      username: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(25), charactersValidator]],
       email: ['', [Validators.required, emailValidator]],
       password: passwordControl,
-      rePassword: ['', [Validators.required, Validators.minLength(6), rePasswordValidator(passwordControl), charactersValidator]]
+      rePassword: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(35), rePasswordValidator(passwordControl), charactersValidator]]
     });
   }
 

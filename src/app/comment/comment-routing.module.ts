@@ -11,7 +11,7 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     component: CommentListComponent,
     data: {
-      isLogged: true,
+      // isLogged: true,
       title: 'Inspiration | Comments'
     }
   },

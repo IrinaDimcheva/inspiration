@@ -1,5 +1,33 @@
 # Inspiration
 
+This is Angular course project part of my education in SoftUni and has no commercial use. The project itself is a website for sharing inspirational posts and write comments for them.
+
+## How to use
+
+#### Non-register users
+
+Non-register users have access to all posts, can search for posts and see comments for them, register, login and about page.
+
+#### Register users
+
+Register users have access to all posts, can search for posts and see comments for them, about page, can logout. Beside that they can create posts, update and delete their own posts, like posts, save posts to and remove them from favorites page, view user profile page with all their own posts, write comments to posts, update and delete their own comments.
+
+## Technology stack
+
+#### Frontend
+- Angular 13.2.6
+- Angular Material
+- HTML5
+- CSS3
+
+#### Backend
+- Node.js
+- Express
+- MongoDB Atlas
+- Mongoose
+- jsonwebtoken
+- bcrypt
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.2.6.
 
 ## Development server

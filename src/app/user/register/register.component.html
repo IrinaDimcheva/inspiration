@@ -17,7 +17,10 @@
       Username must contains only latin letters and digits.
     </span>
     <span class="error" *ngIf="form.get('username').touched && form.get('username').errors?.['minlength']">
-      Username should be at least 5 characters long.
+      Username should be at least 5 characters.
+    </span>
+    <span class="error" *ngIf="form.get('username').touched && form.get('username').errors?.['maxlength']">
+      Username shouldn't exceed 25 characters.
     </span>
     <div>
       <mat-form-field appearance="outline" [style.width.%]="100">
@@ -54,6 +57,9 @@
       <span class="error" *ngIf="form.get('password').touched && form.get('password').errors?.['minlength']">
         Password must be at least 6 chars.
       </span>
+      <span class="error" *ngIf="form.get('password').touched && form.get('password').errors?.['maxlength']">
+        Password shouldn't exceed 35 characters.
+      </span>
     </div>
     <div>
       <mat-form-field appearance="outline" [style.width.%]="100">
@@ -80,95 +86,3 @@
   </form>
   <p>Have an account? <a routerLink="/user/login">Login</a></p>
 </mat-card>
-
-
-<!-- <mat-card>
-  <form #f="ngForm" (ngSubmit)="registerHandler(f)">
-    <div>
-      <mat-form-field appearance="outline" [style.width.%]="100">
-        <mat-label>Enter username</mat-label>
-        <input
-          matInput
-          type="text"
-          name="username"
-          ngModel
-          #username="ngModel"
-          required
-          minlength="5">
-      </mat-form-field>
-      <span *ngIf="username.touched && username.errors?.['required']" class="error">
-        Username is required!
-      </span>
-      <span *ngIf="username.touched && username.errors?.['minlength']" class="error">
-        Username must be at least 5 chars.
-      </span>
-    </div>
-    <div>
-      <mat-form-field appearance="outline" [style.width.%]="100">
-        <mat-label>Enter email</mat-label>
-        <input
-          matInput
-          placeholder="pat@example.com"
-          name="email"
-          ngModel
-          #email="ngModel"
-          email
-          required
-          pattern="^[a-zA-z0-9\.-_]{4,}@[a-z]{2,4}\.[a-z]{2,4}$">
-      </mat-form-field>
-      <span *ngIf="email.touched && email.errors?.['required']" class="error">
-        Email is required!
-      </span>
-      <span *ngIf="email.touched && email.errors?.['pattern']" class="error">
-        Email is not valid!
-      </span>
-    </div>
-    <div>
-      <mat-form-field appearance="outline" [style.width.%]="100">
-        <mat-label>Enter password</mat-label>
-        <input
-          matInput
-          type="password"
-          placeholder="******"
-          name="password"
-          ngModel
-          #password="ngModel"
-          required
-          minlength="6"
-          pattern="^[a-zA-Z0-9]+$">
-      </mat-form-field>
-      <span *ngIf="password.touched && password.errors?.['required']" class="error">
-        Password is required!
-      </span>
-      <span *ngIf="password.touched && password.errors?.['minlength']" class="error">
-        Password should be at least 6 characters.
-      </span>
-      <span *ngIf="password.touched && password.errors?.['pattern']" class="error">
-        Password must contains only latin letters and digits!
-      </span>
-    </div>
-    <div>
-      <mat-form-field appearance="outline" [style.width.%]="100">
-        <mat-label>Enter repeat password</mat-label>
-        <input
-          matInput
-          type="password"
-          placeholder="******"
-          name="rePassword"
-          ngModel
-          #rePassword="ngModel"
-          required
-          minlength="6">
-      </mat-form-field>
-      <span *ngIf="rePassword.touched && rePassword.errors?.['required']" class="error">
-        Password is required!
-      </span>
-      <span *ngIf="rePassword.touched && (f.value.password !== f.value.rePassword)" class="error">Passwords should match.</span>
-    </div>
-    <button mat-raised-button color="primary" [disabled]="isLoading || f.invalid">Register</button>
-    <div class="spinner">
-      <mat-spinner class="spinner" *ngIf="isLoading"></mat-spinner>
-    </div>
-  </form>
-  <p>Have an account? <a routerLink="/user/login">Login</a></p>
-</mat-card> -->

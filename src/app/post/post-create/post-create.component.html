@@ -15,6 +15,9 @@
     <span *ngIf="form.get('title').touched && form.get('title').errors?.['minlength']" class="error">
       Post title should be at least 5 characters.
     </span>
+    <span *ngIf="form.get('title').touched && form.get('title').errors?.['maxlength']" class="error">
+      Post title shouldn't exceed 250 characters.
+    </span>
     <mat-form-field appearance="outline" [style.width.%]="100">
       <mat-label>Post Image</mat-label>
       <input
@@ -42,7 +45,10 @@
       Please enter post content.
     </span>
     <span *ngIf="form.get('content').touched && form.get('content').errors?.['minlength']" class="error">
-      Post content must be at least 10 characters.
+      Post content should be at least 10 characters.
+    </span>
+    <span *ngIf="form.get('content').touched && form.get('content').errors?.['maxlength']" class="error">
+      Post content shouldn't exceed 50000 characters.
     </span>
     <mat-form-field appearance="outline" [style.width.%]="100">
       <mat-label>Category</mat-label>
