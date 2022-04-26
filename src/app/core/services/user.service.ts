@@ -29,11 +29,7 @@ export class UserService {
   }
 
   getFavorites(): Observable<IPost[]> {
-    return this.http.get<IPost[]>('/favorites').pipe(
-      tap((favorites) => {
-        console.log(favorites);
-      })
-    )
+    return this.http.get<IPost[]>('/favorites');
   }
 
   register(data: any): Observable<IUser> {
@@ -54,5 +50,4 @@ export class UserService {
     return this.http.post(`/logout`, {})
       .pipe(tap(() => this.user = null));
   }
-
 }

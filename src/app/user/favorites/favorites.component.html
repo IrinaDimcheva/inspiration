@@ -1,9 +1,3 @@
-<!-- <h2>Favorite Posts</h2>
-<mat-card *ngIf="favoriteList">
-  <app-post-list-item *ngFor="let post of favoriteList" [post]="post"></app-post-list-item>
-  <p class="info-text" *ngIf="favoriteList?.length === 0">No posts added to Favorites yet!</p>
-</mat-card>
-<mat-spinner *ngIf="!favoriteList"></mat-spinner> -->
 <h2>Favorite Posts</h2>
 <mat-card *ngIf="(favoriteList$ | async)">
   <app-post-list-item *ngFor="let post of (favoriteList$ | async)" [post]="post"></app-post-list-item>

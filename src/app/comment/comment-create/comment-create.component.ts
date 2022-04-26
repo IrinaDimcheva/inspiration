@@ -33,7 +33,7 @@ export class CommentCreateComponent implements OnInit {
     if (this.form.invalid) { return; }
     const comment = { text: this.form.value.text };
     this.isLoading = true;
-    this.commentService.addComment(comment, this.postId).pipe(tap(data => console.log(data)))
+    this.commentService.addComment(comment, this.postId)
       .subscribe({
         next: () => {
           this.isLoading = false;
@@ -41,7 +41,7 @@ export class CommentCreateComponent implements OnInit {
         },
         error: (err) => {
           this.isLoading = false;
-          console.log(err);
+          console.error(err);
         }
       });
   }
@@ -50,4 +50,3 @@ export class CommentCreateComponent implements OnInit {
     this.router.navigate(['../'], { relativeTo: this.route });
   }
 }
-

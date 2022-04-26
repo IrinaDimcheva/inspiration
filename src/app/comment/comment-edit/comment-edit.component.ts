@@ -35,15 +35,12 @@ export class CommentEditComponent implements OnInit {
       tap((params: Params) => {
         this.postId = params['id'];
         this.commentId = params['commentId'];
-
-        console.log(this.postId, this.commentId, params);
         this.isLoading = true;
       }),
       mergeMap(() => {
         return this.commentService.getComment(this.postId, this.commentId);
       })).subscribe({
         next: comment => {
-          console.log(comment);
           this.isLoading = false;
           this.comment = {
             text: comment.text
@@ -62,18 +59,16 @@ export class CommentEditComponent implements OnInit {
     if (this.form.invalid) { return; }
     this.isLoading = true;
     const comment: IComment | any = { text: this.form.value.text };
-    this.commentService.editComment(this.postId, this.commentId, comment).pipe(
-      tap((comment) => console.log(comment))
-    ).subscribe({
-      next: (comment) => {
-        console.log(comment);
-        this.isLoading = false;
-        this.router.navigate(['../../'], { relativeTo: this.route });
-      }, error: err => {
-        this.isLoading = false;
-        console.log(err);
-      }
-    });
+    this.commentService.editComment(this.postId, this.commentId, comment)
+      .subscribe({
+        next: () => {
+          this.isLoading = false;
+          this.router.navigate(['../../'], { relativeTo: this.route });
+        }, error: err => {
+          this.isLoading = false;
+          console.error(err);
+        }
+      });
     this.form.reset();
   }
 

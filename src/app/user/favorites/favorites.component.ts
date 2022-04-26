@@ -10,13 +10,6 @@ import { IPost } from 'src/app/shared/interfaces';
   styleUrls: ['./favorites.component.css']
 })
 export class FavoritesComponent implements OnInit {
-  // favoriteList: IPost[];
-
-  // constructor(private userService: UserService) { }
-
-  // ngOnInit(): void {
-  //   this.userService.getFavorites().subscribe();
-  // }
   favoriteList$: Observable<IPost[]>;
 
   constructor(private userService: UserService) { }
@@ -24,5 +17,4 @@ export class FavoritesComponent implements OnInit {
   ngOnInit(): void {
     this.favoriteList$ = this.userService.getFavorites().pipe(shareReplay(1));
   }
-
 }

@@ -61,7 +61,6 @@ export class PostCreateComponent implements OnInit {
       this.isLoading = true;
       this.postService.loadPostById(this.postId).subscribe({
         next: postData => {
-          console.log(postData);
           this.isLoading = false;
           this.post = {
             title: postData.title,
@@ -73,7 +72,7 @@ export class PostCreateComponent implements OnInit {
             this.form.patchValue(this.post);
           });
         }, error: err => {
-          console.log(err);
+          console.error(err);
           this.isLoading = false;
         }
       });
@@ -100,19 +99,18 @@ export class PostCreateComponent implements OnInit {
         },
         error: (err) => {
           this.isLoading = false;
-          console.log(err);
+          console.error(err);
         }
       });
     } else {
       this.postService.editPost(this.postId, post).subscribe({
-        next: (post) => {
-          console.log(post)
+        next: () => {
           this.isLoading = false;
           this.router.navigate(['../'], { relativeTo: this.route });
         },
         error: err => {
           this.isLoading = false;
-          console.log(err);
+          console.error(err);
         }
       })
     }

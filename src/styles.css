@@ -31,12 +31,7 @@ p {
 
 h1, h2, h3, h4, h5, h6 {
   margin: 0;
-  /* padding-bottom: 20px;
-  padding-top: 20px; */
-  /* margin-bottom: 20px;
-  margin-top: 20px; */
   padding-bottom: 0.5em;
-  /* border: 1px solid #CCC; */
 }
 
 h1 { font-size: 2.4em; }

@@ -57,35 +57,11 @@ export class CommentListComponent implements OnInit {
     this.router.navigate([commentId, 'edit'], { relativeTo: this.route });
   }
 
-  // likeHandler(commentId: string) {
-  //   this.commentService.likeComment(commentId).subscribe({
-  //     next: () => {
-  //       console.log(commentId);
-  //       this.commentList$ = this.commentService.getComments(this.postId)
-  //         .pipe(shareReplay(1));
-  //       // this.likes++;
-  //       this.canLike = false;
-  //       this.reloadCurrentRoute();
-  //     },
-  //     // error: err => {
-  //     //   console.error(err);
-  //     // }
-  //   })
-  // }
-
-  // reloadCurrentRoute() {
-  //   const currentUrl = this.router.url;
-  //   this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
-  //     this.router.navigate([currentUrl]);
-  //   });
-  // }
-
   deleteHandler(commentId: string) {
     this.commentService.deleteComment(this.postId, commentId)
       .subscribe({
-        next: data => {
+        next: () => {
           this.status = 'Delete successful';
-          console.log('Delete successful', data);
           this.commentList$ = this.commentService.getComments(this.postId)
             .pipe(shareReplay(1));
           setTimeout(() => {

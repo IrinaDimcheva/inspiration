@@ -7,10 +7,6 @@ import { IComment } from "../../shared/interfaces";
   providedIn: 'root'
 })
 export class CommentService {
-  // private _deleteOperationSuccessfulEvent$: Subject<boolean> = new Subject();
-  // get deleteOperationSuccessfulEvent$(): Observable<boolean> {
-  //   return this._deleteOperationSuccessfulEvent$.asObservable();
-  // }
 
   constructor(private http: HttpClient) { }
 
@@ -26,10 +22,6 @@ export class CommentService {
     return this.http.post<IComment>(`/posts/${postId}/comments`, comment);
   }
 
-  // editComment(data: { text: string }, postId: string, commentId: string): Observable<IComment> {
-  //   return this.http.put<IComment>(`/posts/${postId}/comments/${commentId}`, data,
-  //     { withCredentials: true });
-  // }
   editComment(postId: string, commentId: string, comment: IComment): Observable<IComment> {
     return this.http.put<IComment>(`/posts/${postId}/comments/${commentId}`, comment);
   }

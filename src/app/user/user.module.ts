@@ -11,8 +11,6 @@ import { PostModule } from '../post/post.module';
 import { SharedModule } from '../shared/shared.module';
 import { FavoritesComponent } from './favorites/favorites.component';
 
-
-
 @NgModule({
   declarations: [
     LoginComponent,

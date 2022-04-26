@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { UserService } from 'src/app/core/services/user.service';
 import { IPost } from '../../shared/interfaces';
 
@@ -7,14 +7,10 @@ import { IPost } from '../../shared/interfaces';
   templateUrl: './post-list-item.component.html',
   styleUrls: ['./post-list-item.component.css']
 })
-export class PostListItemComponent implements OnInit {
+export class PostListItemComponent {
   @Input() post: IPost;
   get isLogged() {
     return this.userService.isLogged;
   }
   constructor(private userService: UserService) { }
-
-  ngOnInit(): void {
-    console.log(this.post);
-  }
 }

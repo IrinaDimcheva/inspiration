@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UserService } from '../../core/services/user.service';
@@ -8,20 +8,14 @@ import { UserService } from '../../core/services/user.service';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent {
   @ViewChild('f') form: NgForm;
-  // errorMessage = '';
   isLoading = false;
 
-  constructor(private userService: UserService,
-    private router: Router) { }
-
-  ngOnInit(): void {
-  }
+  constructor(private userService: UserService, private router: Router) { }
 
   loginHandler(): void {
     if (this.form.invalid) { return; }
-    // this.errorMessage = '';
     this.isLoading = true;
     const email = this.form.value.email;
     const password = this.form.value.password;
@@ -31,9 +25,8 @@ export class LoginComponent implements OnInit {
         this.router.navigate(['/']);
       },
       error: (err) => {
-        console.log(err);
+        console.error(err);
         this.isLoading = false;
-        // this.errorMessage = err.error.message;
       }
     });
   }

@@ -29,9 +29,4 @@
   [pageSizeOptions]="pageSizeOptions"
   *ngIf="postList?.length > 0"
   (page)="changePageHandler($event)"></mat-paginator>
-<!-- <mat-accordion multi="true" *ngIf="postList">
-  <app-post-list-item *ngFor="let post of postList" [post]="post"></app-post-list-item>
-  <p class="info-text" *ngIf="postList.length === 0">No posts added yet!</p>
-</mat-accordion> -->
-<!-- <mat-spinner *ngIf="!(postList$ | async)"></mat-spinner> -->
 <mat-spinner *ngIf="!postList"></mat-spinner>

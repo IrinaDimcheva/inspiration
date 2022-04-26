@@ -4,9 +4,6 @@
     <mat-card-subtitle>Author {{post.userId.username | titlecase}}, posted on {{post.created_at | date: 'd MMM y, HH:mm' }}</mat-card-subtitle>
     <mat-card-content>
       <p>{{post.content | shortenContent}}<a [routerLink]="['/posts', post._id]" mat-button>Read more</a></p>
-      <!-- <mat-card-actions> -->
-
-      <!-- </mat-card-actions> -->
     </mat-card-content>
   </div>
   <span class="spacer"></span>

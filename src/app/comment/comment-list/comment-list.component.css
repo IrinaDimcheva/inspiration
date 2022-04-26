@@ -25,10 +25,6 @@ button {
   text-align: center;
 }
 
-/* mat-card {
-  margin-top: 1rem;
-} */
-
 mat-action-row {
   display: flex;
 }
