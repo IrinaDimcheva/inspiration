@@ -16,6 +16,23 @@ a:hover {
   color: #20318f;
 }
 
+input[type="file"] {
+  visibility: hidden;
+}
+
+.image {
+  margin-bottom: 1.5em;
+}
+
+.image-preview {
+  height: 5rem;
+  margin: 1rem 0;
+}
+
+.image-preview img {
+  height: 100%;
+}
+
 .error {
   color: red;
   font-size: 0.8em;
