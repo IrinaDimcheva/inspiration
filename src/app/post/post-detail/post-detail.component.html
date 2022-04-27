@@ -19,7 +19,6 @@
         thumb_up
       </span>
     </button>
-
     <span class="likes">{{post.likes.length}} likes</span>
     <a mat-button color="primary" *ngIf="isLogged" [routerLink]="['/posts', post._id, 'comments', 'new']">Add Comment</a>
     <a mat-button color="primary" [routerLink]="['/posts', post._id, 'comments']">{{post.comments.length}} Comments</a>
