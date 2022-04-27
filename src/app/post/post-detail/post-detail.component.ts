@@ -17,6 +17,7 @@ export class PostDetailComponent implements OnInit {
   isLoading = false;
   isAuthor: boolean;
   canLike: boolean;
+  foundPost: IPost | boolean;
   status = '';
   get isLogged() {
     return this.userService.isLogged;
@@ -62,6 +63,10 @@ export class PostDetailComponent implements OnInit {
           this.post = post;
           this.isAuthor = post.userId._id === this.userId;
           this.canLike = !post.likes.includes(this.userId);
+          this.userService.getFavorites().pipe(tap(posts => {
+            this.foundPost = posts.find(post => post._id === this.id);
+          })).subscribe();
+          console.log(this.foundPost?.['_id']);
         },
         error: err => {
           this.isLoading = false;
@@ -82,9 +87,9 @@ export class PostDetailComponent implements OnInit {
     this.postService.addToFavorites(this.id).subscribe({
       next: () => {
         this.status = 'Add to Favorites successful';
+        this.foundPost = true;
         setTimeout(() => {
           this.status = '';
-          this.router.navigate(['../'], { relativeTo: this.route });
         }, 1200);
       }
     });
@@ -94,9 +99,9 @@ export class PostDetailComponent implements OnInit {
     this.postService.removeFromFavorites(this.id).subscribe({
       next: () => {
         this.status = 'Remove from Favorites successful';
+        this.foundPost = false;
         setTimeout(() => {
           this.status = '';
-          this.router.navigate(['../'], { relativeTo: this.route });
         }, 1200);
       }
     });
