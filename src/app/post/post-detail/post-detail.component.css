@@ -32,11 +32,10 @@ mat-action-row {
 }
 
 .likes {
-  color: #444;
   margin-right: 1em;
 }
 
-.tag {
+.tag, .likes {
   color: #444;
 }
 

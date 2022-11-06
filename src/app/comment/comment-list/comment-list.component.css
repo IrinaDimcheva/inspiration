@@ -2,6 +2,10 @@ mat-card {
   margin: 2em 0;
 }
 
+mat-action-row {
+  display: flex;
+}
+
 mat-spinner {
   margin: 0 auto;
   width: 1em;
@@ -23,10 +27,6 @@ button {
 
 .info-text {
   text-align: center;
-}
-
-mat-action-row {
-  display: flex;
 }
 
 .spacer {

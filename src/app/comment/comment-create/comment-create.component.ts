@@ -1,7 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
-import { tap } from 'rxjs/operators';
 import { UserService } from 'src/app/core/services/user.service';
 import { CommentService } from '../../core/services/comment.service';
 

@@ -33,21 +33,6 @@ export class PostDetailComponent implements OnInit {
     private router: Router
   ) { }
 
-  likeHandler() {
-    this.postService.likePost(this.id)
-      .subscribe(() => {
-        this.canLike = false;
-        this.reloadCurrentRoute();
-      });
-  }
-
-  reloadCurrentRoute() {
-    const currentUrl = this.router.url;
-    this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
-      this.router.navigate([currentUrl]);
-    });
-  }
-
   ngOnInit(): void {
     this.route.params.pipe(
       tap((params: Params) => {
@@ -104,6 +89,21 @@ export class PostDetailComponent implements OnInit {
           this.status = '';
         }, 1200);
       }
+    });
+  }
+
+  likeHandler() {
+    this.postService.likePost(this.id)
+      .subscribe(() => {
+        this.canLike = false;
+        this.reloadCurrentRoute();
+      });
+  }
+
+  reloadCurrentRoute() {
+    const currentUrl = this.router.url;
+    this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+      this.router.navigate([currentUrl]);
     });
   }
 }
