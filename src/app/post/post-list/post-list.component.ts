@@ -7,7 +7,7 @@ import {
   switchMap,
   distinctUntilChanged,
 } from 'rxjs/operators';
-import { PageEvent } from '@angular/material/paginator';
+import { LegacyPageEvent as PageEvent } from '@angular/material/legacy-paginator';
 
 import { IPost } from '../../shared/interfaces';
 import { PostService } from '../../core/services/post.service';
