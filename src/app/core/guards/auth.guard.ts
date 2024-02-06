@@ -36,7 +36,6 @@ export class AuthGuard {
         return typeof isAuthRoute !== 'boolean' || isAuthRoute === !!user;
       }),
       tap((canContinue) => {
-        console.log(canContinue);
         if (canContinue) {
           return;
         }
