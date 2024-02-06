@@ -12,10 +12,7 @@ import { MaterialModule } from './material.module';
 import { NotFoundComponent } from './not-found/not-found.component';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    NotFoundComponent,
-  ],
+  declarations: [AppComponent, NotFoundComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
@@ -24,12 +21,9 @@ import { NotFoundComponent } from './not-found/not-found.component';
     HttpClientModule,
     MaterialModule,
     CoreModule,
-    PostModule
+    PostModule,
   ],
-  providers: [
-    Title
-  ],
-  bootstrap: [AppComponent]
+  providers: [Title],
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
-
+export class AppModule {}

@@ -16,9 +16,13 @@
     "experimentalDecorators": true,
     "moduleResolution": "node",
     "importHelpers": true,
-    "target": "es2022",
+    // "target": "es2022",
+    "target": "ESNext",
     "module": "es2022",
     "lib": ["es2022", "dom"]
+    // "paths": {
+    //   "tslib": ["path/to/node_modules/tslib/tslib.d.ts"]
+    // }
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
