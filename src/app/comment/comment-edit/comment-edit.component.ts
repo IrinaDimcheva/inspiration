@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { mergeMap, tap } from 'rxjs/operators';
 import { CommentService } from 'src/app/core/services/comment.service';
@@ -14,7 +14,7 @@ import { IComment } from 'src/app/shared/interfaces';
 export class CommentEditComponent implements OnInit {
   isLoading = false;
   isLogged = this.userService.isLogged;
-  form: FormGroup;
+  form: UntypedFormGroup;
   postId: string;
   commentId: string;
   comment;
@@ -24,7 +24,7 @@ export class CommentEditComponent implements OnInit {
     private userService: UserService,
     private commentService: CommentService,
     private router: Router,
-    private fb: FormBuilder
+    private fb: UntypedFormBuilder
   ) { }
 
   ngOnInit(): void {

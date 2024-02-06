@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {
+  UntypedFormBuilder,
+  UntypedFormGroup,
+  Validators,
+} from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { IPost } from '../../shared/interfaces';
@@ -9,15 +13,15 @@ import { UserService } from 'src/app/core/services/user.service';
 @Component({
   selector: 'app-post-create',
   templateUrl: './post-create.component.html',
-  styleUrls: ['./post-create.component.css']
+  styleUrls: ['./post-create.component.css'],
 })
 export class PostCreateComponent implements OnInit {
   post: IPost | any;
-  form: FormGroup;
+  form: UntypedFormGroup;
   isLoading = false;
   isEditMode = false;
   postId: string;
-  isLogged = this.userService.isLogged;
+  isLogged;
   tagList: string[] = [
     'art',
     'books',
@@ -37,7 +41,7 @@ export class PostCreateComponent implements OnInit {
     'travel',
     'wellbeing',
     'wildlife',
-    'work'
+    'work',
   ];
 
   constructor(
@@ -45,36 +49,53 @@ export class PostCreateComponent implements OnInit {
     private userService: UserService,
     private router: Router,
     private route: ActivatedRoute,
-    private fb: FormBuilder
-  ) { }
+    private fb: UntypedFormBuilder
+  ) {
+    this.isLogged = this.userService.isLogged;
+  }
 
   ngOnInit(): void {
     this.form = this.fb.group({
-      title: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(250)]],
-      content: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(50000)]],
-      imageUrl: ['', [Validators.required, Validators.pattern('^https*:\/\/.+')]],
-      tag: ['', [Validators.required]]
+      title: [
+        '',
+        [
+          Validators.required,
+          Validators.minLength(5),
+          Validators.maxLength(250),
+        ],
+      ],
+      content: [
+        '',
+        [
+          Validators.required,
+          Validators.minLength(10),
+          Validators.maxLength(50000),
+        ],
+      ],
+      imageUrl: ['', [Validators.required, Validators.pattern('^https*://.+')]],
+      tag: ['', [Validators.required]],
     });
     this.postId = this.route.snapshot.params['id'];
     if (this.postId) {
       this.isEditMode = true;
       this.isLoading = true;
       this.postService.loadPostById(this.postId).subscribe({
-        next: postData => {
+        next: (postData) => {
           this.isLoading = false;
           this.post = {
             title: postData.title,
             content: postData.content,
             imageUrl: postData.imageUrl,
-            tag: postData.tag
+            tag: postData.tag,
           };
           setTimeout(() => {
             this.form.patchValue(this.post);
           });
-        }, error: err => {
+        },
+        error: (err) => {
           console.error(err);
           this.isLoading = false;
-        }
+        },
       });
     } else {
       this.isEditMode = false;
@@ -83,13 +104,15 @@ export class PostCreateComponent implements OnInit {
   }
 
   createHandler() {
-    if (this.form.invalid) { return; }
+    if (this.form.invalid) {
+      return;
+    }
     this.isLoading = true;
     const post: IPost | any = {
       title: this.form.value.title,
       content: this.form.value.content,
       imageUrl: this.form.value.imageUrl,
-      tag: this.form.value.tag
+      tag: this.form.value.tag,
     };
     if (!this.isEditMode) {
       this.postService.addPost(post).subscribe({
@@ -100,7 +123,7 @@ export class PostCreateComponent implements OnInit {
         error: (err) => {
           this.isLoading = false;
           console.error(err);
-        }
+        },
       });
     } else {
       this.postService.editPost(this.postId, post).subscribe({
@@ -108,11 +131,11 @@ export class PostCreateComponent implements OnInit {
           this.isLoading = false;
           this.router.navigate(['../'], { relativeTo: this.route });
         },
-        error: err => {
+        error: (err) => {
           this.isLoading = false;
           console.error(err);
-        }
-      })
+        },
+      });
     }
     this.form.reset();
   }

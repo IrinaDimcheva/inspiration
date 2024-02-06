@@ -4,7 +4,7 @@ import {
   CanActivate,
   Router,
   RouterStateSnapshot,
-  UrlTree
+  UrlTree,
 } from '@angular/router';
 import { Observable, of } from 'rxjs';
 import { tap, map } from 'rxjs/operators';
@@ -14,10 +14,16 @@ import { UserService } from '../services/user.service';
 
 @Injectable()
 export class AuthGuard implements CanActivate {
-  constructor(private userService: UserService, private router: Router) { }
+  constructor(private userService: UserService, private router: Router) {}
 
-  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean | UrlTree | Observable<boolean | UrlTree> | Promise<boolean | UrlTree> {
-
+  canActivate(
+    route: ActivatedRouteSnapshot,
+    state: RouterStateSnapshot
+  ):
+    | boolean
+    | UrlTree
+    | Observable<boolean | UrlTree>
+    | Promise<boolean | UrlTree> {
     let stream$: Observable<IUser | null>;
     if (this.userService.user === undefined) {
       stream$ = this.userService.getUserProfile();
@@ -31,7 +37,10 @@ export class AuthGuard implements CanActivate {
         return typeof isAuthRoute !== 'boolean' || isAuthRoute === !!user;
       }),
       tap((canContinue) => {
-        if (canContinue) { return; }
+        console.log(canContinue);
+        if (canContinue) {
+          return;
+        }
         this.router.navigate(['']);
         // this.router.navigateByUrl(this.router.url);
       })
