@@ -1,13 +1,19 @@
-import { HttpErrorResponse, HttpHandler, HttpInterceptor, HttpRequest, HTTP_INTERCEPTORS } from '@angular/common/http';
+import {
+  HttpErrorResponse,
+  HttpHandler,
+  HttpInterceptor,
+  HttpRequest,
+  HTTP_INTERCEPTORS,
+} from '@angular/common/http';
 import { Injectable, Provider } from '@angular/core';
-import { MatLegacyDialog as MatDialog } from '@angular/material/legacy-dialog';
+import { MatDialog } from '@angular/material/dialog';
 import { catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
 import { ErrorComponent } from '../shared/error/error.component';
 
 @Injectable()
 export class ErrorInterceptor implements HttpInterceptor {
-  constructor(private dialog: MatDialog) { }
+  constructor(private dialog: MatDialog) {}
 
   intercept(req: HttpRequest<any>, next: HttpHandler) {
     return next.handle(req).pipe(
@@ -26,5 +32,5 @@ export class ErrorInterceptor implements HttpInterceptor {
 export const errorInterceptorProvider: Provider = {
   provide: HTTP_INTERCEPTORS,
   useClass: ErrorInterceptor,
-  multi: true
+  multi: true,
 };

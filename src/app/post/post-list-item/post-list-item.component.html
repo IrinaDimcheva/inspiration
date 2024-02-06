@@ -1,13 +1,17 @@
 <mat-card [routerLink]="['/posts', post._id]">
   <div>
-    <mat-card-title>{{post.title | shortenTitle }}</mat-card-title>
-    <mat-card-subtitle>Author {{post.userId.username | titlecase}}, posted on {{post.created_at | date: 'd MMM y, HH:mm' }}</mat-card-subtitle>
-    <mat-card-content>
-      <p>{{post.content | shortenContent}}<a [routerLink]="['/posts', post._id]" mat-button>Read more</a></p>
+    <mat-card-title>{{ post.title | shortenTitle }}</mat-card-title>
+    <mat-card-subtitle
+      >Author {{ post.userId.username | titlecase }}, posted on
+      {{ post.created_at | date : "d MMM y, HH:mm" }}</mat-card-subtitle
+    >
+    <mat-card-content class="content">
+      <p>{{ post.content | shortenContent }}</p>
+      <div><a [routerLink]="['/posts', post._id]" mat-button>Read more</a></div>
     </mat-card-content>
   </div>
-  <span class="spacer"></span>
+  <!-- <span class="spacer"></span> -->
   <div class="image" align="end">
-    <img mat-card-sm-image [src]="post.imageUrl" [alt]="post.title">
+    <img mat-card-lg-image [src]="post.imageUrl" [alt]="post.title" />
   </div>
 </mat-card>
