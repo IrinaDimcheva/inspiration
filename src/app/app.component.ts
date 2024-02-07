@@ -2,9 +2,9 @@ import { Component } from '@angular/core';
 import { ChildrenOutletContexts } from '@angular/router';
 import {
   // slideInAnimation,
-  fader
+  fader,
 } from './animations';
-import { UserService } from './core/services/user.service';
+import { UserService } from './user/services/user.service';
 
 @Component({
   selector: 'app-root',
@@ -12,17 +12,22 @@ import { UserService } from './core/services/user.service';
   styleUrls: ['./app.component.css'],
   animations: [
     // slideInAnimation,
-    fader
-  ]
+    fader,
+  ],
 })
 export class AppComponent {
   get canLoad() {
     return this.userService.canLoad;
   }
 
-  constructor(public userService: UserService, private contexts: ChildrenOutletContexts) { }
+  constructor(
+    public userService: UserService,
+    private contexts: ChildrenOutletContexts
+  ) {}
 
   getRouteAnimationData() {
-    return this.contexts.getContext('primary')?.route?.snapshot?.data?.['animation'];
+    return this.contexts.getContext('primary')?.route?.snapshot?.data?.[
+      'animation'
+    ];
   }
 }

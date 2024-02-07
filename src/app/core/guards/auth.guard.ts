@@ -9,7 +9,7 @@ import { Observable, of } from 'rxjs';
 import { tap, map } from 'rxjs/operators';
 
 import { IUser } from '../../shared/interfaces';
-import { UserService } from '../services/user.service';
+import { UserService } from '../../user/services/user.service';
 
 @Injectable()
 export class AuthGuard {

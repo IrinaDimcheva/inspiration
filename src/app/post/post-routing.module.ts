@@ -1,8 +1,8 @@
-import { RouterModule, Routes } from "@angular/router";
-import { AuthGuard } from "../core/guards/auth.guard";
-import { PostCreateComponent } from "./post-create/post-create.component";
-import { PostDetailComponent } from "./post-detail/post-detail.component";
-import { PostListComponent } from "./post-list/post-list.component";
+import { RouterModule, Routes } from '@angular/router';
+import { AuthGuard } from '../core/guards/auth.guard';
+import { PostCreateComponent } from './components/post-create/post-create.component';
+import { PostDetailComponent } from './components/post-detail/post-detail.component';
+import { PostListComponent } from './components/post-list/post-list.component';
 
 const routes: Routes = [
   {
@@ -10,8 +10,8 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     component: PostListComponent,
     data: {
-      title: 'Inspiration | Posts'
-    }
+      title: 'Inspiration | Posts',
+    },
   },
   {
     path: 'posts/new',
@@ -20,8 +20,8 @@ const routes: Routes = [
     data: {
       title: 'Inspiration | New Post',
       isLogged: true,
-      animation: '*'
-    }
+      animation: '*',
+    },
   },
   {
     path: 'posts/:id',
@@ -29,8 +29,8 @@ const routes: Routes = [
     component: PostDetailComponent,
     data: {
       title: 'Inspiration | Post Detail',
-      animation: '*'
-    }
+      animation: '*',
+    },
   },
   {
     path: 'posts/:id/edit',
@@ -39,9 +39,9 @@ const routes: Routes = [
     data: {
       title: 'Inspiration | Edit Post',
       isLogged: true,
-      animation: '*'
-    }
-  }
+      animation: '*',
+    },
+  },
 ];
 
 export const PostRoutingModule = RouterModule.forChild(routes);

@@ -9,8 +9,8 @@ import {
 } from 'rxjs/operators';
 import { PageEvent as PageEvent } from '@angular/material/paginator';
 
-import { IPost } from '../../shared/interfaces';
-import { PostService } from '../../core/services/post.service';
+import { IPost } from '../../../shared/interfaces';
+import { PostService } from '../../services/post.service';
 
 @Component({
   selector: 'app-post-list',

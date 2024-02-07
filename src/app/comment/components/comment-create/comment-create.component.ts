@@ -1,8 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
-import { UserService } from 'src/app/core/services/user.service';
-import { CommentService } from '../../core/services/comment.service';
+import { UserService } from 'src/app/user/services/user.service';
+import { CommentService } from '../../services/comment.service';
 
 @Component({
   selector: 'app-comment-create',

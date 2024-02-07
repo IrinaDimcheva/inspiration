@@ -2,14 +2,14 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-import { LoginComponent } from './login/login.component';
-import { RegisterComponent } from './register/register.component';
+import { LoginComponent } from './components/login/login.component';
+import { RegisterComponent } from './components/register/register.component';
 import { MaterialModule } from '../material.module';
 import { UserRoutingModule } from './user-routing.module';
-import { ProfileComponent } from './profile/profile.component';
+import { ProfileComponent } from './components/profile/profile.component';
 import { PostModule } from '../post/post.module';
 import { SharedModule } from '../shared/shared.module';
-import { FavoritesComponent } from './favorites/favorites.component';
+import { FavoritesComponent } from './components/favorites/favorites.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +25,7 @@ import { FavoritesComponent } from './favorites/favorites.component';
     ReactiveFormsModule,
     UserRoutingModule,
     PostModule,
-    SharedModule
-  ]
+    SharedModule,
+  ],
 })
-export class UserModule { }
+export class UserModule {}

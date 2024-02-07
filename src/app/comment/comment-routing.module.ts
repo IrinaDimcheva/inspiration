@@ -1,8 +1,8 @@
-import { RouterModule, Routes } from "@angular/router";
-import { AuthGuard } from "../core/guards/auth.guard";
-import { CommentCreateComponent } from "./comment-create/comment-create.component";
-import { CommentEditComponent } from "./comment-edit/comment-edit.component";
-import { CommentListComponent } from "./comment-list/comment-list.component";
+import { RouterModule, Routes } from '@angular/router';
+import { AuthGuard } from '../core/guards/auth.guard';
+import { CommentCreateComponent } from './components/comment-create/comment-create.component';
+import { CommentEditComponent } from './components/comment-edit/comment-edit.component';
+import { CommentListComponent } from './components/comment-list/comment-list.component';
 
 const routes: Routes = [
   {
@@ -12,8 +12,8 @@ const routes: Routes = [
     component: CommentListComponent,
     data: {
       title: 'Inspiration | Comments',
-      animation: '*'
-    }
+      animation: '*',
+    },
   },
   {
     path: 'new',
@@ -22,8 +22,8 @@ const routes: Routes = [
     data: {
       isLogged: true,
       title: 'Inspiration | Comments',
-      animation: '*'
-    }
+      animation: '*',
+    },
   },
   {
     path: ':commentId/edit',
@@ -32,9 +32,9 @@ const routes: Routes = [
     data: {
       isLogged: true,
       title: 'Inspiration | Edit Comment',
-      animation: '*'
-    }
-  }
+      animation: '*',
+    },
+  },
 ];
 
 export const CommentRoutingModule = RouterModule.forChild(routes);

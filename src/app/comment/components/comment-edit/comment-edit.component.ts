@@ -6,8 +6,8 @@ import {
 } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { mergeMap, tap } from 'rxjs/operators';
-import { CommentService } from 'src/app/core/services/comment.service';
-import { UserService } from 'src/app/core/services/user.service';
+import { CommentService } from 'src/app/comment/services/comment.service';
+import { UserService } from 'src/app/user/services/user.service';
 import { IComment } from 'src/app/shared/interfaces';
 
 @Component({

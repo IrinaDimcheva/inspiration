@@ -6,9 +6,9 @@ import {
 } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 
-import { IPost } from '../../shared/interfaces';
-import { PostService } from '../../core/services/post.service';
-import { UserService } from 'src/app/core/services/user.service';
+import { IPost } from '../../../shared/interfaces';
+import { PostService } from '../../services/post.service';
+import { UserService } from 'src/app/user/services/user.service';
 
 @Component({
   selector: 'app-post-create',

@@ -1,21 +1,23 @@
 import { Component, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
-import { UserService } from '../../core/services/user.service';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['./login.component.css'],
 })
 export class LoginComponent {
   @ViewChild('f') form: NgForm;
   isLoading = false;
 
-  constructor(private userService: UserService, private router: Router) { }
+  constructor(private userService: UserService, private router: Router) {}
 
   loginHandler(): void {
-    if (this.form.invalid) { return; }
+    if (this.form.invalid) {
+      return;
+    }
     this.isLoading = true;
     const email = this.form.value.email;
     const password = this.form.value.password;
@@ -27,7 +29,7 @@ export class LoginComponent {
       error: (err) => {
         console.error(err);
         this.isLoading = false;
-      }
+      },
     });
   }
 }

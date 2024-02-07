@@ -1,9 +1,9 @@
 import { Routes, RouterModule } from '@angular/router';
 import { AuthGuard } from '../core/guards/auth.guard';
-import { FavoritesComponent } from './favorites/favorites.component';
-import { LoginComponent } from './login/login.component';
-import { ProfileComponent } from './profile/profile.component';
-import { RegisterComponent } from './register/register.component';
+import { FavoritesComponent } from './components/favorites/favorites.component';
+import { LoginComponent } from './components/login/login.component';
+import { ProfileComponent } from './components/profile/profile.component';
+import { RegisterComponent } from './components/register/register.component';
 
 const routes: Routes = [
   {
@@ -13,8 +13,8 @@ const routes: Routes = [
     data: {
       title: 'Inspiration | Login',
       isLogged: false,
-      animation: '*'
-    }
+      animation: '*',
+    },
   },
   {
     path: 'register',
@@ -23,8 +23,8 @@ const routes: Routes = [
     data: {
       title: 'Inspiration | Register',
       isLogged: false,
-      animation: '*'
-    }
+      animation: '*',
+    },
   },
   {
     path: 'profile',
@@ -33,8 +33,8 @@ const routes: Routes = [
     data: {
       isLogged: true,
       title: 'Inspiration | User',
-      animation: '*'
-    }
+      animation: '*',
+    },
   },
   {
     path: 'favorites',
@@ -43,9 +43,9 @@ const routes: Routes = [
     data: {
       isLogged: true,
       title: 'Inspiration | Favorites',
-      animation: '*'
-    }
-  }
+      animation: '*',
+    },
+  },
 ];
 
 export const UserRoutingModule = RouterModule.forChild(routes);

@@ -3,13 +3,13 @@ import { Title } from '@angular/platform-browser';
 import { ActivationEnd, Router } from '@angular/router';
 import { filter, throttleTime } from 'rxjs/operators';
 
-import { UserService } from 'src/app/core/services/user.service';
+import { UserService } from 'src/app/user/services/user.service';
 import { IUser } from 'src/app/shared/interfaces';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
-  styleUrls: ['./header.component.css']
+  styleUrls: ['./header.component.css'],
 })
 export class HeaderComponent implements OnInit {
   get isLogged(): boolean {
@@ -22,11 +22,15 @@ export class HeaderComponent implements OnInit {
   constructor(
     private userService: UserService,
     private title: Title,
-    private router: Router) {
-  }
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
-    this.router.events.pipe(filter(e => e instanceof ActivationEnd), throttleTime(0))
+    this.router.events
+      .pipe(
+        filter((e) => e instanceof ActivationEnd),
+        throttleTime(0)
+      )
       .subscribe((e: ActivationEnd) => {
         this.title.setTitle(e.snapshot.data?.['title']);
       });

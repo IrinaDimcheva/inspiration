@@ -2,14 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { shareReplay, switchMap } from 'rxjs/operators';
-import { UserService } from 'src/app/core/services/user.service';
+import { UserService } from 'src/app/user/services/user.service';
 import { IComment } from 'src/app/shared/interfaces';
-import { CommentService } from '../../core/services/comment.service';
+import { CommentService } from '../../services/comment.service';
 
 @Component({
   selector: 'app-comment-list',
   templateUrl: './comment-list.component.html',
-  styleUrls: ['./comment-list.component.css']
+  styleUrls: ['./comment-list.component.css'],
 })
 export class CommentListComponent implements OnInit {
   get user() {
@@ -32,7 +32,8 @@ export class CommentListComponent implements OnInit {
     private commentService: CommentService,
     private userService: UserService,
     private route: ActivatedRoute,
-    private router: Router) { }
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.commentList$ = this.route.params.pipe(
@@ -58,19 +59,19 @@ export class CommentListComponent implements OnInit {
   }
 
   deleteHandler(commentId: string) {
-    this.commentService.deleteComment(this.postId, commentId)
-      .subscribe({
-        next: () => {
-          this.status = 'Delete successful';
-          this.commentList$ = this.commentService.getComments(this.postId)
-            .pipe(shareReplay(1));
-          setTimeout(() => {
-            this.status = '';
-          }, 2000);
-        },
-        error: err => {
-          console.error('There was an error!', err);
-        }
-      });
+    this.commentService.deleteComment(this.postId, commentId).subscribe({
+      next: () => {
+        this.status = 'Delete successful';
+        this.commentList$ = this.commentService
+          .getComments(this.postId)
+          .pipe(shareReplay(1));
+        setTimeout(() => {
+          this.status = '';
+        }, 2000);
+      },
+      error: (err) => {
+        console.error('There was an error!', err);
+      },
+    });
   }
 }

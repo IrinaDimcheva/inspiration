@@ -2,12 +2,12 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-import { PostListComponent } from './post-list/post-list.component';
-import { PostCreateComponent } from './post-create/post-create.component';
-import { PostListItemComponent } from './post-list-item/post-list-item.component';
+import { PostListComponent } from './components/post-list/post-list.component';
+import { PostCreateComponent } from './components/post-create/post-create.component';
+import { PostListItemComponent } from './components/post-list-item/post-list-item.component';
 import { MaterialModule } from '../material.module';
 import { PostRoutingModule } from './post-routing.module';
-import { PostDetailComponent } from './post-detail/post-detail.component';
+import { PostDetailComponent } from './components/post-detail/post-detail.component';
 import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
@@ -15,7 +15,7 @@ import { SharedModule } from '../shared/shared.module';
     PostListComponent,
     PostCreateComponent,
     PostListItemComponent,
-    PostDetailComponent
+    PostDetailComponent,
   ],
   imports: [
     CommonModule,
@@ -23,12 +23,8 @@ import { SharedModule } from '../shared/shared.module';
     FormsModule,
     ReactiveFormsModule,
     PostRoutingModule,
-    SharedModule
+    SharedModule,
   ],
-  exports: [
-    PostListComponent,
-    PostCreateComponent,
-    PostListItemComponent
-  ]
+  exports: [PostListComponent, PostCreateComponent, PostListItemComponent],
 })
-export class PostModule { }
+export class PostModule {}
