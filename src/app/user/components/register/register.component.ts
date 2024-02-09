@@ -4,13 +4,17 @@ import {
   UntypedFormGroup,
   Validators,
 } from '@angular/forms';
-import { Router } from '@angular/router';
+import { combineLatest } from 'rxjs';
+import { Store } from '@ngrx/store';
+
 import {
   charactersValidator,
   emailValidator,
   rePasswordValidator,
 } from '../../../shared/validators';
-import { UserService } from '../../services/user.service';
+import { selectErrors, selectIsSubmitting } from '../../+store/reducers';
+import { IRegisterRequest } from '../../interfaces/register-request';
+import { authActions } from '../../+store/actions';
 
 @Component({
   selector: 'app-register',
@@ -19,13 +23,12 @@ import { UserService } from '../../services/user.service';
 })
 export class RegisterComponent implements OnInit {
   form: UntypedFormGroup;
-  isLoading = false;
+  data$ = combineLatest({
+    isSubmitting: this.store.select(selectIsSubmitting),
+    errors: this.store.select(selectErrors),
+  });
 
-  constructor(
-    private fb: UntypedFormBuilder,
-    private userService: UserService,
-    private router: Router
-  ) {}
+  constructor(private fb: UntypedFormBuilder, private store: Store) {}
 
   ngOnInit(): void {
     const passwordControl = this.fb.control('', [
@@ -60,17 +63,7 @@ export class RegisterComponent implements OnInit {
   }
 
   registerHandler(): void {
-    const data = this.form.value;
-    this.isLoading = true;
-    this.userService.register(data).subscribe({
-      next: () => {
-        this.isLoading = false;
-        this.router.navigate(['/']);
-      },
-      error: (err) => {
-        this.isLoading = false;
-        console.error(err);
-      },
-    });
+    const request: IRegisterRequest = this.form.value;
+    this.store.dispatch(authActions.register({ request }));
   }
 }

@@ -9,8 +9,8 @@ const routes: Routes = [
     pathMatch: 'full',
     redirectTo: '/posts',
     data: {
-      animation: 'HomePage'
-    }
+      animation: 'HomePage',
+    },
   },
   {
     path: 'about',
@@ -18,25 +18,28 @@ const routes: Routes = [
     component: AboutComponent,
     data: {
       animation: 'AboutPage',
-      title: 'Inspiration | About'
-    }
+      title: 'Inspiration | About',
+    },
   },
   {
     path: 'user',
-    loadChildren: () => import('./user/user.module').then(m => m.UserModule)
+    loadChildren: () => import('./user/user.module').then((m) => m.UserModule),
   },
   {
     path: 'posts/:id/comments',
-    loadChildren: () => import('./comment/comment.module').then(m => m.CommentModule)
+    loadChildren: () =>
+      import('./comment/comment.module').then((m) => m.CommentModule),
   },
   {
     path: '**',
     canActivate: [AuthGuard],
     component: NotFoundComponent,
     data: {
-      title: 'Inspiration | 404'
-    }
-  }
+      title: 'Inspiration | 404',
+    },
+  },
 ];
 
-export const AppRoutingModule = RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules });
+export const AppRoutingModule = RouterModule.forRoot(routes, {
+  preloadingStrategy: PreloadAllModules,
+});

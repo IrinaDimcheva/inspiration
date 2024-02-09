@@ -12,12 +12,12 @@ import { CommentService } from '../../services/comment.service';
   styleUrls: ['./comment-list.component.css'],
 })
 export class CommentListComponent implements OnInit {
-  get user() {
-    return this.userService.userId;
-  }
-  get isLogged() {
-    return this.userService.isLogged;
-  }
+  // get user() {
+  //   return this.userService.userId;
+  // }
+  // get isLogged() {
+  //   return this.userService.isLogged;
+  // }
   commentList$: Observable<IComment[]>;
   commentUserId: string;
   userId: string;
@@ -40,7 +40,7 @@ export class CommentListComponent implements OnInit {
       switchMap(({ id }) => this.commentService.getComments(id))
       // shareReplay(1)
     );
-    this.userId = this.userService.userId;
+    // this.userId = this.userService.userId;
     this.route.paramMap.subscribe((paramMap: ParamMap) => {
       this.postId = paramMap.get('id');
     });

@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
-import { UserService } from 'src/app/user/services/user.service';
+import { Store } from '@ngrx/store';
 import { IPost } from '../../../shared/interfaces';
+import { selectUser } from 'src/app/user/+store/reducers';
 
 @Component({
   selector: 'app-post-list-item',
@@ -10,7 +11,7 @@ import { IPost } from '../../../shared/interfaces';
 export class PostListItemComponent {
   @Input() post: IPost;
   get isLogged() {
-    return this.userService.isLogged;
+    return this.store.select(selectUser);
   }
-  constructor(private userService: UserService) {}
+  constructor(private store: Store) {}
 }

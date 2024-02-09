@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { mergeMap, tap } from 'rxjs/operators';
+import { Store } from '@ngrx/store';
+
 import { IPost, IUser } from 'src/app/shared/interfaces';
-import { UserService } from 'src/app/user/services/user.service';
 import { PostService } from '../../services/post.service';
+import { selectUser } from 'src/app/user/+store/reducers';
 
 @Component({
   selector: 'app-post-detail',
@@ -20,16 +22,16 @@ export class PostDetailComponent implements OnInit {
   foundPost: IPost | boolean;
   status = '';
   get isLogged() {
-    return this.userService.isLogged;
+    return this.store.select(selectUser);
   }
-  get userId() {
-    return this.userService.userId;
-  }
+  // get userId() {
+  //   return this.userService.userId;
+  // }
 
   constructor(
     public postService: PostService,
     private route: ActivatedRoute,
-    private userService: UserService,
+    private store: Store,
     private router: Router
   ) {}
 
@@ -48,17 +50,17 @@ export class PostDetailComponent implements OnInit {
         next: (post) => {
           this.isLoading = false;
           this.post = post;
-          this.isAuthor = post.userId._id === this.userId;
-          this.canLike = !post.likes.includes(this.userId);
-          this.userService
-            .getFavorites()
-            .pipe(
-              tap((posts) => {
-                this.foundPost = posts.find((post) => post._id === this.id);
-              })
-            )
-            .subscribe();
-          console.log(this.foundPost?.['_id']);
+          // this.isAuthor = post.userId._id === this.userId;
+          // this.canLike = !post.likes.includes(this.userId);
+          // this.userService
+          //   .getFavorites()
+          //   .pipe(
+          //     tap((posts) => {
+          //       this.foundPost = posts.find((post) => post._id === this.id);
+          //     })
+          //   )
+          //   .subscribe();
+          // console.log(this.foundPost?.['_id']);
         },
         error: (err) => {
           this.isLoading = false;

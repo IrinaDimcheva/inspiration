@@ -16,9 +16,9 @@ import { UserService } from './user/services/user.service';
   ],
 })
 export class AppComponent {
-  get canLoad() {
-    return this.userService.canLoad;
-  }
+  // get canLoad() {
+  //   return this.userService.canLoad;
+  // }
 
   constructor(
     public userService: UserService,

@@ -10,10 +10,12 @@ import { tap, map } from 'rxjs/operators';
 
 import { IUser } from '../../shared/interfaces';
 import { UserService } from '../../user/services/user.service';
+import { Store, select } from '@ngrx/store';
+import { selectErrors, selectUser } from 'src/app/user/+store/reducers';
 
 @Injectable()
 export class AuthGuard {
-  constructor(private userService: UserService, private router: Router) {}
+  constructor(private store: Store, private router: Router) {}
 
   canActivate(
     route: ActivatedRouteSnapshot,
@@ -23,12 +25,13 @@ export class AuthGuard {
     | UrlTree
     | Observable<boolean | UrlTree>
     | Promise<boolean | UrlTree> {
-    let stream$: Observable<IUser | null>;
-    if (this.userService.user === undefined) {
-      stream$ = this.userService.getUserProfile();
-    } else {
-      stream$ = of(this.userService.user);
-    }
+    let stream$: Observable<IUser | null> = this.store.select(selectUser);
+    //  if (this.store.select(selectUser) === undefined) {
+    //     // stream$ = this.userService.getUserProfile();
+    //     stream$ = this.store.select(selectUser);
+    //   } else {
+    //     stream$ = this.store.select(selectUser);
+    //   }
 
     return stream$.pipe(
       map((user: IUser) => {

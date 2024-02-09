@@ -13,7 +13,7 @@ export class CommentCreateComponent implements OnInit {
   @ViewChild('f') form: NgForm;
   postId: string;
   isLoading = false;
-  isLogged;
+  // isLogged;
 
   constructor(
     private commentService: CommentService,
@@ -21,7 +21,7 @@ export class CommentCreateComponent implements OnInit {
     private router: Router,
     private userService: UserService
   ) {
-    this.isLogged = this.userService.isLogged;
+    // this.isLogged = this.userService.isLogged;
   }
 
   ngOnInit(): void {

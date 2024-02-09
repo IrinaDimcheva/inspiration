@@ -4,50 +4,66 @@ import { Observable, of } from 'rxjs';
 import { tap, catchError } from 'rxjs/operators';
 
 import { IPost, IUser } from '../../shared/interfaces';
+import { IRegisterRequest } from '../interfaces/register-request';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class UserService {
-  user: IUser | null;
-  get isLogged(): boolean { return !!this.user; }
-  get userId() { return this.user?._id; }
-  get canLoad(): boolean { return this.user !== undefined; }
+  // user$: Observable<IUser> | null = null;
+  // get isLogged(): boolean {
+  //   return !!this.user$;
+  // }
+  // get userId() {
+  //   return this.user$?._id;
+  // }
+  // get canLoad(): boolean {
+  //   return this.user$ !== undefined;
+  // }
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
-  getUserProfile(): Observable<any> {
-    return this.http.get(`/users/profile`).pipe(
-      tap((user: IUser) => {
-        this.user = user;
-      }),
-      catchError(() => {
-        this.user = null;
-        return of(null);
-      })
-    );
+  getUserProfile(): Observable<IUser> {
+    return this.http.get<IUser>(`/users/profile`);
+    // .pipe(
+    //   tap((user: IUser) => {
+    //     this.user$ = user;
+    //   }),
+    //   catchError(() => {
+    //     this.user$ = null;
+    //     return of(null);
+    //   })
+    // );
   }
 
   getFavorites(): Observable<IPost[]> {
     return this.http.get<IPost[]>('/favorites');
   }
 
-  register(data: any): Observable<IUser> {
-    return this.http.post(`/register`, data)
-      .pipe(tap((user: IUser) => {
-        this.user = user;
-      }));
+  register(data: IRegisterRequest): Observable<IUser> {
+    return this.http.post<IUser>(`/register`, data);
+    // .pipe(
+    //   tap((user: IUser) => {
+    //     console.log(user);
+    //   }),
+    //   catchError((err) => {
+    //     console.log(err);
+    //     return of(null);
+    //   })
+    // );
   }
 
-  login(data: any): Observable<IUser | any> {
-    return this.http.post<IUser | any>(`/login`, data)
-      .pipe(tap((user) => {
-        this.user = user;
-      }));
+  login(data: any): Observable<IUser> {
+    return this.http.post<IUser>(`/login`, data);
+    // .pipe(
+    //   tap((user) => {
+    //     this.user$ = user;
+    //   })
+    // );
   }
 
   logout() {
-    return this.http.post(`/logout`, {})
-      .pipe(tap(() => this.user = null));
+    return this.http.post(`/logout`, {});
+    // .pipe(tap(() => (this.user$ = null)));
   }
 }

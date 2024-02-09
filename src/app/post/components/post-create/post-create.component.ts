@@ -9,6 +9,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { IPost } from '../../../shared/interfaces';
 import { PostService } from '../../services/post.service';
 import { UserService } from 'src/app/user/services/user.service';
+import { Store } from '@ngrx/store';
+import { selectUser } from 'src/app/user/+store/reducers';
 
 @Component({
   selector: 'app-post-create',
@@ -21,7 +23,7 @@ export class PostCreateComponent implements OnInit {
   isLoading = false;
   isEditMode = false;
   postId: string;
-  isLogged;
+  isLogged = this.store.select(selectUser);
   tagList: string[] = [
     'art',
     'books',
@@ -46,12 +48,12 @@ export class PostCreateComponent implements OnInit {
 
   constructor(
     private postService: PostService,
-    private userService: UserService,
+    private store: Store,
     private router: Router,
     private route: ActivatedRoute,
     private fb: UntypedFormBuilder
   ) {
-    this.isLogged = this.userService.isLogged;
+    // this.isLogged = this.userService.isLogged;
   }
 
   ngOnInit(): void {

@@ -17,7 +17,7 @@ import { IComment } from 'src/app/shared/interfaces';
 })
 export class CommentEditComponent implements OnInit {
   isLoading = false;
-  isLogged;
+  // isLogged;
   form: UntypedFormGroup;
   postId: string;
   commentId: string;
@@ -30,7 +30,7 @@ export class CommentEditComponent implements OnInit {
     private router: Router,
     private fb: UntypedFormBuilder
   ) {
-    this.isLogged = this.userService.isLogged;
+    // this.isLogged = this.userService.isLogged;
   }
 
   ngOnInit(): void {

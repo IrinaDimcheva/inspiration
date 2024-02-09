@@ -1,8 +1,8 @@
-<ng-container *ngIf="canLoad">
-  <app-header></app-header>
-  <main [@routeAnimations]="getRouteAnimationData()" class="content">
-    <router-outlet #outlet="outlet"></router-outlet>
-  </main>
-  <app-footer></app-footer>
-</ng-container>
-<mat-spinner *ngIf="!canLoad"></mat-spinner>
+<!-- <ng-container *ngIf="canLoad"> -->
+<app-header></app-header>
+<main [@routeAnimations]="getRouteAnimationData()" class="content">
+  <router-outlet #outlet="outlet"></router-outlet>
+</main>
+<app-footer></app-footer>
+<!-- </ng-container> -->
+<!-- <mat-spinner *ngIf="!canLoad"></mat-spinner> -->

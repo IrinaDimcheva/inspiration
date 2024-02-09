@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { ActivationEnd, Router } from '@angular/router';
+import { combineLatest } from 'rxjs';
 import { filter, throttleTime } from 'rxjs/operators';
+import { Store } from '@ngrx/store';
 
-import { UserService } from 'src/app/user/services/user.service';
-import { IUser } from 'src/app/shared/interfaces';
+import { selectUser } from 'src/app/user/+store/reducers';
 
 @Component({
   selector: 'app-header',
@@ -12,15 +13,12 @@ import { IUser } from 'src/app/shared/interfaces';
   styleUrls: ['./header.component.css'],
 })
 export class HeaderComponent implements OnInit {
-  get isLogged(): boolean {
-    return this.userService.isLogged;
-  }
-  get user(): IUser {
-    return this.userService.user;
-  }
+  data$ = combineLatest({
+    user: this.store.select(selectUser),
+  });
 
   constructor(
-    private userService: UserService,
+    private store: Store,
     private title: Title,
     private router: Router
   ) {}
@@ -36,9 +34,9 @@ export class HeaderComponent implements OnInit {
       });
   }
 
-  logoutHandler() {
-    this.userService.logout().subscribe(() => {
-      this.router.navigate(['/user/login']);
-    });
-  }
+  // logoutHandler() {
+  //   this.userService.logout().subscribe(() => {
+  //     this.router.navigate(['/user/login']);
+  //   });
+  // }
 }

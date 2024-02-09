@@ -1,29 +1,39 @@
-<mat-toolbar color="primary">
+<mat-toolbar color="primary" *ngIf="data$ | async as data">
   <span>
     <a routerLink="/">Inspiration</a>
   </span>
   <span class="spacer"></span>
   <ul>
-    <ng-container *ngIf="isLogged">
+    <ng-container *ngIf="data.user">
       <li>
-        <a mat-button routerLink="/posts/new" routerLinkActive="active">New Post</a>
+        <a mat-button routerLink="/posts/new" routerLinkActive="active"
+          >New Post</a
+        >
       </li>
       <li>
-        <a mat-button routerLink="/user/profile" routerLinkActive="active">{{user.username | titlecase}}'s Profile</a>
+        <a mat-button routerLink="/user/profile" routerLinkActive="active"
+          >{{ data.user.username | titlecase }}'s Profile</a
+        >
       </li>
       <li>
-        <a mat-button routerLink="/user/favorites" routerLinkActive="active">My Favorites</a>
+        <a mat-button routerLink="/user/favorites" routerLinkActive="active"
+          >My Favorites</a
+        >
       </li>
       <li>
-        <button mat-button href="/user/logout" (click)="logoutHandler()">Logout</button>
+        <!-- <button mat-button href="/user/logout" (click)="logoutHandler()">Logout</button> -->
       </li>
     </ng-container>
-    <ng-container *ngIf="!isLogged">
+    <ng-container *ngIf="data.user === null">
       <li>
-        <a mat-button routerLink="/user/login" routerLinkActive="active">Login</a>
+        <a mat-button routerLink="/user/login" routerLinkActive="active"
+          >Login</a
+        >
       </li>
       <li>
-        <a mat-button routerLink="/user/register" routerLinkActive="active">Register</a>
+        <a mat-button routerLink="/user/register" routerLinkActive="active"
+          >Register</a
+        >
       </li>
     </ng-container>
   </ul>
