@@ -1,7 +1,9 @@
 import { Component, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { Router } from '@angular/router';
-import { UserService } from '../../services/user.service';
+import { Store } from '@ngrx/store';
+import { combineLatest } from 'rxjs';
+import { authActions } from '../../+store/actions';
+import { selectErrors, selectIsSubmitting } from '../../+store/reducers';
 
 @Component({
   selector: 'app-login',
@@ -10,26 +12,19 @@ import { UserService } from '../../services/user.service';
 })
 export class LoginComponent {
   @ViewChild('f') form: NgForm;
-  isLoading = false;
+  data$ = combineLatest({
+    isSubmitting: this.store.select(selectIsSubmitting),
+    errors: this.store.select(selectErrors),
+  });
 
-  constructor(private userService: UserService, private router: Router) {}
+  constructor(private store: Store) {}
 
   loginHandler(): void {
     if (this.form.invalid) {
       return;
     }
-    this.isLoading = true;
     const email = this.form.value.email;
     const password = this.form.value.password;
-    this.userService.login({ email, password }).subscribe({
-      next: () => {
-        this.isLoading = false;
-        this.router.navigate(['/']);
-      },
-      error: (err) => {
-        console.error(err);
-        this.isLoading = false;
-      },
-    });
+    this.store.dispatch(authActions.login({ request: { email, password } }));
   }
 }

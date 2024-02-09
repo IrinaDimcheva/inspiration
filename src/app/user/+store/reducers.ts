@@ -29,6 +29,21 @@ const authFeature = createFeature({
       isSubmitting: false,
       errors: action.message,
     })),
+    on(authActions.login, (state) => ({
+      ...state,
+      isSubmitting: true,
+      errors: null,
+    })),
+    on(authActions.loginSuccess, (state, action) => ({
+      ...state,
+      isSubmitting: false,
+      user: action.user,
+    })),
+    on(authActions.loginFailure, (state, action) => ({
+      ...state,
+      isSubmitting: false,
+      errors: action.message,
+    })),
     on(routerNavigationAction, (state) => ({
       ...state,
       errors: null,

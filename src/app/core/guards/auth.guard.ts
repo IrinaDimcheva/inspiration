@@ -26,12 +26,9 @@ export class AuthGuard {
     | Observable<boolean | UrlTree>
     | Promise<boolean | UrlTree> {
     let stream$: Observable<IUser | null> = this.store.select(selectUser);
-    //  if (this.store.select(selectUser) === undefined) {
-    //     // stream$ = this.userService.getUserProfile();
-    //     stream$ = this.store.select(selectUser);
-    //   } else {
-    //     stream$ = this.store.select(selectUser);
-    //   }
+    if (this.store.select(selectUser) === null) {
+      stream$ = this.store.select(selectUser);
+    }
 
     return stream$.pipe(
       map((user: IUser) => {

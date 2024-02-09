@@ -14,7 +14,6 @@ import { PostModule } from './post/post.module';
 import { CoreModule } from './core/core.module';
 import { MaterialModule } from './material.module';
 import { NotFoundComponent } from './not-found/not-found.component';
-import * as authEffects from './user/+store/effects';
 
 @NgModule({
   declarations: [AppComponent, NotFoundComponent],
@@ -30,7 +29,7 @@ import * as authEffects from './user/+store/effects';
     StoreModule.forRoot({ router: routerReducer }, {}),
     StoreRouterConnectingModule.forRoot(),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() }),
-    EffectsModule.forRoot([authEffects]),
+    EffectsModule.forRoot(),
   ],
   providers: [Title],
   bootstrap: [AppComponent],

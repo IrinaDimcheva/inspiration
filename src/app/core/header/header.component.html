@@ -1,4 +1,5 @@
 <mat-toolbar color="primary" *ngIf="data$ | async as data">
+  {{ data.user | json }}
   <span>
     <a routerLink="/">Inspiration</a>
   </span>

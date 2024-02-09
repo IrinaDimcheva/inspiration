@@ -1,5 +1,5 @@
-<mat-card>
-  <form (ngSubmit)="loginHandler()" #f="ngForm" *ngIf="!isLoading">
+<mat-card *ngIf="data$ | async as data">
+  <form (ngSubmit)="loginHandler()" #f="ngForm" *ngIf="!data.isSubmitting">
     <div>
       <mat-form-field appearance="outline" [style.width.%]="100">
         <mat-label>Enter your email</mat-label>
@@ -10,12 +10,16 @@
           ngModel
           #email="ngModel"
           appEmailValidator
-          required>
+          required
+        />
       </mat-form-field>
       <span *ngIf="email.touched && email.errors?.['required']" class="error">
         Email is required!
       </span>
-      <span *ngIf="email.touched && email.errors?.['emailValidator']" class="error">
+      <span
+        *ngIf="email.touched && email.errors?.['emailValidator']"
+        class="error"
+      >
         Email is not valid!
       </span>
     </div>
@@ -31,20 +35,36 @@
           #password="ngModel"
           minlength="6"
           maxlength="35"
-          required>
+          required
+        />
       </mat-form-field>
-      <span *ngIf="password.touched && password.errors?.['required']" class="error">
+      <span
+        *ngIf="password.touched && password.errors?.['required']"
+        class="error"
+      >
         Password is required!
       </span>
-      <span *ngIf="password.touched && password.errors?.['minlength']" class="error">
+      <span
+        *ngIf="password.touched && password.errors?.['minlength']"
+        class="error"
+      >
         Password should be at least 6 characters.
       </span>
-      <span *ngIf="password.touched && password.errors?.['maxlength']" class="error">
+      <span
+        *ngIf="password.touched && password.errors?.['maxlength']"
+        class="error"
+      >
         Password shouldn't exceed 35 characters.
       </span>
     </div>
-    <button mat-raised-button color="primary" [disabled]="isLoading || f.invalid">Login</button>
+    <button
+      mat-raised-button
+      color="primary"
+      [disabled]="data.isSubmitting || f.invalid"
+    >
+      Login
+    </button>
   </form>
-  <mat-spinner *ngIf="isLoading"></mat-spinner>
+  <mat-spinner *ngIf="data.isSubmitting"></mat-spinner>
   <p>Don't have an account? <a routerLink="/user/register">Register now</a></p>
 </mat-card>
