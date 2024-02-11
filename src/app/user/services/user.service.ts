@@ -23,17 +23,8 @@ export class UserService {
 
   constructor(private http: HttpClient) {}
 
-  getUserProfile(): Observable<IUser> {
+  getUser(): Observable<IUser> {
     return this.http.get<IUser>(`/users/profile`);
-    // .pipe(
-    //   tap((user: IUser) => {
-    //     this.user$ = user;
-    //   }),
-    //   catchError(() => {
-    //     this.user$ = null;
-    //     return of(null);
-    //   })
-    // );
   }
 
   getFavorites(): Observable<IPost[]> {
@@ -42,24 +33,10 @@ export class UserService {
 
   register(data: IRegisterRequest): Observable<IUser> {
     return this.http.post<IUser>(`/register`, data);
-    // .pipe(
-    //   tap((user: IUser) => {
-    //     console.log(user);
-    //   }),
-    //   catchError((err) => {
-    //     console.log(err);
-    //     return of(null);
-    //   })
-    // );
   }
 
   login(data: any): Observable<IUser> {
     return this.http.post<IUser>(`/login`, data);
-    // .pipe(
-    //   tap((user) => {
-    //     this.user$ = user;
-    //   })
-    // );
   }
 
   logout() {

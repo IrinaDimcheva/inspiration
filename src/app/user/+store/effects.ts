@@ -75,3 +75,22 @@ export const redirectAfterLoginRequest = createEffect(
   },
   { functional: true, dispatch: false }
 );
+
+export const getUser = createEffect(
+  (actions$ = inject(Actions), userService = inject(UserService)) => {
+    return actions$.pipe(
+      ofType(authActions.getUser),
+      switchMap(() => {
+        return userService.getUser().pipe(
+          map((user: IUser) => {
+            return authActions.getUserSuccess({ user });
+          }),
+          catchError(() => {
+            return of(authActions.getUserFailure);
+          })
+        );
+      })
+    );
+  },
+  { functional: true }
+);

@@ -14,22 +14,31 @@ import { PostModule } from './post/post.module';
 import { CoreModule } from './core/core.module';
 import { MaterialModule } from './material.module';
 import { NotFoundComponent } from './not-found/not-found.component';
+import * as authEffects from './user/+store/effects';
 
 @NgModule({
   declarations: [AppComponent, NotFoundComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    AppRoutingModule,
     FormsModule,
     HttpClientModule,
     MaterialModule,
     CoreModule,
     PostModule,
-    StoreModule.forRoot({ router: routerReducer }, {}),
+    StoreModule.forRoot({}),
+    // StoreModule.forRoot({ router: routerReducer }),
+    AppRoutingModule,
     StoreRouterConnectingModule.forRoot(),
-    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() }),
-    EffectsModule.forRoot(),
+    StoreDevtoolsModule.instrument({
+      maxAge: 25,
+      logOnly: !isDevMode(),
+      autoPause: true,
+      trace: false,
+      traceLimit: 75,
+      connectInZone: true,
+    }),
+    EffectsModule.forRoot(authEffects),
   ],
   providers: [Title],
   bootstrap: [AppComponent],

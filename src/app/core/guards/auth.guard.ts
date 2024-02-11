@@ -5,13 +5,12 @@ import {
   RouterStateSnapshot,
   UrlTree,
 } from '@angular/router';
-import { Observable, of } from 'rxjs';
+import { Observable } from 'rxjs';
 import { tap, map } from 'rxjs/operators';
+import { Store } from '@ngrx/store';
 
 import { IUser } from '../../shared/interfaces';
-import { UserService } from '../../user/services/user.service';
-import { Store, select } from '@ngrx/store';
-import { selectErrors, selectUser } from 'src/app/user/+store/reducers';
+import { selectUser } from 'src/app/user/+store/reducers';
 
 @Injectable()
 export class AuthGuard {
@@ -20,15 +19,8 @@ export class AuthGuard {
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
-  ):
-    | boolean
-    | UrlTree
-    | Observable<boolean | UrlTree>
-    | Promise<boolean | UrlTree> {
-    let stream$: Observable<IUser | null> = this.store.select(selectUser);
-    if (this.store.select(selectUser) === null) {
-      stream$ = this.store.select(selectUser);
-    }
+  ): Observable<boolean | UrlTree> {
+    const stream$: Observable<IUser | null> = this.store.select(selectUser);
 
     return stream$.pipe(
       map((user: IUser) => {
@@ -39,7 +31,8 @@ export class AuthGuard {
         if (canContinue) {
           return;
         }
-        this.router.navigate(['']);
+        // this.router.navigate(['']);
+        this.router.navigateByUrl('/user/login');
         // this.router.navigateByUrl(this.router.url);
       })
     );

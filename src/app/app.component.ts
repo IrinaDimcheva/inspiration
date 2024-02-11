@@ -1,10 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ChildrenOutletContexts } from '@angular/router';
+import { Store } from '@ngrx/store';
 import {
   // slideInAnimation,
   fader,
 } from './animations';
-import { UserService } from './user/services/user.service';
+import { authActions } from './user/+store/actions';
 
 @Component({
   selector: 'app-root',
@@ -15,15 +16,12 @@ import { UserService } from './user/services/user.service';
     fader,
   ],
 })
-export class AppComponent {
-  // get canLoad() {
-  //   return this.userService.canLoad;
-  // }
+export class AppComponent implements OnInit {
+  constructor(public store: Store, private contexts: ChildrenOutletContexts) {}
 
-  constructor(
-    public userService: UserService,
-    private contexts: ChildrenOutletContexts
-  ) {}
+  ngOnInit(): void {
+    this.store.dispatch(authActions.getUser());
+  }
 
   getRouteAnimationData() {
     return this.contexts.getContext('primary')?.route?.snapshot?.data?.[

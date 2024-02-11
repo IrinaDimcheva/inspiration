@@ -1,5 +1,4 @@
 <mat-toolbar color="primary" *ngIf="data$ | async as data">
-  {{ data.user | json }}
   <span>
     <a routerLink="/">Inspiration</a>
   </span>
@@ -25,7 +24,7 @@
         <!-- <button mat-button href="/user/logout" (click)="logoutHandler()">Logout</button> -->
       </li>
     </ng-container>
-    <ng-container *ngIf="data.user === null">
+    <ng-container *ngIf="!data.user">
       <li>
         <a mat-button routerLink="/user/login" routerLinkActive="active"
           >Login</a
