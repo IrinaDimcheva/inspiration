@@ -6,6 +6,7 @@ import { filter, throttleTime } from 'rxjs/operators';
 import { Store } from '@ngrx/store';
 
 import { selectUser } from 'src/app/user/+store/reducers';
+import { authActions } from 'src/app/user/+store/actions';
 
 @Component({
   selector: 'app-header',
@@ -34,9 +35,7 @@ export class HeaderComponent implements OnInit {
       });
   }
 
-  // logoutHandler() {
-  //   this.userService.logout().subscribe(() => {
-  //     this.router.navigate(['/user/login']);
-  //   });
-  // }
+  logoutHandler() {
+    this.store.dispatch(authActions.logout());
+  }
 }

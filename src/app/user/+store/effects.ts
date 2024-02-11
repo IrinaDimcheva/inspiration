@@ -76,7 +76,7 @@ export const redirectAfterLoginRequest = createEffect(
   { functional: true, dispatch: false }
 );
 
-export const getUser = createEffect(
+export const getUserEffect = createEffect(
   (actions$ = inject(Actions), userService = inject(UserService)) => {
     return actions$.pipe(
       ofType(authActions.getUser),
@@ -93,4 +93,39 @@ export const getUser = createEffect(
     );
   },
   { functional: true }
+);
+
+export const logoutEffect = createEffect(
+  (actions$ = inject(Actions), userService = inject(UserService)) => {
+    return actions$.pipe(
+      ofType(authActions.logout),
+      switchMap(() => {
+        return userService.logout().pipe(
+          map(() => {
+            return authActions.logoutSuccess();
+          }),
+          catchError((errorResponse: HttpErrorResponse) => {
+            return of(
+              authActions.logoutFailure({
+                message: errorResponse.error.message,
+              })
+            );
+          })
+        );
+      })
+    );
+  },
+  { functional: true }
+);
+
+export const redirectAfterLogoutRequest = createEffect(
+  (actions$ = inject(Actions), router = inject(Router)) => {
+    return actions$.pipe(
+      ofType(authActions.logoutSuccess),
+      tap(() => {
+        router.navigateByUrl('/user/login');
+      })
+    );
+  },
+  { functional: true, dispatch: false }
 );

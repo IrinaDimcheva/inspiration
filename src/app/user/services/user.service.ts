@@ -41,6 +41,5 @@ export class UserService {
 
   logout() {
     return this.http.post(`/logout`, {});
-    // .pipe(tap(() => (this.user$ = null)));
   }
 }
