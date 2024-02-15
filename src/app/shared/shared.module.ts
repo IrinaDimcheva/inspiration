@@ -3,25 +3,19 @@ import { CommonModule } from '@angular/common';
 import { EmailValidatorDirective } from './email-validator.directive';
 import { ShortenTitlePipe } from './pipes/shorten-title.pipe';
 import { ShortenContentPipe } from './pipes/shorten-content.pipe';
-import { ErrorComponent } from './error/error.component';
-
-
+import { ErrorComponent } from './components/error/error.component';
+import { MaterialModule } from '../material.module';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
     EmailValidatorDirective,
     ShortenTitlePipe,
     ShortenContentPipe,
-    ErrorComponent
+    ErrorComponent,
   ],
-  imports: [
-    CommonModule
-  ],
-  exports: [
-    EmailValidatorDirective,
-    ShortenTitlePipe,
-    ShortenContentPipe,
-  ],
+  imports: [CommonModule, MaterialModule, ReactiveFormsModule],
+  exports: [EmailValidatorDirective, ShortenTitlePipe, ShortenContentPipe],
   // entryComponents: [ErrorComponent]
 })
-export class SharedModule { }
+export class SharedModule {}

@@ -1,83 +1,90 @@
-import { Component, OnInit } from '@angular/core';
-import { UntypedFormControl } from '@angular/forms';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { FormControl } from '@angular/forms';
 import {
-  map,
   startWith,
   debounceTime,
   switchMap,
   distinctUntilChanged,
+  mergeMap,
 } from 'rxjs/operators';
+import { Subscription, combineLatest } from 'rxjs';
+import { Store } from '@ngrx/store';
 import { PageEvent as PageEvent } from '@angular/material/paginator';
 
-import { IPost } from '../../../shared/interfaces';
-import { PostService } from '../../services/post.service';
+import { postActions } from '../../+store/actions';
+import {
+  selectError,
+  selectIsLoading,
+  selectPostsData,
+} from '../../+store/reducers';
 
 @Component({
   selector: 'app-post-list',
   templateUrl: './post-list.component.html',
   styleUrls: ['./post-list.component.css'],
 })
-export class PostListComponent implements OnInit {
-  postData: { posts: IPost[]; postCount: number; searchTitle: string };
-  postList: IPost[];
-  searchControl = new UntypedFormControl('');
-  totalPosts = 0;
-  postsPerPage = 5;
-  currentPage = 1;
+export class PostListComponent implements OnInit, OnDestroy {
+  data$ = combineLatest({
+    isLoading: this.store.select(selectIsLoading),
+    error: this.store.select(selectError),
+    posts: this.store.select(selectPostsData),
+  });
+
+  limit = 5;
+  page = 1;
   pageSizeOptions = [1, 2, 5, 10];
 
-  constructor(private postService: PostService) {}
+  searchControl = new FormControl('');
+
+  sub1$: Subscription;
+  sub2$: Subscription;
+
+  constructor(private store: Store) {}
 
   ngOnInit(): void {
-    this.searchControl.valueChanges
+    this.sub1$ = this.searchControl.valueChanges
       .pipe(
         startWith(''),
         debounceTime(300),
         distinctUntilChanged(),
-        switchMap((searchTitle) => {
-          return this.postService.loadPostList(
-            this.postsPerPage,
-            this.currentPage,
-            searchTitle
+        mergeMap((title) => {
+          this.store.dispatch(
+            postActions.getPosts({
+              limit: this.limit,
+              page: this.page,
+              title,
+            })
           );
-        }),
-        map(
-          (data: {
-            posts: IPost[];
-            postCount: number;
-            searchTitle: string;
-          }): void => {
-            this.postList = data.posts;
-            this.totalPosts = data.postCount;
-          }
-        )
+          return title;
+        })
       )
       .subscribe();
   }
 
   changePageHandler(pageData: PageEvent) {
-    this.currentPage = pageData.pageIndex + 1;
-    this.postsPerPage = pageData.pageSize;
-    this.searchControl.valueChanges
+    this.page = pageData.pageIndex + 1;
+    this.limit = pageData.pageSize;
+    this.sub2$ = this.searchControl.valueChanges
       .pipe(
         startWith(''),
-        switchMap((searchTitle) => {
-          return this.postService.loadPostList(
-            this.postsPerPage,
-            this.currentPage,
-            searchTitle
+        debounceTime(300),
+        distinctUntilChanged(),
+        switchMap((title) => {
+          this.store.dispatch(
+            postActions.getPosts({
+              limit: this.limit,
+              page: this.page,
+              title,
+            })
           );
+          return title;
         })
       )
-      .subscribe(
-        (data: {
-          posts: IPost[];
-          postCount: number;
-          searchTitle: string;
-        }): void => {
-          this.postList = data.posts;
-          this.totalPosts = data.postCount;
-        }
-      );
+      .subscribe();
+  }
+
+  ngOnDestroy(): void {
+    this.sub1$?.unsubscribe();
+    this.sub2$?.unsubscribe();
   }
 }

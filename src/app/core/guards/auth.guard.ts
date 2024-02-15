@@ -31,9 +31,7 @@ export class AuthGuard {
         if (canContinue) {
           return;
         }
-        // this.router.navigate(['']);
         this.router.navigateByUrl('/user/login');
-        // this.router.navigateByUrl(this.router.url);
       })
     );
   }

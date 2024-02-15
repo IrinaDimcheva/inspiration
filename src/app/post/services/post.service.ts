@@ -2,23 +2,27 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { IPost } from '../../shared/interfaces';
+import { IPostsResponse } from '../interfaces/posts-response.interface';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class PostService {
+  constructor(private http: HttpClient) {}
 
-  constructor(private http: HttpClient) { }
-
-  loadPostList(postsPerPage: number, currentPage: number, searchTitle: string = ''): Observable<IPost[]> | any {
-    return this.http.get<{ posts: Observable<IPost[]>, postsCount: number }>(`/posts`, {
+  getPosts(
+    limit: number,
+    page: number,
+    title: string = ''
+  ): Observable<IPostsResponse> {
+    return this.http.get<IPostsResponse>(`/posts`, {
       params: new HttpParams({
         fromObject: {
-          pagesize: postsPerPage,
-          page: currentPage,
-          title: searchTitle
-        }
-      })
+          limit,
+          page,
+          title,
+        },
+      }),
     });
   }
 
@@ -35,7 +39,7 @@ export class PostService {
   }
 
   deletePost(id: string): Observable<unknown> {
-    return this.http.delete(`/posts/${id}`)
+    return this.http.delete(`/posts/${id}`);
   }
 
   likePost(postId: string): Observable<IPost> {

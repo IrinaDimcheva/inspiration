@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { StoreModule } from '@ngrx/store';
-import { StoreRouterConnectingModule, routerReducer } from '@ngrx/router-store';
+import { StoreRouterConnectingModule } from '@ngrx/router-store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { EffectsModule } from '@ngrx/effects';
 
@@ -26,10 +26,10 @@ import * as authEffects from './user/+store/effects';
     MaterialModule,
     CoreModule,
     PostModule,
-    StoreModule.forRoot({}),
-    // StoreModule.forRoot({ router: routerReducer }),
     AppRoutingModule,
+    StoreModule.forRoot(),
     StoreRouterConnectingModule.forRoot(),
+    EffectsModule.forRoot(authEffects),
     StoreDevtoolsModule.instrument({
       maxAge: 25,
       logOnly: !isDevMode(),
@@ -38,7 +38,6 @@ import * as authEffects from './user/+store/effects';
       traceLimit: 75,
       connectInZone: true,
     }),
-    EffectsModule.forRoot(authEffects),
   ],
   providers: [Title],
   bootstrap: [AppComponent],

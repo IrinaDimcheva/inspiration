@@ -1,9 +1,4 @@
-import {
-  createFeature,
-  createFeatureSelector,
-  createReducer,
-  on,
-} from '@ngrx/store';
+import { createFeature, createReducer, on } from '@ngrx/store';
 import { IAuthState } from '../interfaces/auth-state';
 import { authActions } from './actions';
 import { routerNavigationAction } from '@ngrx/router-store';
@@ -63,12 +58,13 @@ const authFeature = createFeature({
       isLoading: false,
       user: null,
     })),
+    on(authActions.logout, (state) => ({
+      ...state,
+      ...initialState,
+    })),
     on(routerNavigationAction, (state) => ({
       ...state,
       errors: null,
-    })),
-    on(authActions.logout, (state) => ({
-      ...initialState,
     }))
   ),
 });

@@ -1,16 +1,27 @@
-<form>
+<ng-container *ngIf="data$ | async as data">
   <mat-form-field appearance="outline" [style.width.%]="100">
-    <input matInput type="text" placeholder="Search" [formControl]="searchControl">
+    <input
+      matInput
+      type="text"
+      placeholder="Search"
+      [formControl]="searchControl"
+    />
   </mat-form-field>
-</form>
-<mat-card *ngIf="postList">
-  <app-post-list-item *ngFor="let post of postList" [post]="post"></app-post-list-item>
-  <p class="info-text" *ngIf="postList?.length === 0">No posts added yet!</p>
-</mat-card>
-<mat-paginator
-  [length]="totalPosts"
-  [pageSize]="postsPerPage"
-  [pageSizeOptions]="pageSizeOptions"
-  *ngIf="postList?.length > 0"
-  (page)="changePageHandler($event)"></mat-paginator>
-<mat-spinner *ngIf="!postList"></mat-spinner>
+  <mat-card *ngIf="data.posts">
+    <app-post-list-item
+      *ngFor="let post of data.posts.posts"
+      [post]="post"
+    ></app-post-list-item>
+    <p class="info-text" *ngIf="data.posts.posts.length === 0">
+      No posts added yet!
+    </p>
+  </mat-card>
+  <mat-paginator
+    [length]="data.posts.postCount"
+    [pageSize]="limit"
+    [pageSizeOptions]="pageSizeOptions"
+    *ngIf="data.posts?.postCount > 0"
+    (page)="changePageHandler($event)"
+  ></mat-paginator>
+  <mat-spinner *ngIf="data.isLoading"></mat-spinner>
+</ng-container>
