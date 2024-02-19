@@ -1,11 +1,18 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Params, Router } from '@angular/router';
-import { mergeMap, tap } from 'rxjs/operators';
+import { ActivatedRoute, Router } from '@angular/router';
+import { combineLatest } from 'rxjs';
+import { filter, map } from 'rxjs/operators';
 import { Store } from '@ngrx/store';
 
-import { IPost, IUser } from 'src/app/shared/interfaces';
+import { IUser } from 'src/app/shared/interfaces';
 import { PostService } from '../../services/post.service';
 import { selectUser } from 'src/app/user/+store/reducers';
+import { postActions } from '../../+store/actions';
+import {
+  selectError,
+  selectIsLoading,
+  selectPostData,
+} from '../../+store/reducers';
 
 @Component({
   selector: 'app-post-detail',
@@ -13,20 +20,42 @@ import { selectUser } from 'src/app/user/+store/reducers';
   styleUrls: ['./post-detail.component.css'],
 })
 export class PostDetailComponent implements OnInit {
-  post!: IPost;
-  user: IUser;
-  id: string;
-  isLoading = false;
-  isAuthor: boolean;
-  canLike: boolean;
-  foundPost: IPost | boolean;
+  id = this.route.snapshot.paramMap.get('postId') ?? '';
+
+  canLike$ = combineLatest({
+    post: this.store.select(selectPostData),
+    user: this.store
+      .select(selectUser)
+      .pipe(filter((user): user is IUser | null => user !== undefined)),
+  }).pipe(
+    map(({ post, user }) => {
+      return post?.likes?.includes(user?._id);
+    })
+  );
+  isAuthor$ = combineLatest({
+    post: this.store.select(selectPostData),
+    user: this.store
+      .select(selectUser)
+      .pipe(filter((user): user is IUser | null => user !== undefined)),
+  }).pipe(
+    map(({ post, user }) => {
+      if (!post || !user) {
+        return false;
+      }
+      return post.userId._id === user._id;
+    })
+  );
+  data$ = combineLatest({
+    post: this.store.select(selectPostData),
+    isLoading: this.store.select(selectIsLoading),
+    error: this.store.select(selectError),
+    isAuthor: this.isAuthor$,
+    canLike: this.canLike$,
+    isLogged: this.store.select(selectUser),
+  });
+
+  // foundPost: IPost | boolean;
   status = '';
-  get isLogged() {
-    return this.store.select(selectUser);
-  }
-  // get userId() {
-  //   return this.userService.userId;
-  // }
 
   constructor(
     public postService: PostService,
@@ -36,37 +65,23 @@ export class PostDetailComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.route.params
-      .pipe(
-        tap((params: Params) => {
-          this.id = params['id'];
-          this.isLoading = true;
-        }),
-        mergeMap((params) => {
-          return this.postService.loadPostById(params['id']);
-        })
-      )
-      .subscribe({
-        next: (post) => {
-          this.isLoading = false;
-          this.post = post;
-          // this.isAuthor = post.userId._id === this.userId;
-          // this.canLike = !post.likes.includes(this.userId);
-          // this.userService
-          //   .getFavorites()
-          //   .pipe(
-          //     tap((posts) => {
-          //       this.foundPost = posts.find((post) => post._id === this.id);
-          //     })
-          //   )
-          //   .subscribe();
-          // console.log(this.foundPost?.['_id']);
-        },
-        error: (err) => {
-          this.isLoading = false;
-          console.error(err);
-        },
-      });
+    this.store.dispatch(postActions.getPost({ postId: this.id }));
+
+    // this.userService
+    //   .getFavorites()
+    //   .pipe(
+    //     tap((posts) => {
+    //       this.foundPost = posts.find((post) => post._id === this.id);
+    //     })
+    //   )
+    //   .subscribe();
+    // console.log(this.foundPost?.['_id']);
+    //   },
+    //   error: (err) => {
+    //     this.isLoading = false;
+    //     console.error(err);
+    //   },
+    // });
   }
 
   deleteHandler() {
@@ -78,34 +93,34 @@ export class PostDetailComponent implements OnInit {
   }
 
   addToFavoritesHandler() {
-    this.postService.addToFavorites(this.id).subscribe({
-      next: () => {
-        this.status = 'Add to Favorites successful';
-        this.foundPost = true;
-        setTimeout(() => {
-          this.status = '';
-        }, 1200);
-      },
-    });
+    // this.postService.addToFavorites(this.id).subscribe({
+    //   next: () => {
+    //     this.status = 'Add to Favorites successful';
+    //     this.foundPost = true;
+    //     setTimeout(() => {
+    //       this.status = '';
+    //     }, 1200);
+    //   },
+    // });
   }
 
   removeFromFavoritesHandler() {
-    this.postService.removeFromFavorites(this.id).subscribe({
-      next: () => {
-        this.status = 'Remove from Favorites successful';
-        this.foundPost = false;
-        setTimeout(() => {
-          this.status = '';
-        }, 1200);
-      },
-    });
+    // this.postService.removeFromFavorites(this.id).subscribe({
+    //   next: () => {
+    //     this.status = 'Remove from Favorites successful';
+    //     this.foundPost = false;
+    //     setTimeout(() => {
+    //       this.status = '';
+    //     }, 1200);
+    //   },
+    // });
   }
 
   likeHandler() {
-    this.postService.likePost(this.id).subscribe(() => {
-      this.canLike = false;
-      this.reloadCurrentRoute();
-    });
+    // this.postService.likePost(this.id).subscribe(() => {
+    //   this.canLike = false;
+    //   this.reloadCurrentRoute();
+    // });
   }
 
   reloadCurrentRoute() {

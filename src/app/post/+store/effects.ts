@@ -1,23 +1,25 @@
 import { inject } from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
-import { catchError, map, of, switchMap } from 'rxjs';
+import { catchError, map, of, switchMap, tap } from 'rxjs';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { PostService } from '../services/post.service';
 import { postActions } from './actions';
-import { IPostsResponse } from '../interfaces/posts-response.interface';
+import { IPost } from 'src/app/shared/interfaces';
+import { PostService } from '../services/post.service';
 
-export const postEffects = createEffect(
+export const getPostEffect = createEffect(
   (actions$ = inject(Actions), postService = inject(PostService)) => {
     return actions$.pipe(
-      ofType(postActions.getPosts),
-      switchMap(({ limit, page, title }) => {
-        return postService.getPosts(limit, page, title).pipe(
-          map((posts: IPostsResponse) => {
-            return postActions.getPostsSuccess({ posts });
+      ofType(postActions.getPost),
+      switchMap(({ postId }) => {
+        return postService.loadPostById(postId).pipe(
+          tap(console.log),
+          map((post: IPost) => {
+            return postActions.getPostSuccess({ post });
           }),
+          tap(console.log),
           catchError((errorResponse: HttpErrorResponse) => {
             return of(
-              postActions.getPostsFailure({
+              postActions.getPostFailure({
                 message: errorResponse.error.message,
               })
             );

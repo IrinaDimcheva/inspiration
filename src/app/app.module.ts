@@ -10,7 +10,7 @@ import { EffectsModule } from '@ngrx/effects';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { PostModule } from './post/post.module';
+import { PostsModule } from './posts/posts.module';
 import { CoreModule } from './core/core.module';
 import { MaterialModule } from './material.module';
 import { NotFoundComponent } from './not-found/not-found.component';
@@ -25,7 +25,7 @@ import * as authEffects from './user/+store/effects';
     HttpClientModule,
     MaterialModule,
     CoreModule,
-    PostModule,
+    PostsModule,
     AppRoutingModule,
     StoreModule.forRoot(),
     StoreRouterConnectingModule.forRoot(),

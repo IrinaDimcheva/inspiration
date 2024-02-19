@@ -1,52 +1,56 @@
-<mat-card class="detail" *ngIf="post">
-  <mat-card-header>
-    <div mat-card-avatar class="avatar-image">
-      <img
-        mat-card-avatar
-        src="../../../assets/images/profile-icon-material-design-hd-png-download.png"
-      />
+<mat-card class="detail" *ngIf="data$ | async as data">
+  <mat-spinner *ngIf="data.post === undefined"></mat-spinner>
+  <ng-container *ngIf="data.post">
+    <mat-card-header>
+      <div mat-card-avatar class="avatar-image">
+        <img
+          mat-card-avatar
+          src="../../../assets/images/profile-icon-material-design-hd-png-download.png"
+        />
+      </div>
+      <mat-card-title>{{ data.post.title }}</mat-card-title>
+      <mat-card-subtitle
+        >Author {{ data.post.userId.username | titlecase }}, posted on
+        {{
+          data.post.created_at | date : "d MMM y, HH:mm:ss"
+        }}</mat-card-subtitle
+      >
+    </mat-card-header>
+    <div class="post-image">
+      <img mat-card-image [src]="data.post.imageUrl" [alt]="data.post.title" />
     </div>
-    <mat-card-title>{{ post.title }}</mat-card-title>
-    <mat-card-subtitle
-      >Author {{ post.userId.username | titlecase }}, posted on
-      {{ post.created_at | date : "d MMM y, HH:mm:ss" }}</mat-card-subtitle
-    >
-  </mat-card-header>
-  <div class="post-image">
-    <img mat-card-image [src]="post.imageUrl" [alt]="post.title" />
-  </div>
-  <mat-card-content>
-    <p>{{ post.content }}</p>
-    <span class="tag">#{{ post.tag }}</span>
-  </mat-card-content>
-  <mat-action-row>
-    <button
+    <mat-card-content>
+      <p>{{ data.post.content }}</p>
+      <span class="tag">#{{ data.post.tag }}</span>
+    </mat-card-content>
+    <mat-action-row>
+      <button
+        mat-button
+        color="primary"
+        *ngIf="data.isLogged"
+        [disabled]="!data.canLike"
+        (click)="likeHandler()"
+      >
+        <span class="material-icons"> thumb_up </span>
+      </button>
+      <span class="likes">{{ data.post.likes.length }} likes</span>
+      <a
+        mat-button
+        color="primary"
+        *ngIf="data.isLogged"
+        [routerLink]="['/posts', data.post._id, 'comments', 'new']"
+        >Add Comment</a
+      >
+      <a
+        mat-button
+        color="primary"
+        [routerLink]="['/posts', data.post._id, 'comments']"
+        >{{ data.post.comments.length }} Comments</a
+      >
+      <!-- <button
       mat-button
       color="primary"
-      *ngIf="isLogged"
-      [disabled]="!canLike"
-      (click)="likeHandler()"
-    >
-      <span class="material-icons"> thumb_up </span>
-    </button>
-    <span class="likes">{{ post.likes.length }} likes</span>
-    <a
-      mat-button
-      color="primary"
-      *ngIf="isLogged"
-      [routerLink]="['/posts', post._id, 'comments', 'new']"
-      >Add Comment</a
-    >
-    <a
-      mat-button
-      color="primary"
-      [routerLink]="['/posts', post._id, 'comments']"
-      >{{ post.comments.length }} Comments</a
-    >
-    <button
-      mat-button
-      color="primary"
-      *ngIf="isLogged && !foundPost"
+      *ngIf="data.isLogged && !foundPost"
       (click)="addToFavoritesHandler()"
     >
       To Favorites
@@ -54,31 +58,31 @@
     <button
       mat-button
       color="primary"
-      *ngIf="isLogged && foundPost"
+      *ngIf="data.isLogged && foundPost"
       (click)="removeFromFavoritesHandler()"
     >
       Remove from Favorites
-    </button>
-    <span class="spacer"></span>
-    <button
-      mat-button
-      color="primary"
-      *ngIf="isLogged && isAuthor"
-      [routerLink]="['/posts', post._id, 'edit']"
-    >
-      EDIT
-    </button>
-    <button
-      mat-button
-      color="warn"
-      type="button"
-      *ngIf="isLogged && isAuthor"
-      (click)="deleteHandler()"
-      routerLink="/posts"
-    >
-      DELETE
-    </button>
-  </mat-action-row>
-  <div class="info" *ngIf="status">{{ status }}</div>
+    </button> -->
+      <span class="spacer"></span>
+      <button
+        mat-button
+        color="primary"
+        *ngIf="data.isLogged && data.isAuthor"
+        [routerLink]="['/posts', data.post._id, 'edit']"
+      >
+        EDIT
+      </button>
+      <button
+        mat-button
+        color="warn"
+        type="button"
+        *ngIf="data.isLogged && data.isAuthor"
+        (click)="deleteHandler()"
+        routerLink="/posts"
+      >
+        DELETE
+      </button>
+    </mat-action-row>
+    <div class="info" *ngIf="status">{{ status }}</div>
+  </ng-container>
 </mat-card>
-<mat-spinner *ngIf="!post"></mat-spinner>

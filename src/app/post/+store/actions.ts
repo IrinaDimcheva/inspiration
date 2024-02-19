@@ -1,15 +1,11 @@
 import { createActionGroup, props } from '@ngrx/store';
-import { IPostsResponse } from '../interfaces/posts-response.interface';
+import { IPost } from 'src/app/shared/interfaces';
 
 export const postActions = createActionGroup({
   source: 'post',
   events: {
-    'Get posts': props<{
-      limit: number;
-      page: number;
-      title: string;
-    }>(),
-    'Get posts success': props<{ posts: IPostsResponse }>(),
-    'Get posts failure': props<{ message: string }>(),
+    'Get post': props<{ postId: string }>(),
+    'Get post success': props<{ post: IPost }>(),
+    'Get post failure': props<{ message: string }>(),
   },
 });

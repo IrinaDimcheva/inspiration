@@ -2,19 +2,10 @@ import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from '../core/guards/auth.guard';
 import { PostCreateComponent } from './components/post-create/post-create.component';
 import { PostDetailComponent } from './components/post-detail/post-detail.component';
-import { PostListComponent } from './components/post-list/post-list.component';
 
 const routes: Routes = [
   {
-    path: 'posts',
-    canActivate: [AuthGuard],
-    component: PostListComponent,
-    data: {
-      title: 'Inspiration | Posts',
-    },
-  },
-  {
-    path: 'posts/new',
+    path: 'new',
     canActivate: [AuthGuard],
     component: PostCreateComponent,
     data: {
@@ -24,7 +15,7 @@ const routes: Routes = [
     },
   },
   {
-    path: 'posts/:id',
+    path: ':postId',
     canActivate: [AuthGuard],
     component: PostDetailComponent,
     data: {
@@ -33,7 +24,7 @@ const routes: Routes = [
     },
   },
   {
-    path: 'posts/:id/edit',
+    path: ':postId/edit',
     canActivate: [AuthGuard],
     component: PostCreateComponent,
     data: {

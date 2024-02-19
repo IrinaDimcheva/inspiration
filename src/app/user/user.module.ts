@@ -14,6 +14,7 @@ import { SharedModule } from '../shared/shared.module';
 import { FavoritesComponent } from './components/favorites/favorites.component';
 import * as authEffects from './+store/effects';
 import { authFeatureKey, authReducer } from './+store/reducers';
+import { PostsModule } from '../posts/posts.module';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { authFeatureKey, authReducer } from './+store/reducers';
     ReactiveFormsModule,
     UserRoutingModule,
     PostModule,
+    PostsModule,
     SharedModule,
     StoreModule.forFeature(authFeatureKey, authReducer),
     EffectsModule.forFeature(authEffects),

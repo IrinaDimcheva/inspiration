@@ -26,6 +26,10 @@ const routes: Routes = [
     loadChildren: () => import('./user/user.module').then((m) => m.UserModule),
   },
   {
+    path: 'posts',
+    loadChildren: () => import('./post/post.module').then((m) => m.PostModule),
+  },
+  {
     path: 'posts/:id/comments',
     loadChildren: () =>
       import('./comment/comment.module').then((m) => m.CommentModule),
