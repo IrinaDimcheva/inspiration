@@ -38,7 +38,20 @@ const postFeature = createFeature({
       isSubmitting: false,
       errors: action.message,
     })),
-    on(routerNavigationAction, () => initialState)
+    on(postActions.updatePost, (state) => ({
+      ...state,
+      isSubmitting: true,
+    })),
+    on(postActions.updatePostSuccess, (state) => ({
+      ...state,
+      isSubmitting: false,
+    })),
+    on(postActions.updatePostFailure, (state, action) => ({
+      ...state,
+      isSubmitting: false,
+      errors: action.message,
+    }))
+    // on(routerNavigationAction, () => initialState)
   ),
 });
 

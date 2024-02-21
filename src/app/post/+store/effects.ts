@@ -66,3 +66,38 @@ export const redirectAfterCreateEffect = createEffect(
   },
   { functional: true, dispatch: false }
 );
+
+export const updatePostEffect = createEffect(
+  (actions$ = inject(Actions), postService = inject(PostService)) => {
+    return actions$.pipe(
+      ofType(postActions.updatePost),
+      switchMap(({ request, postId }) => {
+        return postService.editPost(postId, request).pipe(
+          map((post: IPost) => {
+            return postActions.updatePostSuccess({ post });
+          }),
+          catchError((errorResponse: HttpErrorResponse) => {
+            return of(
+              postActions.updatePostFailure({
+                message: errorResponse.error.message,
+              })
+            );
+          })
+        );
+      })
+    );
+  },
+  { functional: true }
+);
+
+export const redirectAfterUpdateEffect = createEffect(
+  (actions$ = inject(Actions), router = inject(Router)) => {
+    return actions$.pipe(
+      ofType(postActions.updatePostSuccess),
+      tap(({ post }) => {
+        router.navigate(['/posts', post._id]);
+      })
+    );
+  },
+  { functional: true, dispatch: false }
+);

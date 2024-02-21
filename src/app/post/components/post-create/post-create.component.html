@@ -1,9 +1,15 @@
 <mat-card *ngIf="data$ | async as data">
-  <mat-spinner *ngIf="isLoading"></mat-spinner>
-  <form [formGroup]="form" (ngSubmit)="createHandler()" *ngIf="!isLoading">
+  <mat-spinner *ngIf="data.isLoading"></mat-spinner>
+  <form [formGroup]="form" (ngSubmit)="createHandler()">
     <mat-form-field appearance="outline" [style.width.%]="100">
       <mat-label>Post Title</mat-label>
-      <input matInput type="text" name="title" formControlName="title" />
+      <input
+        matInput
+        type="text"
+        name="title"
+        formControlName="title"
+        [(ngModel)]="data?.initialValues.title"
+      />
     </mat-form-field>
     <span
       *ngIf="form.get('title').touched && form.get('title').errors?.['required']"
@@ -25,7 +31,13 @@
     </span>
     <mat-form-field appearance="outline" [style.width.%]="100">
       <mat-label>Post Image</mat-label>
-      <input matInput type="text" name="imageUrl" formControlName="imageUrl" />
+      <input
+        matInput
+        type="text"
+        name="imageUrl"
+        formControlName="imageUrl"
+        [(ngModel)]="data.initialValues.imageUrl"
+      />
       <img [src]="form.value.imageUrl" />
     </mat-form-field>
     <span
@@ -47,6 +59,7 @@
         rows="10"
         name="content"
         formControlName="content"
+        [(ngModel)]="data.initialValues.content"
       ></textarea>
     </mat-form-field>
     <span
@@ -69,7 +82,13 @@
     </span>
     <mat-form-field appearance="outline" [style.width.%]="100">
       <mat-label>Category</mat-label>
-      <select matNativeControl name="tag" required formControlName="tag">
+      <select
+        matNativeControl
+        name="tag"
+        required
+        formControlName="tag"
+        [(ngModel)]="data.initialValues.tag"
+      >
         <option *ngFor="let tag of tagList" [ngValue]="tag">
           {{ tag }}
         </option>
@@ -98,7 +117,7 @@
         type="submit"
         mat-raised-button
         color="primary"
-        [disabled]="isLoading || form.invalid"
+        [disabled]="data.isSubmitting || form.invalid"
       >
         Edit
       </button>

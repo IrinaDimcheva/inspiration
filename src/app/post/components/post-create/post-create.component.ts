@@ -1,15 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { combineLatest, filter, map } from 'rxjs';
+import { Store, select } from '@ngrx/store';
 
 import { IPost } from '../../../shared/interfaces';
-import { PostService } from '../../services/post.service';
-import { Store } from '@ngrx/store';
 import { selectUser } from 'src/app/user/+store/reducers';
-import { combineLatest } from 'rxjs';
-import { selectIsSubmitting, selectPostData } from '../../+store/reducers';
+import {
+  selectIsLoading,
+  selectIsSubmitting,
+  selectPostData,
+} from '../../+store/reducers';
 import { postActions } from '../../+store/actions';
-import { ICreatePost } from '../../interfaces/create-post';
+import { IPostRequest } from '../../interfaces/post-request';
 
 @Component({
   selector: 'app-post-create',
@@ -17,11 +20,9 @@ import { ICreatePost } from '../../interfaces/create-post';
   styleUrls: ['./post-create.component.css'],
 })
 export class PostCreateComponent implements OnInit {
-  post: IPost | any;
   form: FormGroup;
-  isLoading = false;
   isEditMode = false;
-  postId: string;
+  postId: string = this.route.snapshot.params['id'];
   tagList: string[] = [
     'art',
     'books',
@@ -43,14 +44,27 @@ export class PostCreateComponent implements OnInit {
     'wildlife',
     'work',
   ];
+  initialValues$ = this.store.pipe(
+    select(selectPostData),
+    filter((post): post is IPost => post !== null),
+    map((post: IPost) => {
+      return {
+        title: post.title,
+        content: post.content,
+        imageUrl: post.imageUrl,
+        tag: post.tag,
+      };
+    })
+  );
   data$ = combineLatest({
     post: this.store.select(selectPostData),
     isSubmitting: this.store.select(selectIsSubmitting),
+    isLoading: this.store.select(selectIsLoading),
     isLogged: this.store.select(selectUser),
+    initialValues: this.initialValues$,
   });
 
   constructor(
-    private postService: PostService,
     private store: Store,
     private router: Router,
     private route: ActivatedRoute,
@@ -78,28 +92,9 @@ export class PostCreateComponent implements OnInit {
       imageUrl: ['', [Validators.required, Validators.pattern('^https*://.+')]],
       tag: ['', [Validators.required]],
     });
-    this.postId = this.route.snapshot.params['id'];
     if (this.postId) {
       this.isEditMode = true;
-      this.isLoading = true;
-      this.postService.loadPostById(this.postId).subscribe({
-        next: (postData) => {
-          this.isLoading = false;
-          this.post = {
-            title: postData.title,
-            content: postData.content,
-            imageUrl: postData.imageUrl,
-            tag: postData.tag,
-          };
-          setTimeout(() => {
-            this.form.patchValue(this.post);
-          });
-        },
-        error: (err) => {
-          console.error(err);
-          this.isLoading = false;
-        },
-      });
+      this.store.dispatch(postActions.getPost({ postId: this.postId }));
     } else {
       this.isEditMode = false;
       this.postId = null;
@@ -110,8 +105,7 @@ export class PostCreateComponent implements OnInit {
     if (this.form.invalid) {
       return;
     }
-    // this.isLoading = true;
-    const post: ICreatePost = {
+    const post: IPostRequest = {
       title: this.form.value.title,
       content: this.form.value.content,
       imageUrl: this.form.value.imageUrl,
@@ -119,17 +113,10 @@ export class PostCreateComponent implements OnInit {
     };
     if (!this.isEditMode) {
       this.store.dispatch(postActions.createPost({ post }));
-      // } else {
-      //   this.postService.editPost(this.postId, post).subscribe({
-      //     next: () => {
-      //       this.isLoading = false;
-      //       this.router.navigate(['../'], { relativeTo: this.route });
-      //     },
-      //     error: (err) => {
-      //       this.isLoading = false;
-      //       console.error(err);
-      //     },
-      //   });
+    } else {
+      this.store.dispatch(
+        postActions.updatePost({ request: post, postId: this.postId })
+      );
     }
     this.form.reset();
   }

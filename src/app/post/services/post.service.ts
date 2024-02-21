@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { IPost } from '../../shared/interfaces';
-import { ICreatePost } from '../interfaces/create-post';
+import { IPostRequest } from '../interfaces/post-request';
 
 @Injectable({
   providedIn: 'root',
@@ -14,16 +14,16 @@ export class PostService {
     return this.http.get<IPost>(`/posts/${postId}`);
   }
 
-  editPost(id: string, post: IPost): Observable<IPost> {
-    return this.http.put<IPost>(`/posts/${id}`, post);
+  editPost(postId: string, post: IPostRequest): Observable<IPost> {
+    return this.http.put<IPost>(`/posts/${postId}`, post);
   }
 
-  addPost(post: ICreatePost): Observable<IPost> {
+  addPost(post: IPostRequest): Observable<IPost> {
     return this.http.post<IPost>(`/posts`, post);
   }
 
-  deletePost(id: string): Observable<unknown> {
-    return this.http.delete(`/posts/${id}`);
+  deletePost(postId: string): Observable<unknown> {
+    return this.http.delete(`/posts/${postId}`);
   }
 
   likePost(postId: string): Observable<IPost> {

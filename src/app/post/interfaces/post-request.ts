@@ -1,4 +1,4 @@
-export interface ICreatePost {
+export interface IPostRequest {
   title: string;
   tag: string;
   content: string;

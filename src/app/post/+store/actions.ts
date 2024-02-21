@@ -1,6 +1,6 @@
 import { createActionGroup, props } from '@ngrx/store';
 import { IPost } from 'src/app/shared/interfaces';
-import { ICreatePost } from '../interfaces/create-post';
+import { IPostRequest } from '../interfaces/post-request';
 
 export const postActions = createActionGroup({
   source: 'post',
@@ -9,8 +9,12 @@ export const postActions = createActionGroup({
     'Get post success': props<{ post: IPost }>(),
     'Get post failure': props<{ message: string }>(),
 
-    'Create post': props<{ post: ICreatePost }>(),
+    'Create post': props<{ post: IPostRequest }>(),
     'Create post success': props<{ post: IPost }>(),
     'Create post failure': props<{ message: string }>(),
+
+    'Update post': props<{ request: IPostRequest; postId: string }>(),
+    'Update post success': props<{ post: IPost }>(),
+    'Update post failure': props<{ message: string }>(),
   },
 });
