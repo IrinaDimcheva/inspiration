@@ -9,7 +9,7 @@ import { PostService } from '../../services/post.service';
 import { selectUser } from 'src/app/user/+store/reducers';
 import { postActions } from '../../+store/actions';
 import {
-  selectError,
+  selectErrors,
   selectIsLoading,
   selectPostData,
 } from '../../+store/reducers';
@@ -48,7 +48,7 @@ export class PostDetailComponent implements OnInit {
   data$ = combineLatest({
     post: this.store.select(selectPostData),
     isLoading: this.store.select(selectIsLoading),
-    error: this.store.select(selectError),
+    error: this.store.select(selectErrors),
     isAuthor: this.isAuthor$,
     canLike: this.canLike$,
     isLogged: this.store.select(selectUser),

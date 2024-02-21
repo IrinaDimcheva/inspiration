@@ -5,7 +5,7 @@ import { PostDetailComponent } from './components/post-detail/post-detail.compon
 
 const routes: Routes = [
   {
-    path: 'new',
+    path: 'posts/new',
     canActivate: [AuthGuard],
     component: PostCreateComponent,
     data: {
@@ -15,7 +15,7 @@ const routes: Routes = [
     },
   },
   {
-    path: ':postId',
+    path: 'posts/:postId',
     canActivate: [AuthGuard],
     component: PostDetailComponent,
     data: {
@@ -24,7 +24,7 @@ const routes: Routes = [
     },
   },
   {
-    path: ':postId/edit',
+    path: 'posts/:postId/edit',
     canActivate: [AuthGuard],
     component: PostCreateComponent,
     data: {

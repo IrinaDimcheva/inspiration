@@ -1,11 +1,12 @@
 import { createFeature, createReducer, on } from '@ngrx/store';
 import { postActions } from './actions';
 import { routerNavigationAction } from '@ngrx/router-store';
-import { IPostState } from '../interfaces/post-state.interface copy';
+import { IPostState } from '../interfaces/post-state.interface';
 
 const initialState: IPostState = {
+  isSubmitting: false,
   isLoading: false,
-  error: null,
+  errors: null,
   data: null,
 };
 
@@ -22,7 +23,20 @@ const postFeature = createFeature({
     on(postActions.getPostFailure, (state, action) => ({
       ...state,
       isLoading: false,
-      error: action.message,
+      errors: action.message,
+    })),
+    on(postActions.createPost, (state) => ({
+      ...state,
+      isSubmitting: true,
+    })),
+    on(postActions.createPostSuccess, (state) => ({
+      ...state,
+      isSubmitting: false,
+    })),
+    on(postActions.createPostFailure, (state, action) => ({
+      ...state,
+      isSubmitting: false,
+      errors: action.message,
     })),
     on(routerNavigationAction, () => initialState)
   ),
@@ -31,7 +45,8 @@ const postFeature = createFeature({
 export const {
   name: postFeatureKey,
   reducer: postReducer,
+  selectIsSubmitting,
   selectIsLoading,
-  selectError,
+  selectErrors,
   selectData: selectPostData,
 } = postFeature;

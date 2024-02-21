@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { IPost } from '../../shared/interfaces';
+import { ICreatePost } from '../interfaces/create-post';
 
 @Injectable({
   providedIn: 'root',
@@ -17,7 +18,7 @@ export class PostService {
     return this.http.put<IPost>(`/posts/${id}`, post);
   }
 
-  addPost(post: IPost): Observable<IPost> {
+  addPost(post: ICreatePost): Observable<IPost> {
     return this.http.post<IPost>(`/posts`, post);
   }
 

@@ -1,36 +1,43 @@
-<mat-card>
+<mat-card *ngIf="data$ | async as data">
   <mat-spinner *ngIf="isLoading"></mat-spinner>
   <form [formGroup]="form" (ngSubmit)="createHandler()" *ngIf="!isLoading">
     <mat-form-field appearance="outline" [style.width.%]="100">
       <mat-label>Post Title</mat-label>
-      <input
-        matInput
-        type="text"
-        name="title"
-        formControlName="title">
+      <input matInput type="text" name="title" formControlName="title" />
     </mat-form-field>
-    <span *ngIf="form.get('title').touched && form.get('title').errors?.['required']" class="error">
+    <span
+      *ngIf="form.get('title').touched && form.get('title').errors?.['required']"
+      class="error"
+    >
       Please enter post title.
     </span>
-    <span *ngIf="form.get('title').touched && form.get('title').errors?.['minlength']" class="error">
+    <span
+      *ngIf="form.get('title').touched && form.get('title').errors?.['minlength']"
+      class="error"
+    >
       Post title should be at least 5 characters.
     </span>
-    <span *ngIf="form.get('title').touched && form.get('title').errors?.['maxlength']" class="error">
+    <span
+      *ngIf="form.get('title').touched && form.get('title').errors?.['maxlength']"
+      class="error"
+    >
       Post title shouldn't exceed 250 characters.
     </span>
     <mat-form-field appearance="outline" [style.width.%]="100">
       <mat-label>Post Image</mat-label>
-      <input
-        matInput
-        type="text"
-        name="imageUrl"
-        formControlName="imageUrl">
-      <img [src]="form.value.imageUrl">
+      <input matInput type="text" name="imageUrl" formControlName="imageUrl" />
+      <img [src]="form.value.imageUrl" />
     </mat-form-field>
-    <span *ngIf="form.get('imageUrl').touched && form.get('imageUrl').errors?.['required']" class="error">
+    <span
+      *ngIf="form.get('imageUrl').touched && form.get('imageUrl').errors?.['required']"
+      class="error"
+    >
       Please enter post image.
     </span>
-    <span *ngIf="form.get('imageUrl').touched && form.get('imageUrl').errors?.['pattern']" class="error">
+    <span
+      *ngIf="form.get('imageUrl').touched && form.get('imageUrl').errors?.['pattern']"
+      class="error"
+    >
       Image should start with 'http://' or 'https://'.
     </span>
     <mat-form-field appearance="outline" [style.width.%]="100">
@@ -39,32 +46,70 @@
         matInput
         rows="10"
         name="content"
-        formControlName="content"></textarea>
+        formControlName="content"
+      ></textarea>
     </mat-form-field>
-    <span *ngIf="form.get('content').touched && form.get('content').errors?.['required']" class="error">
+    <span
+      *ngIf="form.get('content').touched && form.get('content').errors?.['required']"
+      class="error"
+    >
       Please enter post content.
     </span>
-    <span *ngIf="form.get('content').touched && form.get('content').errors?.['minlength']" class="error">
+    <span
+      *ngIf="form.get('content').touched && form.get('content').errors?.['minlength']"
+      class="error"
+    >
       Post content should be at least 10 characters.
     </span>
-    <span *ngIf="form.get('content').touched && form.get('content').errors?.['maxlength']" class="error">
+    <span
+      *ngIf="form.get('content').touched && form.get('content').errors?.['maxlength']"
+      class="error"
+    >
       Post content shouldn't exceed 50000 characters.
     </span>
     <mat-form-field appearance="outline" [style.width.%]="100">
       <mat-label>Category</mat-label>
       <select matNativeControl name="tag" required formControlName="tag">
         <option *ngFor="let tag of tagList" [ngValue]="tag">
-          {{tag}}
+          {{ tag }}
         </option>
       </select>
     </mat-form-field>
     <ng-container *ngIf="!isEditMode">
-      <button type="submit" mat-raised-button color="primary" [disabled]="isLoading || form.invalid">Save</button>
-      <button type="button" mat-raised-button color="warn" (click)="resetForm()">Clear</button>
+      <button
+        type="submit"
+        mat-raised-button
+        color="primary"
+        [disabled]="data.isSubmitting || form.invalid"
+      >
+        Save
+      </button>
+      <button
+        type="button"
+        mat-raised-button
+        color="warn"
+        (click)="resetForm()"
+      >
+        Clear
+      </button>
     </ng-container>
     <ng-container *ngIf="isEditMode">
-      <button type="submit" mat-raised-button color="primary" [disabled]="isLoading || form.invalid">Edit</button>
-      <button type="button" mat-raised-button color="warn" (click)="cancelHandler()">Cancel</button>
+      <button
+        type="submit"
+        mat-raised-button
+        color="primary"
+        [disabled]="isLoading || form.invalid"
+      >
+        Edit
+      </button>
+      <button
+        type="button"
+        mat-raised-button
+        color="warn"
+        (click)="cancelHandler()"
+      >
+        Cancel
+      </button>
     </ng-container>
   </form>
 </mat-card>

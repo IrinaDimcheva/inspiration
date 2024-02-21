@@ -1,7 +1,8 @@
 import { IPost } from 'src/app/shared/interfaces';
 
 export interface IPostState {
+  isSubmitting: boolean;
   isLoading: boolean;
-  error: string | null;
+  errors: string | null;
   data: IPost | null;
 }
