@@ -22,7 +22,7 @@ export class PostService {
     return this.http.post<IPost>(`/posts`, post);
   }
 
-  deletePost(postId: string): Observable<unknown> {
+  deletePost(postId: string): Observable<{}> {
     return this.http.delete(`/posts/${postId}`);
   }
 

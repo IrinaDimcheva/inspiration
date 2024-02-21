@@ -51,7 +51,6 @@ const postFeature = createFeature({
       isSubmitting: false,
       errors: action.message,
     }))
-    // on(routerNavigationAction, () => initialState)
   ),
 });
 

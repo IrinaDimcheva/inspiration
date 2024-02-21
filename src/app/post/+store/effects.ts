@@ -101,3 +101,34 @@ export const redirectAfterUpdateEffect = createEffect(
   },
   { functional: true, dispatch: false }
 );
+
+export const deletePostEffect = createEffect(
+  (actions$ = inject(Actions), postService = inject(PostService)) => {
+    return actions$.pipe(
+      ofType(postActions.deletePost),
+      switchMap(({ postId }) => {
+        return postService.deletePost(postId).pipe(
+          map(() => {
+            return postActions.deletePostSuccess();
+          }),
+          catchError(() => {
+            return of(postActions.deletePostFailure());
+          })
+        );
+      })
+    );
+  },
+  { functional: true }
+);
+
+export const redirectAfterDeleteEffect = createEffect(
+  (actions$ = inject(Actions), router = inject(Router)) => {
+    return actions$.pipe(
+      ofType(postActions.deletePostSuccess),
+      tap(() => {
+        router.navigate['/'];
+      })
+    );
+  },
+  { functional: true, dispatch: false }
+);

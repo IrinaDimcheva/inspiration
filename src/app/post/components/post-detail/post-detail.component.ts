@@ -85,11 +85,7 @@ export class PostDetailComponent implements OnInit {
   }
 
   deleteHandler() {
-    this.postService.deletePost(this.id).subscribe({
-      next: () => {
-        this.router.navigate(['/']);
-      },
-    });
+    this.store.dispatch(postActions.deletePost({ postId: this.id }));
   }
 
   addToFavoritesHandler() {

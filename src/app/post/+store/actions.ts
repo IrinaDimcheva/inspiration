@@ -1,4 +1,4 @@
-import { createActionGroup, props } from '@ngrx/store';
+import { createActionGroup, emptyProps, props } from '@ngrx/store';
 import { IPost } from 'src/app/shared/interfaces';
 import { IPostRequest } from '../interfaces/post-request';
 
@@ -16,5 +16,9 @@ export const postActions = createActionGroup({
     'Update post': props<{ request: IPostRequest; postId: string }>(),
     'Update post success': props<{ post: IPost }>(),
     'Update post failure': props<{ message: string }>(),
+
+    'Delete post': props<{ postId: string }>(),
+    'Delete post success': emptyProps(),
+    'Delete post failure': emptyProps(),
   },
 });
