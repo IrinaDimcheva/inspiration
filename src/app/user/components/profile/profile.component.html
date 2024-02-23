@@ -1,19 +1,29 @@
-<mat-card>
-  <div class="image">
-    <img mat-card-image src="../../../assets/images/profile-icon-material-design-hd-png-download.png">
-  </div>
-  <div class="info">
-    <mat-card-title>{{user?.username | titlecase}}</mat-card-title>
-    <div>
-      <mat-card-subtitle>{{user?.email}}</mat-card-subtitle>
+<ng-container *ngIf="data$ | async as data">
+  <mat-card>
+    <div class="image">
+      <img
+        mat-card-image
+        src="../../../assets/images/profile-icon-material-design-hd-png-download.png"
+      />
     </div>
+    <div class="info">
+      <mat-card-title>{{ data.user.username | titlecase }}</mat-card-title>
+      <div>
+        <mat-card-subtitle>{{ data.user.email }}</mat-card-subtitle>
+      </div>
+    </div>
+  </mat-card>
+  <h2>My Posts</h2>
+  <mat-accordion multi="true" *ngIf="data?.user.posts">
+    <app-post-list-item
+      *ngFor="let post of data.user.posts"
+      [post]="post"
+    ></app-post-list-item>
+    <p class="info-text" *ngIf="data.user.posts.length === 0">
+      No posts added yet!
+    </p>
+  </mat-accordion>
+  <div class="spinner">
+    <mat-spinner *ngIf="!data.user.posts"></mat-spinner>
   </div>
-</mat-card>
-<h2>My Posts</h2>
-<mat-accordion multi="true" *ngIf="postList">
-  <app-post-list-item *ngFor="let post of postList" [post]="post"></app-post-list-item>
-  <p class="info-text" *ngIf="postList.length === 0">No posts added yet!</p>
-</mat-accordion>
-<div class="spinner">
-  <mat-spinner *ngIf="!postList"></mat-spinner>
-</div>
+</ng-container>

@@ -85,8 +85,12 @@ export const getUserEffect = createEffect(
           map((user: IUser) => {
             return authActions.getUserSuccess({ user });
           }),
-          catchError(() => {
-            return of(authActions.getUserFailure);
+          catchError((errorResponse: HttpErrorResponse) => {
+            return of(
+              authActions.getUserFailure({
+                message: errorResponse.error.message,
+              })
+            );
           })
         );
       })

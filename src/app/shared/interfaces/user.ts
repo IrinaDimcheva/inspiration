@@ -1,7 +1,10 @@
+import { IComment } from './comment';
+import { IPost } from './post';
+
 export interface IUser {
   favorites: string[];
-  posts: string[];
-  comments: string[];
+  posts: IPost[];
+  comments: IComment[];
   _id: string;
   email: string;
   username: string;

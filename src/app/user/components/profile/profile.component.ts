@@ -1,22 +1,17 @@
-import { Component, OnInit } from '@angular/core';
-import { IPost, IUser } from 'src/app/shared/interfaces';
-import { UserService } from '../../services/user.service';
+import { Component } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { combineLatest } from 'rxjs';
+import { selectUser } from '../../+store/reducers';
 
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.css'],
 })
-export class ProfileComponent implements OnInit {
-  user: IUser;
-  postList: IPost[];
+export class ProfileComponent {
+  data$ = combineLatest({
+    user: this.store.select(selectUser),
+  });
 
-  constructor(private userService: UserService) {}
-
-  ngOnInit(): void {
-    // this.userService.getUserProfile().subscribe((user) => {
-    //   this.user = user;
-    //   this.postList = user.posts.filter((x) => x.userId === user._id);
-    // });
-  }
+  constructor(private store: Store) {}
 }
