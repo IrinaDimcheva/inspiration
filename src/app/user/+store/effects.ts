@@ -99,6 +99,29 @@ export const getUserEffect = createEffect(
   { functional: true }
 );
 
+export const getFavoritesEffect = createEffect(
+  (actions$ = inject(Actions), userService = inject(UserService)) => {
+    return actions$.pipe(
+      ofType(authActions.getFavorites),
+      switchMap(() => {
+        return userService.getFavorites().pipe(
+          map((posts) => {
+            return authActions.getFavoritesSuccess({ posts });
+          }),
+          catchError((errorResponse: HttpErrorResponse) => {
+            return of(
+              authActions.getFavoritesFailure({
+                message: errorResponse.error.message,
+              })
+            );
+          })
+        );
+      })
+    );
+  },
+  { functional: true }
+);
+
 export const logoutEffect = createEffect(
   (actions$ = inject(Actions), userService = inject(UserService)) => {
     return actions$.pipe(

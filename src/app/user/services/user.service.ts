@@ -9,17 +9,6 @@ import { IRegisterRequest } from '../interfaces/register-request';
   providedIn: 'root',
 })
 export class UserService {
-  // user$: Observable<IUser> | null = null;
-  // get isLogged(): boolean {
-  //   return !!this.user$;
-  // }
-  // get userId() {
-  //   return this.user$?._id;
-  // }
-  // get canLoad(): boolean {
-  //   return this.user$ !== undefined;
-  // }
-
   constructor(private http: HttpClient) {}
 
   getUser(): Observable<IUser> {

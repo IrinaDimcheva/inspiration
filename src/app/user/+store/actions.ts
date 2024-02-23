@@ -1,6 +1,6 @@
 import { createActionGroup, emptyProps, props } from '@ngrx/store';
 import { IRegisterRequest } from '../interfaces/register-request';
-import { IUser } from '../../shared/interfaces';
+import { IPost, IUser } from '../../shared/interfaces';
 import { ILoginRequest } from '../interfaces/login-request';
 
 export const authActions = createActionGroup({
@@ -17,6 +17,10 @@ export const authActions = createActionGroup({
     'Get user': emptyProps(),
     'Get user success': props<{ user: IUser }>(),
     'Get user failure': props<{ message: string }>(),
+
+    'Get favorites': emptyProps(),
+    'Get favorites success': props<{ posts: IPost[] }>(),
+    'Get favorites failure': props<{ message: string }>(),
 
     Logout: emptyProps(),
     'Logout success': emptyProps(),

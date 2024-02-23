@@ -8,6 +8,7 @@ const initialState: IAuthState = {
   isLoading: false,
   user: null,
   errors: null,
+  data: null,
 };
 
 const authFeature = createFeature({
@@ -59,6 +60,20 @@ const authFeature = createFeature({
       user: null,
       errors: action.message,
     })),
+    on(authActions.getFavorites, (state) => ({
+      ...state,
+      isLoading: true,
+    })),
+    on(authActions.getFavoritesSuccess, (state, action) => ({
+      ...state,
+      isLoading: false,
+      data: action.posts,
+    })),
+    on(authActions.getFavoritesFailure, (state, action) => ({
+      ...state,
+      isLoading: false,
+      errors: action.message,
+    })),
     on(authActions.logout, (state) => ({
       ...state,
       ...initialState,
@@ -78,4 +93,5 @@ export const {
   selectIsLoading,
   selectUser,
   selectErrors,
+  selectData: selectFavoritesData,
 } = authFeature;

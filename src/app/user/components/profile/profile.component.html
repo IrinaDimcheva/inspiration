@@ -24,6 +24,6 @@
     </p>
   </mat-accordion>
   <div class="spinner">
-    <mat-spinner *ngIf="!data.user.posts"></mat-spinner>
+    <mat-spinner *ngIf="data.isLoading"></mat-spinner>
   </div>
 </ng-container>

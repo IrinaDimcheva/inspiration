@@ -1,8 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
-import { shareReplay } from 'rxjs/operators';
-import { UserService } from 'src/app/user/services/user.service';
+import { Observable, combineLatest } from 'rxjs';
 import { IPost } from 'src/app/shared/interfaces';
+import { Store } from '@ngrx/store';
+import { authActions } from '../../+store/actions';
+import {
+  selectErrors,
+  selectFavoritesData,
+  selectIsLoading,
+} from '../../+store/reducers';
 
 @Component({
   selector: 'app-favorites',
@@ -11,10 +16,15 @@ import { IPost } from 'src/app/shared/interfaces';
 })
 export class FavoritesComponent implements OnInit {
   favoriteList$: Observable<IPost[]>;
+  data$ = combineLatest({
+    favoriteList: this.store.select(selectFavoritesData),
+    isLoading: this.store.select(selectIsLoading),
+    error: this.store.select(selectErrors),
+  });
 
-  constructor(private userService: UserService) {}
+  constructor(private store: Store) {}
 
   ngOnInit(): void {
-    this.favoriteList$ = this.userService.getFavorites().pipe(shareReplay(1));
+    this.store.dispatch(authActions.getFavorites());
   }
 }
